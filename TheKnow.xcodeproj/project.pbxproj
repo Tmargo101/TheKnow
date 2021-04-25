@@ -83,10 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				A2FF88492601668C00D16EBC /* ContentView.swift */,
-				A27DD5B22635D8EF00A083CF /* LoginView.swift */,
+				A2D6AB01263634F500714B17 /* LoggedOut */,
 				A27DD5BE2635DC9C00A083CF /* CollectionsView.swift */,
-				A27DD5C12635DCC400A083CF /* LoggedOutView.swift */,
-				A27DD5C62635E04400A083CF /* SignupView.swift */,
 				A27DD5D42635F95B00A083CF /* AccountView.swift */,
 				A27EDE2026362A8E0081104D /* MapView.swift */,
 				A27EDE2326362AA90081104D /* PlaceListView.swift */,
@@ -133,6 +131,16 @@
 				A27EDE2A26362B180081104D /* CoreLocation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A2D6AB01263634F500714B17 /* LoggedOut */ = {
+			isa = PBXGroup;
+			children = (
+				A27DD5C12635DCC400A083CF /* LoggedOutView.swift */,
+				A27DD5C62635E04400A083CF /* SignupView.swift */,
+				A27DD5B22635D8EF00A083CF /* LoginView.swift */,
+			);
+			path = LoggedOut;
 			sourceTree = "<group>";
 		};
 		A2FF883B2601668C00D16EBC = {
