@@ -11,7 +11,7 @@ struct ContentView: View {
     @EnvironmentObject var user: UserViewModel
     
     var body: some View {
-        VStack {
+        ZStack {
             if (user.loggedIn) {
                 CollectionsView()
             } else {
@@ -19,7 +19,6 @@ struct ContentView: View {
             }
         }
         .environmentObject(user)
-        
     }
 }
 

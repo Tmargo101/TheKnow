@@ -36,7 +36,7 @@ struct SignupView: View {
                     } // Section
                     
                 } // Form
-                .navigationTitle(Strings.SIGN_UP)
+                .navigationTitle(Text(Strings.SIGN_UP))
             } // NavigationView
             Image(systemName: "chevron.compact.down")
                 .font(.system(.largeTitle))

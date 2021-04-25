@@ -28,12 +28,6 @@ struct LoggedOutView: View {
     }
 }
 
-struct LoggedOutView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoggedOutView()
-    }
-}
-
 struct LoggedOutViewButtons: View {
     
     @EnvironmentObject var user: UserViewModel
@@ -65,5 +59,11 @@ struct LoggedOutViewButtons: View {
         }
         .padding(.bottom, 50)
         .environmentObject(user)
+    }
+}
+
+struct LoggedOutView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoggedOutView()
     }
 }

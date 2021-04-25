@@ -14,6 +14,26 @@ struct CollectionsView: View {
     @State var presentAccountSheet: Bool = false
     
     var body: some View {
+//        VStack {
+//            NavigationView {
+//                VStack {
+//                    Text("Hello")
+//                    Button(action: {
+//                        presentAccountSheet.toggle()
+//                    }) {
+//                        Image(systemName: "person.circle")
+//                            .font(.largeTitle)
+//                    }
+//                    .foregroundColor(.blue)
+//                    .sheet(isPresented: $presentAccountSheet) {
+//                        AccountView(showSheet: $presentAccountSheet)
+//                    }
+//                } // VStack
+//            } // NavigationView
+//        }// VStack
+//        .environmentObject(user)
+
+
         NavigationView {
             List(0..<4) { index in
                 NavigationLink(
@@ -26,16 +46,20 @@ struct CollectionsView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        presentAccountSheet.toggle()
-                    }) {
+//                    Button(action: {
+//                        presentAccountSheet.toggle()
+//                    }) {
+//                        Image(systemName: "person.circle")
+//                            .font(.largeTitle)
+//                    }
+//                    .foregroundColor(.blue)
+//                    .sheet(isPresented: $presentAccountSheet) {
+//                        AccountView(showSheet: $presentAccountSheet)
+//                    }
+                    NavigationLink(destination: AccountView(), label: {
                         Image(systemName: "person.circle")
                             .font(.largeTitle)
-                    }
-                    .foregroundColor(.blue)
-                    .sheet(isPresented: $presentAccountSheet) {
-                        AccountView()
-                    }
+                    })
                 }
                 ToolbarItem(placement: .principal) {
                     Text("TheKnow")
@@ -50,10 +74,8 @@ struct CollectionsView: View {
                     .foregroundColor(.blue)
                 } // ToolbarItem
             } //Toolbar
-            .navigationBarTitle(Strings.MY_COLLECTIONS)
-            //.navigationTitle(Strings.MY_COLLECTIONS)
+            .navigationTitle(Text(Strings.MY_COLLECTIONS))
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .environmentObject(user)
     }
 }

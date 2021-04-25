@@ -9,14 +9,12 @@ import SwiftUI
 
 struct AccountView: View {
     @EnvironmentObject var user: UserViewModel
-    
         
     var body: some View {
         ZStack (alignment: .top) {
-            NavigationView {
                 Form {
                     Section (header: Text("Account Name")) {
-//                        Text("\(user.username ?? "Username not found")")
+                        Text("\(user.username ?? "Username not found")")
                     }
 
                     Section (header: Text("Account Actions")) {
@@ -31,12 +29,8 @@ struct AccountView: View {
                             Text("Log Out")
                         })
                     }
-                }
-                .navigationTitle("Account")
             }
-            Image(systemName: "chevron.compact.down")
-                .font(.system(.largeTitle))
-                .padding(.top, 20)
+            .navigationTitle("Account")
         } // ZStack
         .environmentObject(user)
     }

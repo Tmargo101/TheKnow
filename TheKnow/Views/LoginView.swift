@@ -31,7 +31,7 @@ struct LoginView: View {
     //                        .disabled(userViewModel.isValid)
                     } // Section
                 } // Form
-                .navigationTitle("Log In")
+                .navigationTitle(Text(Strings.LOG_IN))
             } // NavigationView
             Image(systemName: "chevron.compact.down")
                 .font(.system(.largeTitle))

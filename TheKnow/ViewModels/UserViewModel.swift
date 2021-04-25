@@ -15,17 +15,17 @@ class UserViewModel: ObservableObject {
     func login(_username: String, password: String) {
         print("Username: \(_username), Password: \(password)")
         self.username = _username
-        self.loggedIn.toggle()
+        self.loggedIn = true
     }
     
     func signup(_username: String, password: String, password2: String) {
         print("Username: \(_username), Password: \(password)")
         self.username = _username
-        self.loggedIn.toggle()
+        self.loggedIn = true
     }
     
     func logout() {
         print("Logout")
-        self.loggedIn.toggle()
+        self.loggedIn = false
     }
 }
