@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct TheKnowApp: App {
+    @StateObject var user = UserViewModel()
+    
     var body: some Scene {
         WindowGroup {
-           ContentView()
+            ContentView().environmentObject(user)
         }
     }
 }
