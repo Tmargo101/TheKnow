@@ -12,6 +12,11 @@
 		A2641F692601786600A0F427 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2641F682601786600A0F427 /* Models.swift */; };
 		A2641F6E26017CE100A0F427 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2641F6D26017CE100A0F427 /* Strings.swift */; };
 		A2641F7426017F4F00A0F427 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2641F7326017F4F00A0F427 /* API.swift */; };
+		A27DD5B32635D8EF00A083CF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5B22635D8EF00A083CF /* LoginView.swift */; };
+		A27DD5B72635D96900A083CF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5B62635D96900A083CF /* LoginViewModel.swift */; };
+		A27DD5BF2635DC9C00A083CF /* CollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5BE2635DC9C00A083CF /* CollectionsView.swift */; };
+		A27DD5C22635DCC400A083CF /* LoggedOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5C12635DCC400A083CF /* LoggedOutView.swift */; };
+		A27DD5C72635E04400A083CF /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5C62635E04400A083CF /* SignupView.swift */; };
 		A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88472601668C00D16EBC /* TheKnowApp.swift */; };
 		A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88492601668C00D16EBC /* ContentView.swift */; };
 		A2FF884C2601668D00D16EBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2FF884B2601668D00D16EBC /* Assets.xcassets */; };
@@ -23,6 +28,11 @@
 		A2641F682601786600A0F427 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		A2641F6D26017CE100A0F427 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		A2641F7326017F4F00A0F427 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		A27DD5B22635D8EF00A083CF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A27DD5B62635D96900A083CF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		A27DD5BE2635DC9C00A083CF /* CollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsView.swift; sourceTree = "<group>"; };
+		A27DD5C12635DCC400A083CF /* LoggedOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutView.swift; sourceTree = "<group>"; };
+		A27DD5C62635E04400A083CF /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		A2FF88442601668C00D16EBC /* TheKnow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheKnow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FF88472601668C00D16EBC /* TheKnowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheKnowApp.swift; sourceTree = "<group>"; };
 		A2FF88492601668C00D16EBC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,6 +57,10 @@
 			isa = PBXGroup;
 			children = (
 				A2FF88492601668C00D16EBC /* ContentView.swift */,
+				A27DD5B22635D8EF00A083CF /* LoginView.swift */,
+				A27DD5BE2635DC9C00A083CF /* CollectionsView.swift */,
+				A27DD5C12635DCC400A083CF /* LoggedOutView.swift */,
+				A27DD5C62635E04400A083CF /* SignupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -59,6 +73,14 @@
 				291FDECB2635C94F00181FE8 /* YelpAPI.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A27DD5B52635D95A00A083CF /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A27DD5B62635D96900A083CF /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		A2FF883B2601668C00D16EBC = {
@@ -80,6 +102,7 @@
 		A2FF88462601668C00D16EBC /* TheKnow */ = {
 			isa = PBXGroup;
 			children = (
+				A27DD5B52635D95A00A083CF /* ViewModels */,
 				291FDEC92635C91700181FE8 /* Models */,
 				291FDEC82635C90A00181FE8 /* Views */,
 				A2641F6D26017CE100A0F427 /* Strings.swift */,
@@ -175,10 +198,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				291FDECC2635C94F00181FE8 /* YelpAPI.swift in Sources */,
+				A27DD5B32635D8EF00A083CF /* LoginView.swift in Sources */,
+				A27DD5BF2635DC9C00A083CF /* CollectionsView.swift in Sources */,
 				A2641F692601786600A0F427 /* Models.swift in Sources */,
 				A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */,
+				A27DD5B72635D96900A083CF /* LoginViewModel.swift in Sources */,
 				A2641F6E26017CE100A0F427 /* Strings.swift in Sources */,
+				A27DD5C22635DCC400A083CF /* LoggedOutView.swift in Sources */,
 				A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */,
+				A27DD5C72635E04400A083CF /* SignupView.swift in Sources */,
 				A2641F7426017F4F00A0F427 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
