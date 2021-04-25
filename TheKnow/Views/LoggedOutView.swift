@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoggedOutView: View {
+    
     @EnvironmentObject var user: UserViewModel
     
     // State variables
@@ -22,8 +23,8 @@ struct LoggedOutView: View {
                 .padding(.all)
             Spacer()
             LoggedOutViewButtons(presentLoginSheet: $presentLoginSheet, presentSignupSheet: $presentSignupSheet)
-                .environmentObject(user)
         }
+        .environmentObject(user)
     }
 }
 
@@ -50,7 +51,6 @@ struct LoggedOutViewButtons: View {
             })
             .sheet(isPresented: $presentLoginSheet) {
                 LoginView()
-                    .environmentObject(user)
             }
             Spacer()
             Button(action: {
@@ -60,10 +60,10 @@ struct LoggedOutViewButtons: View {
             })
             .sheet(isPresented: $presentSignupSheet) {
                 SignupView()
-                    .environmentObject(user)
             }
             Spacer()
         }
         .padding(.bottom, 50)
+        .environmentObject(user)
     }
 }

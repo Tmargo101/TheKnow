@@ -8,21 +8,26 @@
 import Foundation
 
 class UserViewModel: ObservableObject {
+    @Published var accountSheet: Bool = false
     @Published var loggedIn: Bool = false
-    @Published var username: String = ""
-    @Published var token: String = ""
+    @Published var username: String? = ""
+    @Published var token: String? = ""
     
-    func login(username: String, password: String) {
-        print("Username: \(username), Password: \(password)")
+    func login(_username: String, password: String) {
+        print("Username: \(_username), Password: \(password)")
+        self.username = _username
         self.loggedIn.toggle()
     }
     
-    func signup(username: String, password: String, password2: String) {
-        print("Username: \(username), Password: \(password)")
+    func signup(_username: String, password: String, password2: String) {
+        print("Username: \(_username), Password: \(password)")
+        self.username = _username
         self.loggedIn.toggle()
     }
     
     func logout() {
+        print("Logout")
         self.loggedIn.toggle()
+        self.accountSheet = false
     }
 }

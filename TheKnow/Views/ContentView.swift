@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var user = UserViewModel()    
+    @EnvironmentObject var user: UserViewModel
     
     var body: some View {
         VStack {
-            if (!user.loggedIn) {
-                LoggedOutView()
-            } else {
+            if (user.loggedIn) {
                 CollectionsView()
+            } else {
+                LoggedOutView()
             }
         }
         .environmentObject(user)
+        
     }
 }
 

@@ -12,26 +12,33 @@ struct LoginView: View {
     @ObservedObject private var loginViewModel = LoginViewModel()
 
     var body: some View {
-        NavigationView {
-            Form {
-                Section () {
-                    TextField(Strings.USERNAME, text: $loginViewModel.username)
-                        .autocapitalization(.none)
-                    SecureField(Strings.PASSWORD, text: $loginViewModel.password)
+        ZStack (alignment: .top) {
+            NavigationView {
+                Form {
+                    Section {
+                        TextField(Strings.USERNAME, text: $loginViewModel.username)
+                            .autocapitalization(.none)
+                        SecureField(Strings.PASSWORD, text: $loginViewModel.password)
 
-                }
-                Section {
+                    }
+                    Section {
                         Button(action: {
-                            user.login(username: loginViewModel.username, password: loginViewModel.password)
+                            user.login(_username: loginViewModel.username, password: loginViewModel.password)
                         }, label: {
                             Text(Strings.LOG_IN)
                                 .frame(maxWidth: .infinity, alignment: .center)
                         })
-    //                    .disabled(userViewModel.isValid)
-                }
-            }
-            .navigationTitle("Log In")
-        }
+    //                        .disabled(userViewModel.isValid)
+                    } // Section
+                } // Form
+                .navigationTitle("Log In")
+            } // NavigationView
+            Image(systemName: "chevron.compact.down")
+                .font(.system(.largeTitle))
+                .padding(.top, 20)
+            
+
+        } // ZStack
     }
 }
 

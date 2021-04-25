@@ -12,29 +12,36 @@ struct SignupView: View {
     @ObservedObject private var signupViewModel = SignupViewModel()
 
     var body: some View {
-        NavigationView {
-            Form {
-                Section (header: Text(Strings.USERNAME)) {
-                    TextField(Strings.USERNAME, text: $signupViewModel.username)
-                        .autocapitalization(.none)
-                }
-                Section (header: Text(Strings.PASSWORD)) {
-                    SecureField(Strings.ENTER_PASSWORD, text: $signupViewModel.password)
-                    SecureField(Strings.VERIFY_PASSWORD, text: $signupViewModel.password2)
-                }
-                Section {
-                    Button(action: {
-                        user.signup(username: signupViewModel.username, password: signupViewModel.password, password2: signupViewModel.password2)
-                    }, label: {
-                        Text(Strings.SIGN_UP)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    })
-//                    .disabled(userViewModel.isValid)
-                }
-            }
-
-            .navigationTitle(Strings.SIGN_UP)
-        }
+        ZStack (alignment: .top){
+            NavigationView {
+                Form {
+                    Section (header: Text(Strings.USERNAME)) {
+                        TextField(Strings.USERNAME, text: $signupViewModel.username)
+                            .autocapitalization(.none)
+                    } // Section
+                    
+                    Section (header: Text(Strings.PASSWORD)) {
+                        SecureField(Strings.ENTER_PASSWORD, text: $signupViewModel.password)
+                        SecureField(Strings.VERIFY_PASSWORD, text: $signupViewModel.password2)
+                    } // Section
+                    
+                    Section {
+                        Button(action: {
+                            user.signup(_username: signupViewModel.username, password: signupViewModel.password, password2: signupViewModel.password2)
+                        }, label: {
+                            Text(Strings.SIGN_UP)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        })
+    //                    .disabled(userViewModel.isValid)
+                    } // Section
+                    
+                } // Form
+                .navigationTitle(Strings.SIGN_UP)
+            } // NavigationView
+            Image(systemName: "chevron.compact.down")
+                .font(.system(.largeTitle))
+                .padding(.top, 20)
+        } // ZStack
         
         
         
