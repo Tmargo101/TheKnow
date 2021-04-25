@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		291FDECC2635C94F00181FE8 /* YelpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291FDECB2635C94F00181FE8 /* YelpAPI.swift */; };
+		291FDED02635CD7400181FE8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291FDECF2635CD7400181FE8 /* MapKit.framework */; };
+		291FDED22635CD7E00181FE8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291FDED12635CD7E00181FE8 /* CoreLocation.framework */; };
+		291FDED42635D71800181FE8 /* PlaceSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291FDED32635D71800181FE8 /* PlaceSearch.swift */; };
+		291FDED72635E01C00181FE8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291FDED62635E01C00181FE8 /* MapView.swift */; };
+		291FDEDB2635E20E00181FE8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291FDEDA2635E20E00181FE8 /* LocationManager.swift */; };
+		291FDEDE2635E75400181FE8 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291FDEDD2635E75400181FE8 /* Place.swift */; };
+		291FDEE12635E80500181FE8 /* PlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291FDEE02635E80500181FE8 /* PlaceAnnotation.swift */; };
+		291FDEE42635EC7C00181FE8 /* PlaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291FDEE32635EC7C00181FE8 /* PlaceListView.swift */; };
 		A2641F432601695700A0F427 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A2641F422601695700A0F427 /* Alamofire */; };
 		A2641F692601786600A0F427 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2641F682601786600A0F427 /* Models.swift */; };
 		A2641F6E26017CE100A0F427 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2641F6D26017CE100A0F427 /* Strings.swift */; };
@@ -29,6 +37,14 @@
 
 /* Begin PBXFileReference section */
 		291FDECB2635C94F00181FE8 /* YelpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPI.swift; sourceTree = "<group>"; };
+		291FDECF2635CD7400181FE8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		291FDED12635CD7E00181FE8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		291FDED32635D71800181FE8 /* PlaceSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearch.swift; sourceTree = "<group>"; };
+		291FDED62635E01C00181FE8 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		291FDEDA2635E20E00181FE8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		291FDEDD2635E75400181FE8 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		291FDEE02635E80500181FE8 /* PlaceAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
+		291FDEE32635EC7C00181FE8 /* PlaceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListView.swift; sourceTree = "<group>"; };
 		A2641F682601786600A0F427 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		A2641F6D26017CE100A0F427 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		A2641F7326017F4F00A0F427 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -54,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				291FDED22635CD7E00181FE8 /* CoreLocation.framework in Frameworks */,
+				291FDED02635CD7400181FE8 /* MapKit.framework in Frameworks */,
 				A2641F432601695700A0F427 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,11 +83,16 @@
 			isa = PBXGroup;
 			children = (
 				A2FF88492601668C00D16EBC /* ContentView.swift */,
+
 				A27DD5B22635D8EF00A083CF /* LoginView.swift */,
 				A27DD5BE2635DC9C00A083CF /* CollectionsView.swift */,
 				A27DD5C12635DCC400A083CF /* LoggedOutView.swift */,
 				A27DD5C62635E04400A083CF /* SignupView.swift */,
 				A27DD5D42635F95B00A083CF /* AccountView.swift */,
+				291FDED32635D71800181FE8 /* PlaceSearch.swift */,
+				291FDED62635E01C00181FE8 /* MapView.swift */,
+				291FDEE32635EC7C00181FE8 /* PlaceListView.swift */,
+
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -80,10 +103,11 @@
 				A2641F682601786600A0F427 /* Models.swift */,
 				A2641F7326017F4F00A0F427 /* API.swift */,
 				291FDECB2635C94F00181FE8 /* YelpAPI.swift */,
+				291FDEDD2635E75400181FE8 /* Place.swift */,
+				291FDEE02635E80500181FE8 /* PlaceAnnotation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
-		};
 		A27DD5B52635D95A00A083CF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +117,23 @@
 				A27DD5D12635F69B00A083CF /* CollectionsViewModel.swift */,
 			);
 			path = ViewModels;
+
+		291FDECE2635CD7400181FE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				291FDED12635CD7E00181FE8 /* CoreLocation.framework */,
+				291FDECF2635CD7400181FE8 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		291FDED92635E1FF00181FE8 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				291FDEDA2635E20E00181FE8 /* LocationManager.swift */,
+			);
+			path = Managers;
+
 			sourceTree = "<group>";
 		};
 		A2FF883B2601668C00D16EBC = {
@@ -100,6 +141,7 @@
 			children = (
 				A2FF88462601668C00D16EBC /* TheKnow */,
 				A2FF88452601668C00D16EBC /* Products */,
+				291FDECE2635CD7400181FE8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,7 +156,11 @@
 		A2FF88462601668C00D16EBC /* TheKnow */ = {
 			isa = PBXGroup;
 			children = (
+
 				A27DD5B52635D95A00A083CF /* ViewModels */,
+
+				291FDED92635E1FF00181FE8 /* Managers */,
+
 				291FDEC92635C91700181FE8 /* Models */,
 				291FDEC82635C90A00181FE8 /* Views */,
 				A2641F6D26017CE100A0F427 /* Strings.swift */,
@@ -210,20 +256,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				291FDECC2635C94F00181FE8 /* YelpAPI.swift in Sources */,
+
 				A27DD5CB2635E6E000A083CF /* UserViewModel.swift in Sources */,
 				A27DD5B32635D8EF00A083CF /* LoginView.swift in Sources */,
 				A27DD5BF2635DC9C00A083CF /* CollectionsView.swift in Sources */,
 				A27DD5D22635F69B00A083CF /* CollectionsViewModel.swift in Sources */,
+
+				291FDED72635E01C00181FE8 /* MapView.swift in Sources */,
+				291FDEE12635E80500181FE8 /* PlaceAnnotation.swift in Sources */,
+
 				A2641F692601786600A0F427 /* Models.swift in Sources */,
 				A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */,
 				A27DD5B72635D96900A083CF /* LoginViewModel.swift in Sources */,
 				A27DD5CF2635F33400A083CF /* SignupViewModel.swift in Sources */,
 				A27DD5D52635F95B00A083CF /* AccountView.swift in Sources */,
 				A2641F6E26017CE100A0F427 /* Strings.swift in Sources */,
+
 				A27DD5C22635DCC400A083CF /* LoggedOutView.swift in Sources */,
 				A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */,
 				A27DD5C72635E04400A083CF /* SignupView.swift in Sources */,
+
+				291FDEE42635EC7C00181FE8 /* PlaceListView.swift in Sources */,
+				A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */,
+				291FDED42635D71800181FE8 /* PlaceSearch.swift in Sources */,
+
 				A2641F7426017F4F00A0F427 /* API.swift in Sources */,
+				291FDEDB2635E20E00181FE8 /* LocationManager.swift in Sources */,
+				291FDEDE2635E75400181FE8 /* Place.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
