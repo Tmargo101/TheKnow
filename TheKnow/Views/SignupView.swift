@@ -15,24 +15,36 @@ struct SignupView: View {
         ZStack (alignment: .top){
             NavigationView {
                 Form {
-                    Section (header: Text(Strings.USERNAME)) {
+                    Section (header:
+                                Text(Strings.USERNAME)
+                             , footer:
+                                Text(signupViewModel.usernameMessage)
+                                    .foregroundColor(.red)
+                    ) {
                         TextField(Strings.USERNAME, text: $signupViewModel.username)
                             .autocapitalization(.none)
                     } // Section
                     
-                    Section (header: Text(Strings.PASSWORD)) {
+                    Section (header:
+                                Text(Strings.PASSWORD)
+                             , footer:
+                                Text(signupViewModel.passwordMessage)
+                                    .foregroundColor(.red)
+                        ) {
                         SecureField(Strings.ENTER_PASSWORD, text: $signupViewModel.password)
-                        SecureField(Strings.VERIFY_PASSWORD, text: $signupViewModel.password2)
+                            .autocapitalization(.none)
+                        SecureField(Strings.VERIFY_PASSWORD, text: $signupViewModel.passwordConfirm)
+                            .autocapitalization(.none)
                     } // Section
                     
                     Section {
                         Button(action: {
-                            user.signup(_username: signupViewModel.username, password: signupViewModel.password, password2: signupViewModel.password2)
+                            user.signup(_username: signupViewModel.username, password: signupViewModel.password, password2: signupViewModel.passwordConfirm)
                         }, label: {
                             Text(Strings.SIGN_UP)
                                 .frame(maxWidth: .infinity, alignment: .center)
                         })
-    //                    .disabled(userViewModel.isValid)
+                        .disabled(!signupViewModel.isValid)
                     } // Section
                     
                 } // Form

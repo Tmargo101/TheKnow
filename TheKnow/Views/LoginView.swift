@@ -19,6 +19,7 @@ struct LoginView: View {
                         TextField(Strings.USERNAME, text: $loginViewModel.username)
                             .autocapitalization(.none)
                         SecureField(Strings.PASSWORD, text: $loginViewModel.password)
+                            .autocapitalization(.none)
 
                     }
                     Section {

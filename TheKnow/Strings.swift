@@ -18,6 +18,6 @@ struct Strings {
     static let USERNAME = "Username"
     static let PASSWORD = "Password"
     static let ENTER_PASSWORD = "Enter password"
-    static let VERIFY_PASSWORD = "Enter the same password"
+    static let VERIFY_PASSWORD = "Confirm password"
     static let MY_COLLECTIONS = "My Collections"
 }
