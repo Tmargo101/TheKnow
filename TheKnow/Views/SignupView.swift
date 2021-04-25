@@ -21,7 +21,10 @@ struct SignupView: View {
                                 Text(signupViewModel.usernameMessage)
                                     .foregroundColor(.red)
                     ) {
-                        TextField(Strings.USERNAME, text: $signupViewModel.username)
+                        TextField(
+                            Strings.USERNAME,
+                            text: $signupViewModel.username
+                        )
                             .autocapitalization(.none)
                     } // Section
                     
@@ -31,15 +34,25 @@ struct SignupView: View {
                                 Text(signupViewModel.passwordMessage)
                                     .foregroundColor(.red)
                         ) {
-                        SecureField(Strings.ENTER_PASSWORD, text: $signupViewModel.password)
+                        SecureField(
+                            Strings.ENTER_PASSWORD,
+                            text: $signupViewModel.password
+                        )
                             .autocapitalization(.none)
-                        SecureField(Strings.VERIFY_PASSWORD, text: $signupViewModel.passwordConfirm)
+                        SecureField(
+                            Strings.VERIFY_PASSWORD,
+                            text: $signupViewModel.passwordConfirm
+                        )
                             .autocapitalization(.none)
                     } // Section
                     
                     Section {
                         Button(action: {
-                            user.signup(_username: signupViewModel.username, password: signupViewModel.password, password2: signupViewModel.passwordConfirm)
+                            user.signup(
+                                _username: signupViewModel.username,
+                                password: signupViewModel.password,
+                                password2: signupViewModel.passwordConfirm
+                            )
                         }, label: {
                             Text(Strings.SIGN_UP)
                                 .frame(maxWidth: .infinity, alignment: .center)
