@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 
 struct Routes {
     static let BASE = "http://localhost:3000"
