@@ -6,42 +6,24 @@
 //
 
 import SwiftUI
-import Alamofire
 
 struct ContentView: View {
-    
-    let api = API.shared
-    
-    @State var placeLists: [PlaceList] = []
-    
-    init() {
-        
-        api.getLists { (returnedLists) in
-            guard let safeLists = returnedLists else {
-                // handle error
-                return
-            }
-            self.placeLists = safeLists
-        }
-        
-    }
+    @EnvironmentObject var user: UserViewModel
     
     var body: some View {
-        NavigationView {
-            List(0..<placeLists.count) { placeList in
-                NavigationLink(
-                    destination: Text("Destination"),
-                    label: {
-                        Text("Navigate")
-                    })
+        ZStack {
+            if (user.loggedIn) {
+                CollectionsView()
+            } else {
+                LoggedOutView()
             }
         }
-        .navigationTitle("The Know")
+        .environmentObject(user)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(UserViewModel())
     }
 }
