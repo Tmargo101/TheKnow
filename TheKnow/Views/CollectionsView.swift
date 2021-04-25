@@ -13,15 +13,33 @@ struct CollectionsView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Collections View")
-                Button(action: {
-                    user.loggedIn.toggle()
-                }, label: {
-                    Text("Log Out")
-                })
+            List(0..<4) { index in
+                NavigationLink(
+                    destination: Text("Collection \(index)"),
+                    label: {
+                        Text("Collection \(index + 1)")
+                            .font(.title2)
+                    })
+                    .padding()
             }
-            .navigationTitle("TheKnow")
+            .navigationBarItems(leading:
+                HStack {
+                    Button(action: {
+                        user.logout()
+                    }) {
+                        Image(systemName: "person.circle")
+                            .font(.largeTitle)
+                    }.foregroundColor(.blue)
+                }, trailing:
+                HStack {
+                    Button(action: {}) {
+                        Image(systemName: "plus.circle")
+                            .font(.largeTitle)
+                    }.foregroundColor(.blue)
+                })
+                .navigationTitle(Strings.MY_COLLECTIONS)
+
+
         }
     }
 }

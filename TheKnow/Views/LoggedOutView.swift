@@ -16,8 +16,9 @@ struct LoggedOutView: View {
     
     var body: some View {
         VStack {
-            Text("Welcome to The Know")
-                .font(.title)
+            Text(Strings.LOGGED_OUT_WELCOME)
+                .font(.largeTitle)
+                .fontWeight(.bold)
                 .padding(.all)
             Spacer()
             LoggedOutViewButtons(presentLoginSheet: $presentLoginSheet, presentSignupSheet: $presentSignupSheet)

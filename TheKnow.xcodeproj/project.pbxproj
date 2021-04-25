@@ -18,6 +18,7 @@
 		A27DD5C22635DCC400A083CF /* LoggedOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5C12635DCC400A083CF /* LoggedOutView.swift */; };
 		A27DD5C72635E04400A083CF /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5C62635E04400A083CF /* SignupView.swift */; };
 		A27DD5CB2635E6E000A083CF /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5CA2635E6E000A083CF /* UserViewModel.swift */; };
+		A27DD5CF2635F33400A083CF /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5CE2635F33400A083CF /* SignupViewModel.swift */; };
 		A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88472601668C00D16EBC /* TheKnowApp.swift */; };
 		A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88492601668C00D16EBC /* ContentView.swift */; };
 		A2FF884C2601668D00D16EBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2FF884B2601668D00D16EBC /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		A27DD5C12635DCC400A083CF /* LoggedOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutView.swift; sourceTree = "<group>"; };
 		A27DD5C62635E04400A083CF /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		A27DD5CA2635E6E000A083CF /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		A27DD5CE2635F33400A083CF /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		A2FF88442601668C00D16EBC /* TheKnow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheKnow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FF88472601668C00D16EBC /* TheKnowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheKnowApp.swift; sourceTree = "<group>"; };
 		A2FF88492601668C00D16EBC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,8 +82,9 @@
 		A27DD5B52635D95A00A083CF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				A27DD5B62635D96900A083CF /* LoginViewModel.swift */,
 				A27DD5CA2635E6E000A083CF /* UserViewModel.swift */,
+				A27DD5B62635D96900A083CF /* LoginViewModel.swift */,
+				A27DD5CE2635F33400A083CF /* SignupViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				A2641F692601786600A0F427 /* Models.swift in Sources */,
 				A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */,
 				A27DD5B72635D96900A083CF /* LoginViewModel.swift in Sources */,
+				A27DD5CF2635F33400A083CF /* SignupViewModel.swift in Sources */,
 				A2641F6E26017CE100A0F427 /* Strings.swift in Sources */,
 				A27DD5C22635DCC400A083CF /* LoggedOutView.swift in Sources */,
 				A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */,

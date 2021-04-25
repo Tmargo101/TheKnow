@@ -9,28 +9,30 @@ import SwiftUI
 
 struct SignupView: View {
     @EnvironmentObject var user: UserViewModel
-    @ObservedObject private var loginViewModel = LoginViewModel()
+    @ObservedObject private var signupViewModel = SignupViewModel()
 
     var body: some View {
         NavigationView {
             Form {
                 Section (header: Text(Strings.USERNAME)) {
-                    TextField(Strings.USERNAME, text: $loginViewModel.username)
+                    TextField(Strings.USERNAME, text: $signupViewModel.username)
+                        .autocapitalization(.none)
                 }
                 Section (header: Text(Strings.PASSWORD)) {
-                    SecureField(Strings.ENTER_PASSWORD, text: $loginViewModel.password)
-                    SecureField(Strings.VERIFY_PASSWORD, text: $loginViewModel.password)
+                    SecureField(Strings.ENTER_PASSWORD, text: $signupViewModel.password)
+                    SecureField(Strings.VERIFY_PASSWORD, text: $signupViewModel.password2)
                 }
                 Section {
-                        Button(action: {
-                            user.loggedIn.toggle()
-                        }, label: {
-                            Text(Strings.SIGN_UP)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                        })
-    //                    .disabled(userViewModel.isValid)
+                    Button(action: {
+                        user.signup(username: signupViewModel.username, password: signupViewModel.password, password2: signupViewModel.password2)
+                    }, label: {
+                        Text(Strings.SIGN_UP)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    })
+//                    .disabled(userViewModel.isValid)
                 }
             }
+
             .navigationTitle(Strings.SIGN_UP)
         }
         

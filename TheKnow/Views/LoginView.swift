@@ -16,14 +16,13 @@ struct LoginView: View {
             Form {
                 Section () {
                     TextField(Strings.USERNAME, text: $loginViewModel.username)
+                        .autocapitalization(.none)
                     SecureField(Strings.PASSWORD, text: $loginViewModel.password)
 
                 }
                 Section {
                         Button(action: {
-    //                        self.signUp()
-                            user.loggedIn.toggle()
-
+                            user.login(username: loginViewModel.username, password: loginViewModel.password)
                         }, label: {
                             Text(Strings.LOG_IN)
                                 .frame(maxWidth: .infinity, alignment: .center)
