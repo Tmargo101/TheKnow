@@ -8,7 +8,6 @@
 import Foundation
 
 class UserViewModel: ObservableObject {
-    @Published var accountSheet: Bool = false
     @Published var loggedIn: Bool = false
     @Published var username: String? = ""
     @Published var token: String? = ""
@@ -28,6 +27,5 @@ class UserViewModel: ObservableObject {
     func logout() {
         print("Logout")
         self.loggedIn.toggle()
-        self.accountSheet = false
     }
 }

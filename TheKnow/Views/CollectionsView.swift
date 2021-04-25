@@ -27,13 +27,13 @@ struct CollectionsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        user.accountSheet.toggle()
+                        presentAccountSheet.toggle()
                     }) {
                         Image(systemName: "person.circle")
                             .font(.largeTitle)
                     }
                     .foregroundColor(.blue)
-                    .sheet(isPresented: $user.accountSheet) {
+                    .sheet(isPresented: $presentAccountSheet) {
                         AccountView()
                     }
                 }
@@ -55,7 +55,6 @@ struct CollectionsView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .environmentObject(user)
-        
     }
 }
 
