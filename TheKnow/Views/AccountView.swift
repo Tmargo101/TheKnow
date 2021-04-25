@@ -22,6 +22,7 @@ struct AccountView: View {
                         }, label: {
                             Text("Change Password")
                         })
+                        .disabled(true)
 
                         Button(action: {
                             user.logout()

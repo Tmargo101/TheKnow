@@ -13,7 +13,7 @@ struct Strings {
     static let THE_KNOW = "The Know"
     static let LOG_IN = "Log In"
     static let SIGN_UP = "Sign Up"
-    static let LOGGED_OUT_WELCOME = "Welcome to The Know"
+    static let LOGGED_OUT_WELCOME = "The Know"
     static let LOGIN = "Login"
     static let USERNAME = "Username"
     static let PASSWORD = "Password"

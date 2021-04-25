@@ -18,9 +18,9 @@ struct LoggedOutView: View {
     var body: some View {
         VStack {
             Text(Strings.LOGGED_OUT_WELCOME)
-                .font(.largeTitle)
+                .font(.system(.largeTitle, design: .rounded))
                 .fontWeight(.bold)
-                .padding(.all)
+                .padding(.top, 50)
             Spacer()
             LoggedOutViewButtons(presentLoginSheet: $presentLoginSheet, presentSignupSheet: $presentSignupSheet)
         }
@@ -36,34 +36,60 @@ struct LoggedOutViewButtons: View {
     @Binding var presentSignupSheet: Bool
     
     var body: some View {
-        HStack {
-            Spacer()
-            Button(action: {
-                self.presentLoginSheet.toggle()
-            }, label: {
-                Text(Strings.LOG_IN)
-            })
-            .sheet(isPresented: $presentLoginSheet) {
-                LoginView()
+        VStack {
+            HStack {
+                Spacer()
+                Button(action: {
+                    self.presentLoginSheet.toggle()
+                }, label: {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(minHeight: 60, maxHeight: 60)
+                        .overlay(
+                            Text(Strings.LOG_IN)
+                                .foregroundColor(.white)
+                                .font(.system(.title3, design: .rounded))
+                                .bold()
+                        )
+                })
+                .sheet(isPresented: $presentLoginSheet) {
+                    LoginView()
+                }
+                
+                Spacer()
             }
-            Spacer()
-            Button(action: {
-                self.presentSignupSheet.toggle()
-            }, label: {
-                Text(Strings.SIGN_UP)
-            })
-            .sheet(isPresented: $presentSignupSheet) {
-                SignupView()
+            HStack {
+                Spacer()
+                Button(action: {
+                    self.presentSignupSheet.toggle()
+                }, label: {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(minHeight: 60, maxHeight: 60)
+                        .overlay(
+                            Text(Strings.SIGN_UP)
+                                .foregroundColor(.white)
+                                .font(.system(.title3, design: .rounded))
+                                .bold()
+                        )
+
+                })
+                .sheet(isPresented: $presentSignupSheet) {
+                    SignupView()
+                }
+
+                Spacer()
             }
-            Spacer()
         }
         .padding(.bottom, 50)
         .environmentObject(user)
+        
     }
 }
 
 struct LoggedOutView_Previews: PreviewProvider {
     static var previews: some View {
-        LoggedOutView()
+        Group {
+            LoggedOutView()
+                .environmentObject(UserViewModel())
+        }
     }
 }
