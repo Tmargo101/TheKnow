@@ -33,5 +33,23 @@ fileprivate func fetchYelpBusinesses(latitude: Double, longitude: Double) {
 }
 
 /*
- 
+ Finding all locations by location and term
  */
+fileprivate func fetchYelpBusinesses(term: String, location: String) {
+    let url = URL(string: "https://api.yelp.com/v3/businesses/search?term=\(term)&location=\(location)")
+    var request = URLRequest(url: url!)
+    request.setValue("Bearer \(YELP_API_KEY)", forHTTPHeaderField: "Authorization")
+    request.httpMethod = "GET"
+    
+    URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let err = error {
+            print(err.localizedDescription)
+        }
+        do {
+            let json = try JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+            print(">>>>>", json, #line, "<<<<<<<<<")
+        } catch {
+            print("caught")
+        }
+    }.resume()
+}
