@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		291FDECC2635C94F00181FE8 /* YelpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291FDECB2635C94F00181FE8 /* YelpAPI.swift */; };
 		A2641F432601695700A0F427 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A2641F422601695700A0F427 /* Alamofire */; };
 		A2641F692601786600A0F427 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2641F682601786600A0F427 /* Models.swift */; };
 		A2641F6E26017CE100A0F427 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2641F6D26017CE100A0F427 /* Strings.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		291FDECB2635C94F00181FE8 /* YelpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPI.swift; sourceTree = "<group>"; };
 		A2641F682601786600A0F427 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		A2641F6D26017CE100A0F427 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		A2641F7326017F4F00A0F427 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -41,6 +43,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		291FDEC82635C90A00181FE8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A2FF88492601668C00D16EBC /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		291FDEC92635C91700181FE8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A2641F682601786600A0F427 /* Models.swift */,
+				A2641F7326017F4F00A0F427 /* API.swift */,
+				291FDECB2635C94F00181FE8 /* YelpAPI.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A2FF883B2601668C00D16EBC = {
 			isa = PBXGroup;
 			children = (
@@ -60,11 +80,10 @@
 		A2FF88462601668C00D16EBC /* TheKnow */ = {
 			isa = PBXGroup;
 			children = (
+				291FDEC92635C91700181FE8 /* Models */,
+				291FDEC82635C90A00181FE8 /* Views */,
 				A2641F6D26017CE100A0F427 /* Strings.swift */,
 				A2FF88472601668C00D16EBC /* TheKnowApp.swift */,
-				A2FF88492601668C00D16EBC /* ContentView.swift */,
-				A2641F7326017F4F00A0F427 /* API.swift */,
-				A2641F682601786600A0F427 /* Models.swift */,
 				A2FF884B2601668D00D16EBC /* Assets.xcassets */,
 				A2FF88502601668D00D16EBC /* Info.plist */,
 				A2FF884D2601668D00D16EBC /* Preview Content */,
@@ -155,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				291FDECC2635C94F00181FE8 /* YelpAPI.swift in Sources */,
 				A2641F692601786600A0F427 /* Models.swift in Sources */,
 				A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */,
 				A2641F6E26017CE100A0F427 /* Strings.swift in Sources */,
