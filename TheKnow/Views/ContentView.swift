@@ -8,24 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @State private var loggedIn = false
+    @StateObject var user = UserViewModel()    
     
     var body: some View {
         VStack {
-            if (!loggedIn) {
+            if (!user.loggedIn) {
                 LoggedOutView()
             } else {
                 CollectionsView()
             }
-            Button(action: {
-                self.loggedIn.toggle()
-            }, label: {
-                Text("Toggle Logged In Status")
-            })
-
         }
-        
+        .environmentObject(user)
     }
 }
 

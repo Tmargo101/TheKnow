@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct CollectionsView: View {
+    
+    @EnvironmentObject var user: UserViewModel
+    
     var body: some View {
         NavigationView {
             VStack {
                 Text("Collections View")
-
+                Button(action: {
+                    user.loggedIn.toggle()
+                }, label: {
+                    Text("Log Out")
+                })
             }
             .navigationTitle("TheKnow")
         }

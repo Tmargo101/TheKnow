@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignupView: View {
-    
+    @EnvironmentObject var user: UserViewModel
     @ObservedObject private var loginViewModel = LoginViewModel()
 
     var body: some View {
@@ -18,12 +18,12 @@ struct SignupView: View {
                     TextField(Strings.USERNAME, text: $loginViewModel.username)
                 }
                 Section (header: Text(Strings.PASSWORD)) {
-                    TextField(Strings.ENTER_PASSWORD, text: $loginViewModel.password)
-                    TextField(Strings.VERIFY_PASSWORD, text: $loginViewModel.password)
+                    SecureField(Strings.ENTER_PASSWORD, text: $loginViewModel.password)
+                    SecureField(Strings.VERIFY_PASSWORD, text: $loginViewModel.password)
                 }
                 Section {
                         Button(action: {
-    //                        self.signUp()
+                            user.loggedIn.toggle()
                         }, label: {
                             Text(Strings.SIGN_UP)
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -33,6 +33,9 @@ struct SignupView: View {
             }
             .navigationTitle(Strings.SIGN_UP)
         }
+        
+        
+        
     }
 }
 

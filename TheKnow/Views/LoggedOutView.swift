@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct LoggedOutView: View {
+    @EnvironmentObject var user: UserViewModel
     
-    @State private var presentLoginSheet: Bool = false
-    @State private var presentSignupSheet: Bool = false
+    // State variables
+    @State var presentLoginSheet: Bool = false
+    @State var presentSignupSheet: Bool = false
     
     var body: some View {
         VStack {
@@ -18,28 +20,8 @@ struct LoggedOutView: View {
                 .font(.title)
                 .padding(.all)
             Spacer()
-            HStack {
-                Spacer()
-                Button(action: {
-                    self.presentLoginSheet.toggle()
-                }, label: {
-                    Text(Strings.LOG_IN)
-                })
-                .sheet(isPresented: $presentLoginSheet, content: {
-                    LoginView()
-                })
-                Spacer()
-                Button(action: {
-                    self.presentSignupSheet.toggle()
-                }, label: {
-                    Text(Strings.SIGN_UP)
-                })
-                .sheet(isPresented: $presentSignupSheet, content: {
-                    SignupView()
-                })
-                Spacer()
-            }
-            .padding(.bottom, 50)
+            LoggedOutViewButtons(presentLoginSheet: $presentLoginSheet, presentSignupSheet: $presentSignupSheet)
+                .environmentObject(user)
         }
     }
 }
@@ -47,5 +29,40 @@ struct LoggedOutView: View {
 struct LoggedOutView_Previews: PreviewProvider {
     static var previews: some View {
         LoggedOutView()
+    }
+}
+
+struct LoggedOutViewButtons: View {
+    
+    @EnvironmentObject var user: UserViewModel
+    
+    @Binding var presentLoginSheet: Bool
+    @Binding var presentSignupSheet: Bool
+    
+    var body: some View {
+        HStack {
+            Spacer()
+            Button(action: {
+                self.presentLoginSheet.toggle()
+            }, label: {
+                Text(Strings.LOG_IN)
+            })
+            .sheet(isPresented: $presentLoginSheet) {
+                LoginView()
+                    .environmentObject(user)
+            }
+            Spacer()
+            Button(action: {
+                self.presentSignupSheet.toggle()
+            }, label: {
+                Text(Strings.SIGN_UP)
+            })
+            .sheet(isPresented: $presentSignupSheet) {
+                SignupView()
+                    .environmentObject(user)
+            }
+            Spacer()
+        }
+        .padding(.bottom, 50)
     }
 }
