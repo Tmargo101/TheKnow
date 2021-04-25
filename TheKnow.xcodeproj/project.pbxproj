@@ -21,6 +21,14 @@
 		A27DD5CF2635F33400A083CF /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5CE2635F33400A083CF /* SignupViewModel.swift */; };
 		A27DD5D22635F69B00A083CF /* CollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5D12635F69B00A083CF /* CollectionsViewModel.swift */; };
 		A27DD5D52635F95B00A083CF /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27DD5D42635F95B00A083CF /* AccountView.swift */; };
+		A27EDE1726362A280081104D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EDE1626362A280081104D /* LocationManager.swift */; };
+		A27EDE1B26362A470081104D /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EDE1A26362A470081104D /* Place.swift */; };
+		A27EDE1E26362A5C0081104D /* PlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EDE1D26362A5C0081104D /* PlaceAnnotation.swift */; };
+		A27EDE2126362A8E0081104D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EDE2026362A8E0081104D /* MapView.swift */; };
+		A27EDE2426362AA90081104D /* PlaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EDE2326362AA90081104D /* PlaceListView.swift */; };
+		A27EDE2726362ABA0081104D /* PlaceSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EDE2626362ABA0081104D /* PlaceSearch.swift */; };
+		A27EDE2B26362B180081104D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27EDE2A26362B180081104D /* CoreLocation.framework */; };
+		A27EDE2D26362B1D0081104D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27EDE2C26362B1D0081104D /* MapKit.framework */; };
 		A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88472601668C00D16EBC /* TheKnowApp.swift */; };
 		A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88492601668C00D16EBC /* ContentView.swift */; };
 		A2FF884C2601668D00D16EBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2FF884B2601668D00D16EBC /* Assets.xcassets */; };
@@ -41,6 +49,14 @@
 		A27DD5CE2635F33400A083CF /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		A27DD5D12635F69B00A083CF /* CollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewModel.swift; sourceTree = "<group>"; };
 		A27DD5D42635F95B00A083CF /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		A27EDE1626362A280081104D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		A27EDE1A26362A470081104D /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		A27EDE1D26362A5C0081104D /* PlaceAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
+		A27EDE2026362A8E0081104D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		A27EDE2326362AA90081104D /* PlaceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListView.swift; sourceTree = "<group>"; };
+		A27EDE2626362ABA0081104D /* PlaceSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearch.swift; sourceTree = "<group>"; };
+		A27EDE2A26362B180081104D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A27EDE2C26362B1D0081104D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A2FF88442601668C00D16EBC /* TheKnow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheKnow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FF88472601668C00D16EBC /* TheKnowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheKnowApp.swift; sourceTree = "<group>"; };
 		A2FF88492601668C00D16EBC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A27EDE2B26362B180081104D /* CoreLocation.framework in Frameworks */,
+				A27EDE2D26362B1D0081104D /* MapKit.framework in Frameworks */,
 				A2641F432601695700A0F427 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,6 +88,9 @@
 				A27DD5C12635DCC400A083CF /* LoggedOutView.swift */,
 				A27DD5C62635E04400A083CF /* SignupView.swift */,
 				A27DD5D42635F95B00A083CF /* AccountView.swift */,
+				A27EDE2026362A8E0081104D /* MapView.swift */,
+				A27EDE2326362AA90081104D /* PlaceListView.swift */,
+				A27EDE2626362ABA0081104D /* PlaceSearch.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -80,6 +101,8 @@
 				A2641F682601786600A0F427 /* Models.swift */,
 				A2641F7326017F4F00A0F427 /* API.swift */,
 				291FDECB2635C94F00181FE8 /* YelpAPI.swift */,
+				A27EDE1A26362A470081104D /* Place.swift */,
+				A27EDE1D26362A5C0081104D /* PlaceAnnotation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -95,11 +118,29 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		A27EDE1526362A160081104D /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A27EDE1626362A280081104D /* LocationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		A27EDE2926362B180081104D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A27EDE2C26362B1D0081104D /* MapKit.framework */,
+				A27EDE2A26362B180081104D /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A2FF883B2601668C00D16EBC = {
 			isa = PBXGroup;
 			children = (
 				A2FF88462601668C00D16EBC /* TheKnow */,
 				A2FF88452601668C00D16EBC /* Products */,
+				A27EDE2926362B180081104D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,6 +155,7 @@
 		A2FF88462601668C00D16EBC /* TheKnow */ = {
 			isa = PBXGroup;
 			children = (
+				A27EDE1526362A160081104D /* Managers */,
 				A27DD5B52635D95A00A083CF /* ViewModels */,
 				291FDEC92635C91700181FE8 /* Models */,
 				291FDEC82635C90A00181FE8 /* Views */,
@@ -211,18 +253,24 @@
 			files = (
 				291FDECC2635C94F00181FE8 /* YelpAPI.swift in Sources */,
 				A27DD5CB2635E6E000A083CF /* UserViewModel.swift in Sources */,
+				A27EDE2426362AA90081104D /* PlaceListView.swift in Sources */,
 				A27DD5B32635D8EF00A083CF /* LoginView.swift in Sources */,
 				A27DD5BF2635DC9C00A083CF /* CollectionsView.swift in Sources */,
+				A27EDE1726362A280081104D /* LocationManager.swift in Sources */,
 				A27DD5D22635F69B00A083CF /* CollectionsViewModel.swift in Sources */,
 				A2641F692601786600A0F427 /* Models.swift in Sources */,
 				A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */,
 				A27DD5B72635D96900A083CF /* LoginViewModel.swift in Sources */,
+				A27EDE1B26362A470081104D /* Place.swift in Sources */,
+				A27EDE1E26362A5C0081104D /* PlaceAnnotation.swift in Sources */,
 				A27DD5CF2635F33400A083CF /* SignupViewModel.swift in Sources */,
 				A27DD5D52635F95B00A083CF /* AccountView.swift in Sources */,
 				A2641F6E26017CE100A0F427 /* Strings.swift in Sources */,
 				A27DD5C22635DCC400A083CF /* LoggedOutView.swift in Sources */,
+				A27EDE2126362A8E0081104D /* MapView.swift in Sources */,
 				A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */,
 				A27DD5C72635E04400A083CF /* SignupView.swift in Sources */,
+				A27EDE2726362ABA0081104D /* PlaceSearch.swift in Sources */,
 				A2641F7426017F4F00A0F427 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

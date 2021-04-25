@@ -37,7 +37,7 @@ struct CollectionsView: View {
         NavigationView {
             List(0..<4) { index in
                 NavigationLink(
-                    destination: Text("Collection \(index)"),
+                    destination: PlaceSearch(),
                     label: {
                         Text("Collection \(index + 1)")
                             .font(.title2)
@@ -67,6 +67,7 @@ struct CollectionsView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
+                        
                     }, label: {
                         Image(systemName: "plus.circle")
                             .font(.largeTitle)
