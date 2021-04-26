@@ -16,13 +16,15 @@ struct LoggedOutView: View {
     @State var presentSignupSheet: Bool = false
     
     var body: some View {
-        VStack {
-            Text(Strings.LOGGED_OUT_WELCOME)
-                .font(.system(.largeTitle, design: .rounded))
-                .fontWeight(.bold)
-                .padding(.top, 50)
-            Spacer()
-            LoggedOutViewButtons(presentLoginSheet: $presentLoginSheet, presentSignupSheet: $presentSignupSheet)
+        NavigationView {
+            VStack {
+                Text(Strings.LOGGED_OUT_WELCOME)
+                    .font(.system(.largeTitle, design: .rounded))
+                    .fontWeight(.bold)
+                    .padding(.top, 50)
+                Spacer()
+                LoggedOutViewButtons(presentLoginSheet: $presentLoginSheet, presentSignupSheet: $presentSignupSheet)
+            }
         }
         
     }
@@ -37,47 +39,32 @@ struct LoggedOutViewButtons: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Button(action: {
-                    self.presentLoginSheet.toggle()
-                }, label: {
+            NavigationLink(
+                destination: LoginView(),
+                label: {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(minHeight: 60, maxHeight: 60)
+                        .padding()
                         .overlay(
                             Text(Strings.LOG_IN)
                                 .foregroundColor(.white)
                                 .font(.system(.title3, design: .rounded))
                                 .bold()
-                        )
-                })
-                .sheet(isPresented: $presentLoginSheet) {
-                    LoginView()
-                }
-                
-                Spacer()
-            }
-            HStack {
-                Spacer()
-                Button(action: {
-                    self.presentSignupSheet.toggle()
-                }, label: {
+                        ) // Overlay
+            }) // NavigationLink
+            NavigationLink(
+                destination: SignupView(),
+                label: {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(minHeight: 60, maxHeight: 60)
+                        .padding()
                         .overlay(
                             Text(Strings.SIGN_UP)
                                 .foregroundColor(.white)
                                 .font(.system(.title3, design: .rounded))
                                 .bold()
-                        )
-
-                })
-                .sheet(isPresented: $presentSignupSheet) {
-                    SignupView()
-                }
-
-                Spacer()
-            }
+                        ) // Overlay
+            }) // NavigationLink
         }
         .padding(.bottom, 50)        
     }

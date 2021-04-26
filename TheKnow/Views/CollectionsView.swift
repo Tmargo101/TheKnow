@@ -14,25 +14,6 @@ struct CollectionsView: View {
     @State var presentAccountSheet: Bool = false
     
     var body: some View {
-//        VStack {
-//            NavigationView {
-//                VStack {
-//                    Text("Hello")
-//                    Button(action: {
-//                        presentAccountSheet.toggle()
-//                    }) {
-//                        Image(systemName: "person.circle")
-//                            .font(.largeTitle)
-//                    }
-//                    .foregroundColor(.blue)
-//                    .sheet(isPresented: $presentAccountSheet) {
-//                        AccountView(showSheet: $presentAccountSheet)
-//                    }
-//                } // VStack
-//            } // NavigationView
-//        }// VStack
-//        .environmentObject(user)
-
 
         NavigationView {
             List(0..<4) { index in
@@ -46,17 +27,6 @@ struct CollectionsView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-//                    Button(action: {
-//                        presentAccountSheet.toggle()
-//                    }) {
-//                        Image(systemName: "person.circle")
-//                            .font(.largeTitle)
-//                    }
-//                    .foregroundColor(.blue)
-//                    .sheet(isPresented: $presentAccountSheet) {
-//                        AccountView(presented: $presentAccountSheet)
-//                            .environmentObject(user)
-//                    }
                     NavigationLink(destination: AccountView(), label: {
                         Image(systemName: "person.circle")
                             .font(.largeTitle)

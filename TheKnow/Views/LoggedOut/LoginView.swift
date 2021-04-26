@@ -13,35 +13,32 @@ struct LoginView: View {
 
     var body: some View {
         ZStack (alignment: .top) {
-            NavigationView {
-                Form {
-                    Section {
-                        TextField(Strings.USERNAME, text: $loginViewModel.username)
-                            .autocapitalization(.none)
-                        SecureField(Strings.PASSWORD, text: $loginViewModel.password) {
+            Form {
+                Section {
+                    TextField(Strings.USERNAME, text: $loginViewModel.username)
+                        .autocapitalization(.none)
+                    SecureField(Strings.PASSWORD, text: $loginViewModel.password) {
+                        withAnimation {
                             user.login(_username: loginViewModel.username, password: loginViewModel.password)
                         }
-                        .autocapitalization(.none)
-                            
-
                     }
-                    Section {
-                        Button(action: {
-                            user.login(_username: loginViewModel.username, password: loginViewModel.password)
-                        }, label: {
-                            Text(Strings.LOG_IN)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                        })
-                        .disabled(!loginViewModel.isValid)
-                    } // Section
-                } // Form
-                .navigationTitle(Text(Strings.LOG_IN))
-            } // NavigationView
-            Image(systemName: Symbols.SHEET_DISMISS_GRABBER)
-                .font(.system(.largeTitle))
-                .padding(.top, 20)
-            
+                    .autocapitalization(.none)
+                        
 
+                }
+                Section {
+                    Button(action: {
+                        withAnimation {
+                            user.login(_username: loginViewModel.username, password: loginViewModel.password)
+                        }
+                    }, label: {
+                        Text(Strings.LOG_IN)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    })
+                    .disabled(!loginViewModel.isValid)
+                } // Section
+            } // Form
+            .navigationTitle(Text(Strings.LOG_IN))
         } // ZStack
     }
 }

@@ -10,13 +10,14 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var user: UserViewModel
-    
+        
     var body: some View {
         ZStack {
             if (user.loggedIn) {
                 CollectionsView()
             } else {
                 LoggedOutView()
+                    .transition(.scale(scale: 3.0))
             }
         }
         

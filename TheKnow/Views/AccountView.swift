@@ -26,16 +26,12 @@ struct AccountView: View {
                     .disabled(true)
 
                     Button(action: {
-                        user.logout()
+                        withAnimation {
+                            user.logout()
+                        }
                     }, label: {
                         Text(Strings.LOG_OUT)
                     })
-                    
-                    NavigationLink(destination: PlaceSearch(), label: {
-                        Image(systemName: "person.circle")
-                            .font(.largeTitle)
-                    })
-
                 }
             }
             .navigationTitle(Strings.ACCOUNT)
