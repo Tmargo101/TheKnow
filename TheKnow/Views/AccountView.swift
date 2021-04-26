@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AccountView: View {
+    
     @EnvironmentObject var user: UserViewModel
         
     var body: some View {
@@ -33,13 +34,12 @@ struct AccountView: View {
             }
             .navigationTitle(Strings.ACCOUNT)
         } // ZStack
-        .environmentObject(user)
     }
 }
 
-//struct AccountView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AccountView()
-//            .environmentObject(UserViewModel())
-//    }
-//}
+struct AccountView_Previews: PreviewProvider {
+    static var previews: some View {
+        AccountView()
+            .environmentObject(UserViewModel())
+    }
+}

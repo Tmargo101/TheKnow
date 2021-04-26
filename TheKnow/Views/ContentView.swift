@@ -14,11 +14,13 @@ struct ContentView: View {
         ZStack {
             if (user.loggedIn) {
                 CollectionsView()
+                    .environmentObject(user)
             } else {
                 LoggedOutView()
+                    .environmentObject(user)
             }
         }
-        .environmentObject(user)
+        
     }
 }
 

@@ -18,8 +18,11 @@ struct LoginView: View {
                     Section {
                         TextField(Strings.USERNAME, text: $loginViewModel.username)
                             .autocapitalization(.none)
-                        SecureField(Strings.PASSWORD, text: $loginViewModel.password)
-                            .autocapitalization(.none)
+                        SecureField(Strings.PASSWORD, text: $loginViewModel.password) {
+                            user.login(_username: loginViewModel.username, password: loginViewModel.password)
+                        }
+                        .autocapitalization(.none)
+                            
 
                     }
                     Section {
@@ -29,7 +32,7 @@ struct LoginView: View {
                             Text(Strings.LOG_IN)
                                 .frame(maxWidth: .infinity, alignment: .center)
                         })
-    //                        .disabled(userViewModel.isValid)
+                        .disabled(!loginViewModel.isValid)
                     } // Section
                 } // Form
                 .navigationTitle(Text(Strings.LOG_IN))

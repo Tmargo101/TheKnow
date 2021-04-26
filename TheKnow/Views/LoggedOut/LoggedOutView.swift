@@ -23,8 +23,9 @@ struct LoggedOutView: View {
                 .padding(.top, 50)
             Spacer()
             LoggedOutViewButtons(presentLoginSheet: $presentLoginSheet, presentSignupSheet: $presentSignupSheet)
+                .environmentObject(user)
         }
-        .environmentObject(user)
+        
     }
 }
 
@@ -53,6 +54,7 @@ struct LoggedOutViewButtons: View {
                 })
                 .sheet(isPresented: $presentLoginSheet) {
                     LoginView()
+                        .environmentObject(user)
                 }
                 
                 Spacer()
@@ -74,14 +76,13 @@ struct LoggedOutViewButtons: View {
                 })
                 .sheet(isPresented: $presentSignupSheet) {
                     SignupView()
+                        .environmentObject(user)
                 }
 
                 Spacer()
             }
         }
-        .padding(.bottom, 50)
-        .environmentObject(user)
-        
+        .padding(.bottom, 50)        
     }
 }
 

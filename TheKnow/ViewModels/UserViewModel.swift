@@ -26,6 +26,7 @@ class UserViewModel: ObservableObject {
     
     func logout() {
         print("Logout")
+        self.username = ""
         self.loggedIn = false
     }
 }

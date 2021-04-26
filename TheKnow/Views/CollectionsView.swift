@@ -54,7 +54,7 @@ struct CollectionsView: View {
 //                    }
 //                    .foregroundColor(.blue)
 //                    .sheet(isPresented: $presentAccountSheet) {
-//                        AccountView(showSheet: $presentAccountSheet)
+//                        AccountView()
 //                    }
                     NavigationLink(destination: AccountView(), label: {
                         Image(systemName: "person.circle")
@@ -77,7 +77,6 @@ struct CollectionsView: View {
             } //Toolbar
             .navigationTitle(Text(Strings.MY_COLLECTIONS))
         }
-        .environmentObject(user)
     }
 }
 
