@@ -63,7 +63,7 @@ struct SignupView: View {
                 } // Form
                 .navigationTitle(Text(Strings.SIGN_UP))
             } // NavigationView
-            Image(systemName: "chevron.compact.down")
+            Image(systemName: Symbols.SHEET_DISMISS_GRABBER)
                 .font(.system(.largeTitle))
                 .padding(.top, 20)
         } // ZStack

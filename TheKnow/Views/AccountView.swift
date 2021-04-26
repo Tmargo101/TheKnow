@@ -12,26 +12,26 @@ struct AccountView: View {
         
     var body: some View {
         ZStack (alignment: .top) {
-                Form {
-                    Section (header: Text("Account Name")) {
-                        Text("\(user.username ?? "Username not found")")
-                    }
+            Form {
+                Section (header: Text(Strings.ACCOUNT_NAME)) {
+                    Text("\(user.username ?? Strings.USERNAME_NOT_FOUND)")
+                }
 
-                    Section (header: Text("Account Actions")) {
-                        Button(action: {
-                        }, label: {
-                            Text("Change Password")
-                        })
-                        .disabled(true)
+                Section (header: Text(Strings.ACCOUNT_ACTIONS)) {
+                    Button(action: {
+                    }, label: {
+                        Text(Strings.CHANGE_PASSWORD)
+                    })
+                    .disabled(true)
 
-                        Button(action: {
-                            user.logout()
-                        }, label: {
-                            Text("Log Out")
-                        })
-                    }
+                    Button(action: {
+                        user.logout()
+                    }, label: {
+                        Text(Strings.LOG_OUT)
+                    })
+                }
             }
-            .navigationTitle("Account")
+            .navigationTitle(Strings.ACCOUNT)
         } // ZStack
         .environmentObject(user)
     }

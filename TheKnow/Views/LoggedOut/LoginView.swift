@@ -34,7 +34,7 @@ struct LoginView: View {
                 } // Form
                 .navigationTitle(Text(Strings.LOG_IN))
             } // NavigationView
-            Image(systemName: "chevron.compact.down")
+            Image(systemName: Symbols.SHEET_DISMISS_GRABBER)
                 .font(.system(.largeTitle))
                 .padding(.top, 20)
             
