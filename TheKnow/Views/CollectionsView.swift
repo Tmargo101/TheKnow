@@ -37,7 +37,7 @@ struct CollectionsView: View {
         NavigationView {
             List(0..<4) { index in
                 NavigationLink(
-                    destination: PlaceSearch(),
+                    destination: AccountView(),
                     label: {
                         Text("Collection \(index + 1)")
                             .font(.title2)
@@ -54,7 +54,8 @@ struct CollectionsView: View {
 //                    }
 //                    .foregroundColor(.blue)
 //                    .sheet(isPresented: $presentAccountSheet) {
-//                        AccountView()
+//                        AccountView(presented: $presentAccountSheet)
+//                            .environmentObject(user)
 //                    }
                     NavigationLink(destination: AccountView(), label: {
                         Image(systemName: "person.circle")

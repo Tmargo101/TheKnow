@@ -10,7 +10,7 @@ import SwiftUI
 struct AccountView: View {
     
     @EnvironmentObject var user: UserViewModel
-        
+            
     var body: some View {
         ZStack (alignment: .top) {
             Form {
@@ -30,6 +30,12 @@ struct AccountView: View {
                     }, label: {
                         Text(Strings.LOG_OUT)
                     })
+                    
+                    NavigationLink(destination: PlaceSearch(), label: {
+                        Image(systemName: "person.circle")
+                            .font(.largeTitle)
+                    })
+
                 }
             }
             .navigationTitle(Strings.ACCOUNT)
@@ -37,9 +43,9 @@ struct AccountView: View {
     }
 }
 
-struct AccountView_Previews: PreviewProvider {
-    static var previews: some View {
-        AccountView()
-            .environmentObject(UserViewModel())
-    }
-}
+//struct AccountView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AccountView(dismiss: true)
+//            .environmentObject(UserViewModel())
+//    }
+//}

@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     @EnvironmentObject var user: UserViewModel
     
     var body: some View {
         ZStack {
             if (user.loggedIn) {
                 CollectionsView()
-                    .environmentObject(user)
             } else {
                 LoggedOutView()
-                    .environmentObject(user)
             }
         }
         
