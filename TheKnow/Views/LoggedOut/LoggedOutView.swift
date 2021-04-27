@@ -45,8 +45,8 @@ struct LoggedOutViewButtons: View {
                 destination: LoginView(),
                 label: {
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(minHeight: 60, maxHeight: 60)
-                        .padding()
+                        .frame(minWidth: 200, maxWidth: 400, minHeight: 60, maxHeight: 60)
+                        .padding(.horizontal)
                         .overlay(
                             Text(Strings.LOG_IN)
                                 .foregroundColor(.white)
@@ -54,12 +54,13 @@ struct LoggedOutViewButtons: View {
                                 .bold()
                         ) // Overlay
             }) // NavigationLink
+                .padding(.bottom)
             NavigationLink(
                 destination: SignupView(),
                 label: {
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(minHeight: 60, maxHeight: 60)
-                        .padding()
+                        .frame(minWidth: 200, maxWidth: 400, minHeight: 60, maxHeight: 60)
+                        .padding(.horizontal)
                         .overlay(
                             Text(Strings.SIGN_UP)
                                 .foregroundColor(.white)
@@ -67,6 +68,7 @@ struct LoggedOutViewButtons: View {
                                 .bold()
                         ) // Overlay
             }) // NavigationLink
+                .padding(.bottom)
         }
     } // Body
 }
