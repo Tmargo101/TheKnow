@@ -17,7 +17,12 @@ struct ContentView: View {
                 CollectionsView()
             } else {
                 LoggedOutView()
-                    .transition(.scale(scale: 3.0))
+                    .transition(
+                        .asymmetric(
+                            insertion: .offset(y: 1000),
+                            removal: .offset(y: -1000))
+                    )
+                    //.transition(.scale(scale: 3.0))
             }
         }
         
