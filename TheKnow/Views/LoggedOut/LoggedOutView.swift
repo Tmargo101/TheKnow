@@ -26,6 +26,8 @@ struct LoggedOutView: View {
                 LoggedOutViewButtons(presentLoginSheet: $presentLoginSheet, presentSignupSheet: $presentSignupSheet)
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+
         
     }
 }
@@ -66,8 +68,7 @@ struct LoggedOutViewButtons: View {
                         ) // Overlay
             }) // NavigationLink
         }
-        .padding(.bottom, 50)        
-    }
+    } // Body
 }
 
 struct LoggedOutView_Previews: PreviewProvider {

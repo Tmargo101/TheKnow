@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		291FDECC2635C94F00181FE8 /* YelpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291FDECB2635C94F00181FE8 /* YelpAPI.swift */; };
+		A22ACC7326371C9500C04639 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22ACC7226371C9500C04639 /* CollectionView.swift */; };
+		A22ACC7626371CA200C04639 /* PlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22ACC7526371CA200C04639 /* PlaceView.swift */; };
+		A22ACC7926371CD000C04639 /* AddCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22ACC7826371CD000C04639 /* AddCollectionView.swift */; };
+		A22ACC7D26371CD900C04639 /* AddPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22ACC7C26371CD900C04639 /* AddPlaceView.swift */; };
+		A22ACC8426371CF700C04639 /* CollectionManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22ACC8326371CF700C04639 /* CollectionManageView.swift */; };
 		A2641F432601695700A0F427 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A2641F422601695700A0F427 /* Alamofire */; };
 		A2641F692601786600A0F427 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2641F682601786600A0F427 /* Models.swift */; };
 		A2641F6E26017CE100A0F427 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2641F6D26017CE100A0F427 /* Strings.swift */; };
@@ -37,6 +42,11 @@
 
 /* Begin PBXFileReference section */
 		291FDECB2635C94F00181FE8 /* YelpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPI.swift; sourceTree = "<group>"; };
+		A22ACC7226371C9500C04639 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
+		A22ACC7526371CA200C04639 /* PlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceView.swift; sourceTree = "<group>"; };
+		A22ACC7826371CD000C04639 /* AddCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionView.swift; sourceTree = "<group>"; };
+		A22ACC7C26371CD900C04639 /* AddPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceView.swift; sourceTree = "<group>"; };
+		A22ACC8326371CF700C04639 /* CollectionManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionManageView.swift; sourceTree = "<group>"; };
 		A2641F682601786600A0F427 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		A2641F6D26017CE100A0F427 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		A2641F7326017F4F00A0F427 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -83,12 +93,10 @@
 			isa = PBXGroup;
 			children = (
 				A2FF88492601668C00D16EBC /* ContentView.swift */,
+				A22ACC8926371D7800C04639 /* AddManageViews */,
+				A22ACC8826371D5700C04639 /* DetailViews */,
+				A22ACC8626371D2200C04639 /* Map */,
 				A2D6AB01263634F500714B17 /* LoggedOut */,
-				A27DD5BE2635DC9C00A083CF /* CollectionsView.swift */,
-				A27DD5D42635F95B00A083CF /* AccountView.swift */,
-				A27EDE2026362A8E0081104D /* MapView.swift */,
-				A27EDE2326362AA90081104D /* PlaceListView.swift */,
-				A27EDE2626362ABA0081104D /* PlaceSearch.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -103,6 +111,37 @@
 				A27EDE1D26362A5C0081104D /* PlaceAnnotation.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A22ACC8626371D2200C04639 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				A27EDE2026362A8E0081104D /* MapView.swift */,
+				A27EDE2326362AA90081104D /* PlaceListView.swift */,
+				A27EDE2626362ABA0081104D /* PlaceSearch.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		A22ACC8826371D5700C04639 /* DetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				A27DD5BE2635DC9C00A083CF /* CollectionsView.swift */,
+				A22ACC7226371C9500C04639 /* CollectionView.swift */,
+				A22ACC7526371CA200C04639 /* PlaceView.swift */,
+				A27DD5D42635F95B00A083CF /* AccountView.swift */,
+			);
+			path = DetailViews;
+			sourceTree = "<group>";
+		};
+		A22ACC8926371D7800C04639 /* AddManageViews */ = {
+			isa = PBXGroup;
+			children = (
+				A22ACC8326371CF700C04639 /* CollectionManageView.swift */,
+				A22ACC7826371CD000C04639 /* AddCollectionView.swift */,
+				A22ACC7C26371CD900C04639 /* AddPlaceView.swift */,
+			);
+			path = AddManageViews;
 			sourceTree = "<group>";
 		};
 		A27DD5B52635D95A00A083CF /* ViewModels */ = {
@@ -260,14 +299,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				291FDECC2635C94F00181FE8 /* YelpAPI.swift in Sources */,
+				A22ACC8426371CF700C04639 /* CollectionManageView.swift in Sources */,
 				A27DD5CB2635E6E000A083CF /* UserViewModel.swift in Sources */,
+				A22ACC7626371CA200C04639 /* PlaceView.swift in Sources */,
 				A27EDE2426362AA90081104D /* PlaceListView.swift in Sources */,
+				A22ACC7D26371CD900C04639 /* AddPlaceView.swift in Sources */,
 				A27DD5B32635D8EF00A083CF /* LoginView.swift in Sources */,
 				A27DD5BF2635DC9C00A083CF /* CollectionsView.swift in Sources */,
 				A27EDE1726362A280081104D /* LocationManager.swift in Sources */,
 				A27DD5D22635F69B00A083CF /* CollectionsViewModel.swift in Sources */,
 				A2641F692601786600A0F427 /* Models.swift in Sources */,
 				A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */,
+				A22ACC7926371CD000C04639 /* AddCollectionView.swift in Sources */,
 				A27DD5B72635D96900A083CF /* LoginViewModel.swift in Sources */,
 				A27EDE1B26362A470081104D /* Place.swift in Sources */,
 				A27EDE1E26362A5C0081104D /* PlaceAnnotation.swift in Sources */,
@@ -279,6 +322,7 @@
 				A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */,
 				A27DD5C72635E04400A083CF /* SignupView.swift in Sources */,
 				A27EDE2726362ABA0081104D /* PlaceSearch.swift in Sources */,
+				A22ACC7326371C9500C04639 /* CollectionView.swift in Sources */,
 				A2641F7426017F4F00A0F427 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
