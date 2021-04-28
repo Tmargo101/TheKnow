@@ -11,11 +11,13 @@ struct CollectionView: View {
     
     var collectionName: String
     
+    @State var presentNewPlaceSheet: Bool = false
+    
     var body: some View {
         VStack {
             List(0..<4) { index in
                 NavigationLink(
-                    destination: PlaceView(placeName: "Place \(index + 1)"),
+                    destination: PlaceView(placeName: "Place \(index + 1)", reccomendedBy: "Tom M", note: ""),
                     label: {
                         Text("Place \(index + 1)")
                             .font(.title2)
@@ -24,18 +26,23 @@ struct CollectionView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AddPlaceView(), label: {
-//                        Image(systemName: "plus.circle")
-//                            .font(.largeTitle)
-                        Text("Add Place")
+                    Button(action: {
+                        presentNewPlaceSheet.toggle()
+                    }, label: {
+                        Image(systemName: "plus.circle")
+                            .font(.largeTitle)
                     })
+                    .sheet(isPresented: $presentNewPlaceSheet) {
+                        AddPlaceView()
+                    }
                 }
 
             }
-            Text("Shows all places in a collection")
-
         }
         .navigationTitle(collectionName)
+//        .onAppear() {
+//            
+//        }
     }
 }
 
