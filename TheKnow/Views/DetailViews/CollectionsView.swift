@@ -10,6 +10,7 @@ import SwiftUI
 struct CollectionsView: View {
     
     @EnvironmentObject var user: UserViewModel
+    @State private var showAddNewCollection: Bool = false
     
     @State var presentNewCollectionSheet: Bool = false
     
@@ -43,9 +44,34 @@ struct CollectionsView: View {
                 .sheet(isPresented: $presentNewCollectionSheet) {
                     AddCollectionView()
                 }
-            } // ToolbarItem
-        } //Toolbar
-        .navigationTitle(Text(Strings.MY_COLLECTIONS))
+            }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        self.showAddNewCollection = true
+                        
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.purple)
+                    }
+                    
+
+                } // ToolbarItem
+            } //Toolbar
+            .navigationTitle(Text(Strings.MY_COLLECTIONS))
+        }
+        
+        if showAddNewCollection {
+            BlankView(bgColor: .black)
+                .opacity(0.5)
+                .onTapGesture {
+                    self.showAddNewCollection = false
+                }
+            
+            AddCollectionView(name: "", isShow: $showAddNewCollection)
+                .transition(.move(edge: .bottom))
+                .animation(.interpolatingSpring(stiffness: 200.0, damping: 25.0, initialVelocity: 10.0))
+        }
     }
 }
 
@@ -53,5 +79,19 @@ struct CollectionsView_Previews: PreviewProvider {
     static var previews: some View {
         CollectionsView()
             .environmentObject(UserViewModel())
+    }
+}
+
+struct BlankView : View {
+    
+    var bgColor: Color
+    
+    var body: some View {
+        VStack {
+            Spacer()
+        }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        .background(bgColor)
+        .edgesIgnoringSafeArea(.all)
     }
 }
