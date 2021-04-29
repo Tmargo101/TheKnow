@@ -11,10 +11,6 @@ struct LoggedOutView: View {
     
     @EnvironmentObject var user: UserViewModel
     
-    // State variables
-    @State var presentLoginSheet: Bool = false
-    @State var presentSignupSheet: Bool = false
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -23,7 +19,7 @@ struct LoggedOutView: View {
                     .fontWeight(.bold)
                     .padding(.top, 50)
                 Spacer()
-                LoggedOutViewButtons(presentLoginSheet: $presentLoginSheet, presentSignupSheet: $presentSignupSheet)
+                LoggedOutViewButtons()
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
@@ -35,10 +31,7 @@ struct LoggedOutView: View {
 struct LoggedOutViewButtons: View {
     
     @EnvironmentObject var user: UserViewModel
-    
-    @Binding var presentLoginSheet: Bool
-    @Binding var presentSignupSheet: Bool
-    
+        
     var body: some View {
         VStack {
             NavigationLink(
