@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct CollectionsView: View {
     
@@ -14,20 +15,23 @@ struct CollectionsView: View {
     
     @State var presentNewCollectionSheet: Bool = false
     
+    @State var collections = [Collection]()
+    
     var body: some View {
         
         ZStack {
             VStack {
-                List(0..<4) { index in
+                List(collections) { collection in
                     NavigationLink(
-                        destination: CollectionView(collectionName: "Collection \(index + 1)"),
+                        destination: CollectionView(collectionName: "\(collection.name)"),
                         label: {
-                            Text("Collection \(index + 1)")
+                            Text("\(collection.name)")
                                 .font(.title2)
                         })
                         //                    .isDetailLink(false)
                         .padding()
                 }
+                .onAppear(perform: getAllCollections)
                 .sheet(isPresented: $presentNewCollectionSheet) {
                     AddCollectionView(name: "", isShow: $showAddNewCollection)
                 }
@@ -60,18 +64,30 @@ struct CollectionsView: View {
             .animation(.easeOut)
         
         
-        if showAddNewCollection {
-            BlankView(bgColor: .black)
-                .opacity(0.5)
-                .onTapGesture {
-                    self.showAddNewCollection = false
-                }
-            
-            AddCollectionView(name: "", isShow: $showAddNewCollection)
-                .transition(.move(edge: .bottom))
-                .animation(.interpolatingSpring(stiffness: 200.0, damping: 25.0, initialVelocity: 10.0))
+            if showAddNewCollection {
+                BlankView(bgColor: .black)
+                    .opacity(0.5)
+                    .onTapGesture {
+                        self.showAddNewCollection = false
+                    }
+                
+                AddCollectionView(name: "", isShow: $showAddNewCollection)
+                    .transition(.move(edge: .bottom))
+                    .animation(.interpolatingSpring(stiffness: 200.0, damping: 25.0, initialVelocity: 10.0))
+            }
         }
-        }
+    } // Body
+    
+    func getAllCollections() {
+        let headers: HTTPHeaders = ["x-access-token": user.token ?? ""]
+        let parameters = ["user": "60898f83551cc20015fc83b3"]
+        AF.request("https://txm5483-theknow-api.herokuapp.com/collections", parameters: parameters, headers: headers)
+            .validate()
+            .responseDecodable(of: Response.self) { (response) in
+                guard let response = response.value else { return }
+                print(response)
+                collections = response.contents
+            }
     }
 }
 

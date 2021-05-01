@@ -20,3 +20,27 @@ struct Place: Codable {
     var id: String
     var been: Bool
 }
+
+struct Response: Decodable {
+    let status: String
+    let message: String
+    let contents: [Collection]
+}
+
+struct Collection: Decodable, Identifiable {
+    let id: String
+    let createdDate: String
+    let members: [String]
+    let name: String
+    let owner: String
+    let places: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case createdDate = "createdDate"
+        case members = "members"
+        case name = "name"
+        case owner = "owner"
+        case places = "places"
+    }
+}
