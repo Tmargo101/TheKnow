@@ -10,6 +10,7 @@ import SwiftUI
 struct CollectionView: View {
     
     var collectionName: String
+    @State private var showAddNewPlace: Bool = false
     
     var body: some View {
         VStack {
@@ -22,17 +23,34 @@ struct CollectionView: View {
                     })
                     .padding()
             }
+            .sheet(isPresented: $showAddNewPlace, content: {
+                AddPlaceView(location: "", isShow: $showAddNewPlace)
+            })
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AddPlaceView(), label: {
-//                        Image(systemName: "plus.circle")
-//                            .font(.largeTitle)
-                        Text("Add Place")
-                    })
+                    Button(action: {
+                        self.showAddNewPlace = true
+                        
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.purple)
+                    }
                 }
 
             }
-            Text("Shows all places in a collection")
+            
+//            if showAddNewPlace {
+//                BlankView(bgColor: .black)
+//                    .opacity(0.5)
+//                    .onTapGesture {
+//                        self.showAddNewPlace = false
+//                    }
+//                AddPlaceView(location: "", isShow: $showAddNewPlace)
+//                    .transition(.move(edge: .bottom))
+//                    .animation(.interpolatingSpring(stiffness: 200.0, damping: 25.0, initialVelocity: 10.0))
+//            }
+            
 
         }
         .navigationTitle(collectionName)

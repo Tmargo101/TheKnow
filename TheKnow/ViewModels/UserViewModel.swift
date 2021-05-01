@@ -8,7 +8,7 @@
 import Foundation
 
 class UserViewModel: ObservableObject {
-    @Published var loggedIn: Bool = false
+    @Published var loggedIn: Bool = true
     @Published var username: String? = ""
     @Published var token: String? = ""
     
