@@ -16,28 +16,35 @@ struct CollectionsView: View {
     
     var body: some View {
 
-        NavigationView {
-            List(0..<4) { index in
-                NavigationLink(
-                    destination: CollectionView(collectionName: "Collection \(index + 1)"),
-                    label: {
-                        Text("Collection \(index + 1)")
-                            .font(.title2)
-                    })
-                    .isDetailLink(false)
-                    .padding()
+        List(0..<4) { index in
+            NavigationLink(
+                destination: CollectionView(collectionName: "Collection \(index + 1)"),
+                label: {
+                    Text("Collection \(index + 1)")
+                        .font(.title2)
+                })
+//                    .isDetailLink(false)
+                .padding()
+        }
+        .listStyle(SidebarListStyle())
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                NavigationLink(destination: AccountView(), label: {
+                    Image(systemName: "person.circle")
+                        .font(.largeTitle)
+                })
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: AccountView(), label: {
-                        Image(systemName: "person.circle")
-                            .font(.largeTitle)
-                    })
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    presentNewCollectionSheet.toggle()
+                }, label: {
+                    Image(systemName: "plus.circle")
+                        .font(.largeTitle)
+                })
+                .sheet(isPresented: $presentNewCollectionSheet) {
+                    AddCollectionView()
                 }
-                ToolbarItem(placement: .principal) {
-                    Text("TheKnow")
-                        .fontWeight(.bold)
-                }
+            }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         self.showAddNewCollection = true

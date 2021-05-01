@@ -12,11 +12,13 @@ struct CollectionView: View {
     var collectionName: String
     @State private var showAddNewPlace: Bool = false
     
+    @State var presentNewPlaceSheet: Bool = false
+    
     var body: some View {
         VStack {
             List(0..<4) { index in
                 NavigationLink(
-                    destination: PlaceView(placeName: "Place \(index + 1)"),
+                    destination: PlaceView(placeName: "Place \(index + 1)", reccomendedBy: "Tom M", note: ""),
                     label: {
                         Text("Place \(index + 1)")
                             .font(.title2)
@@ -29,31 +31,22 @@ struct CollectionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        self.showAddNewPlace = true
-                        
-                    }) {
-                        Image(systemName: "plus.circle.fill")
+                        presentNewPlaceSheet.toggle()
+                    }, label: {
+                        Image(systemName: "plus.circle")
                             .font(.largeTitle)
-                            .foregroundColor(.purple)
+                    })
+                    .sheet(isPresented: $presentNewPlaceSheet) {
+                        AddPlaceView()
                     }
                 }
 
             }
-            
-//            if showAddNewPlace {
-//                BlankView(bgColor: .black)
-//                    .opacity(0.5)
-//                    .onTapGesture {
-//                        self.showAddNewPlace = false
-//                    }
-//                AddPlaceView(location: "", isShow: $showAddNewPlace)
-//                    .transition(.move(edge: .bottom))
-//                    .animation(.interpolatingSpring(stiffness: 200.0, damping: 25.0, initialVelocity: 10.0))
-//            }
-            
-
         }
         .navigationTitle(collectionName)
+//        .onAppear() {
+//            
+//        }
     }
 }
 

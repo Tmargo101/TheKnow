@@ -14,15 +14,15 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if (user.loggedIn) {
-                CollectionsView()
+                LoggedInView()
             } else {
                 LoggedOutView()
                     .transition(
                         .asymmetric(
-                            insertion: .offset(y: 1000),
-                            removal: .offset(y: -1000))
+                            insertion: .offset(y: -1000),
+                            removal: .offset(y: 1000)
+                        )
                     )
-                    //.transition(.scale(scale: 3.0))
             }
         }
         
