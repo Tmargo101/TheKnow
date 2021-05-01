@@ -10,7 +10,15 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var user: UserViewModel
-        
+    
+    @AppStorage("token") var UserDefaultsToken = ""
+    @AppStorage("loggedIn") var UserDefaultsLoggedIn = false
+    @AppStorage("username") var UserDefaultsUsername = ""
+    @AppStorage("id") var UserDefaultsId = ""
+    
+//    init() {
+//    }
+    
     var body: some View {
         ZStack {
             if (user.loggedIn) {
@@ -24,9 +32,14 @@ struct ContentView: View {
                         )
                     )
             }
+        }.onAppear {
+            user.loggedIn = UserDefaultsLoggedIn
+            user.token = UserDefaultsToken
+            user.id = UserDefaultsId
+            user.username = UserDefaultsUsername
         }
-        
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
