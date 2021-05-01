@@ -9,7 +9,7 @@ import SwiftUI
 import Alamofire
 
 struct CollectionsView: View {
-    
+        
     @EnvironmentObject var user: UserViewModel
     @State private var showAddNewCollection: Bool = false
     
