@@ -8,15 +8,48 @@
 import SwiftUI
 import MapKit
 
+class SearchMe: ObservableObject {
+    @Published var placeSearchResults: [PlaceSearchResultModel] = []
+    @ObservedObject var locationManager = LocationManager()
+    
+    func search(search: String) {
+        print("received \(search)")
+        var psr: [PlaceSearchResultModel] = []
+        
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = search
+        if let loc = locationManager.location {
+            let region = MKCoordinateRegion(center: loc.coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
+            request.region = region
+        }
+        let search = MKLocalSearch(request: request)
+        
+        search.start { (response, error) in
+            if let response = response {
+                let mapItems = response.mapItems
+                
+                psr = mapItems.map {
+                    PlaceSearchResultModel(item: $0)
+                }
+                self.placeSearchResults = psr
+            }
+
+        }
+
+    }
+}
+
 struct PlaceSearch: View {
     @State private var search: String = ""
     @ObservedObject var locationManager = LocationManager()
     @State private var placeSearchResults: [PlaceSearchResultModel] = [PlaceSearchResultModel]()
     @State private var tapped: Bool = false
     
-    private func getNearbyLandmarks() {
+    func getNearbyLandmarks() {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = search
+//        request.region
+//        https://developer.apple.com/documentation/mapkit/mklocalsearch/request
         
         let search = MKLocalSearch(request: request)
         
@@ -25,12 +58,17 @@ struct PlaceSearch: View {
                 let mapItems = response.mapItems
                 
                 self.placeSearchResults = mapItems.map {
-                    PlaceSearchResultModel(placemark: $0.placemark)
+                    PlaceSearchResultModel(item: $0)
                 }
                 
             }
             
         }
+    }
+    
+    func getSearchResults(str: String) -> [PlaceSearchResultModel] {
+        self.search = str
+        return placeSearchResults
     }
     
     private func calculateOffset() -> CGFloat {

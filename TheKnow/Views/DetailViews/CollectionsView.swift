@@ -15,51 +15,50 @@ struct CollectionsView: View {
     @State var presentNewCollectionSheet: Bool = false
     
     var body: some View {
-
-        List(0..<4) { index in
-            NavigationLink(
-                destination: CollectionView(collectionName: "Collection \(index + 1)"),
-                label: {
-                    Text("Collection \(index + 1)")
-                        .font(.title2)
-                })
-//                    .isDetailLink(false)
-                .padding()
-        }
-        .listStyle(SidebarListStyle())
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                NavigationLink(destination: AccountView(), label: {
-                    Image(systemName: "person.circle")
-                        .font(.largeTitle)
-                })
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    presentNewCollectionSheet.toggle()
-                }, label: {
-                    Image(systemName: "plus.circle")
-                        .font(.largeTitle)
-                })
-                .sheet(isPresented: $presentNewCollectionSheet) {
-                    AddCollectionView()
+        
+        ZStack {
+            VStack {
+                List(0..<4) { index in
+                    NavigationLink(
+                        destination: CollectionView(collectionName: "Collection \(index + 1)"),
+                        label: {
+                            Text("Collection \(index + 1)")
+                                .font(.title2)
+                        })
+                        //                    .isDetailLink(false)
+                        .padding()
                 }
-            }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        self.showAddNewCollection = true
-                        
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.largeTitle)
-                            .foregroundColor(.purple)
+                .sheet(isPresented: $presentNewCollectionSheet) {
+                    AddCollectionView(name: "", isShow: $showAddNewCollection)
+                }
+                .listStyle(SidebarListStyle())
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        NavigationLink(destination: AccountView(), label: {
+                            Image(systemName: "person.circle")
+                                .font(.largeTitle)
+                        })
                     }
                     
-
-                } // ToolbarItem
-            } //Toolbar
-            .navigationTitle(Text(Strings.MY_COLLECTIONS))
-        }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            self.showAddNewCollection = true
+                            
+                        }) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.largeTitle)
+                                .foregroundColor(.purple)
+                        }
+                        
+                        
+                    } // ToolbarItem
+                } //Toolbar
+                .navigationTitle(Text(Strings.MY_COLLECTIONS))
+            }
+            .rotation3DEffect(Angle(degrees: showAddNewCollection ? 5 : 0), axis: (x: 1, y: 0, z: 0))
+            .offset(y: showAddNewCollection ? -50 : 0)
+            .animation(.easeOut)
+        
         
         if showAddNewCollection {
             BlankView(bgColor: .black)
@@ -71,6 +70,7 @@ struct CollectionsView: View {
             AddCollectionView(name: "", isShow: $showAddNewCollection)
                 .transition(.move(edge: .bottom))
                 .animation(.interpolatingSpring(stiffness: 200.0, damping: 25.0, initialVelocity: 10.0))
+        }
         }
     }
 }

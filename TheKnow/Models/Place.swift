@@ -7,22 +7,34 @@
 import Foundation
 import MapKit
 
-struct PlaceSearchResultModel {
-    let placemark: MKPlacemark
+struct PlaceSearchResultModel: Identifiable {
+    let item: MKMapItem
     
     var id: UUID {
         return UUID()
     }
     
     var name: String {
-        self.placemark.name ?? ""
+        self.item.name ?? ""
+    }
+    
+    var address: String {
+        "\(self.item.placemark.subThoroughfare ?? "") \(self.item.placemark.thoroughfare ?? ""), \(self.item.placemark.subAdministrativeArea ?? "") \(self.item.placemark.administrativeArea ?? "")"
+    }
+    
+    var phoneNumber: String? {
+        self.item.phoneNumber ?? ""
+    }
+    
+    var url: URL? {
+        self.item.url ?? URL(string: "")
     }
     
     var title: String {
-        self.placemark.title ?? ""
+        self.item.placemark.title ?? ""
     }
     
     var coordinate: CLLocationCoordinate2D {
-        self.placemark.coordinate
+        self.item.placemark.coordinate
     }
 }

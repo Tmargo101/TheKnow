@@ -36,6 +36,6 @@ struct PlaceListView: View {
 
 struct PlaceListView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaceListView(places: [PlaceSearchResultModel(placemark: MKPlacemark())], onTap: {})
+        PlaceListView(places: [PlaceSearchResultModel(item: MKMapItem())], onTap: {})
     }
 }

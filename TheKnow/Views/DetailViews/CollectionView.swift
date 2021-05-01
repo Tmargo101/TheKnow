@@ -10,6 +10,7 @@ import SwiftUI
 struct CollectionView: View {
     
     var collectionName: String
+    @State private var showAddNewPlace: Bool = false
     
     @State var presentNewPlaceSheet: Bool = false
     
@@ -24,17 +25,17 @@ struct CollectionView: View {
                     })
                     .padding()
             }
+            .sheet(isPresented: $showAddNewPlace, content: {
+                AddPlaceView(location: "", isShow: $showAddNewPlace)
+            })
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        presentNewPlaceSheet.toggle()
+                        showAddNewPlace.toggle()
                     }, label: {
                         Image(systemName: "plus.circle")
                             .font(.largeTitle)
                     })
-                    .sheet(isPresented: $presentNewPlaceSheet) {
-                        AddPlaceView()
-                    }
                 }
 
             }
