@@ -7,24 +7,34 @@
 
 import Foundation
 
-struct PlaceList: Codable {
-    let name: String
-    let id: Int
-}
-
-struct Place: Codable {
-    var name: String
-    var address: String
-    var notes: String
-    var reccomendedBy: String
-    var id: String
-    var been: Bool
-}
+//struct PlaceList: Codable {
+//    let name: String
+//    let id: Int
+//}
+//
+//struct Place: Codable {
+//    var name: String
+//    var address: String
+//    var notes: String
+//    var reccomendedBy: String
+//    var id: String
+//    var been: Bool
+//}
 
 struct Response: Decodable {
     let status: String
     let message: String
-    let contents: [Collection]
+    let contents: Contents
+}
+
+struct Contents: Decodable {
+    let user: User?
+    let collections: [Collection]?
+}
+
+struct User: Decodable {
+    let id: String
+    let token: String
 }
 
 struct Collection: Decodable, Identifiable {

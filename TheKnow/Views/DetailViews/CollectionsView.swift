@@ -28,7 +28,6 @@ struct CollectionsView: View {
                             Text("\(collection.name)")
                                 .font(.title2)
                         })
-                        //                    .isDetailLink(false)
                         .padding()
                 }
                 .onAppear(perform: getAllCollections)
@@ -59,9 +58,9 @@ struct CollectionsView: View {
                 } //Toolbar
                 .navigationTitle(Text(Strings.MY_COLLECTIONS))
             }
-            .rotation3DEffect(Angle(degrees: showAddNewCollection ? 5 : 0), axis: (x: 1, y: 0, z: 0))
-            .offset(y: showAddNewCollection ? -50 : 0)
-            .animation(.easeOut)
+//            .rotation3DEffect(Angle(degrees: showAddNewCollection ? 5 : 0), axis: (x: 1, y: 0, z: 0))
+//            .offset(y: showAddNewCollection ? -50 : 0)
+//            .animation(.easeOut)
         
         
             if showAddNewCollection {
@@ -79,14 +78,17 @@ struct CollectionsView: View {
     } // Body
     
     func getAllCollections() {
-        let headers: HTTPHeaders = ["x-access-token": user.token ?? ""]
-        let parameters = ["user": "60898f83551cc20015fc83b3"]
+        let headers: HTTPHeaders = [Headers.AUTH: user.token ?? ""]
+        let parameters = [BodyParams.USER: user.id]
         AF.request("https://txm5483-theknow-api.herokuapp.com/collections", parameters: parameters, headers: headers)
             .validate()
+            .responseJSON { response in
+                print(response)
+            }
             .responseDecodable(of: Response.self) { (response) in
                 guard let response = response.value else { return }
-                print(response)
-                collections = response.contents
+                print(response.contents.collections ?? "Fuck")
+                collections = response.contents.collections ?? []
             }
     }
 }
