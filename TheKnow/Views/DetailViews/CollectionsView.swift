@@ -82,7 +82,7 @@ struct CollectionsView: View {
         
         
             if showAddNewCollection {
-                BlankView(bgColor: .black)
+                BlankView(bgColor: .secondary)
                     .opacity(0.5)
                     .onTapGesture {
                         self.showAddNewCollection = false
