@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct CollectionView: View {
-    
+    @EnvironmentObject var user: UserViewModel
+    @ObservedObject var collectionViewModel = CollectionViewModel()
+    var collectionId: String
     var collectionName: String
     @State private var showAddNewPlace: Bool = false
     
@@ -16,39 +18,53 @@ struct CollectionView: View {
     
     var body: some View {
         VStack {
-            List(0..<4) { index in
-                NavigationLink(
-                    destination: PlaceView(placeName: "Place \(index + 1)", reccomendedBy: "Tom M", note: ""),
-                    label: {
-                        Text("Place \(index + 1)")
-                            .font(.title2)
-                    })
-                    .padding()
-            }
-            .sheet(isPresented: $showAddNewPlace, content: {
-                AddPlaceView(location: "", isShow: $showAddNewPlace)
-            })
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        showAddNewPlace.toggle()
-                    }, label: {
-                        Image(systemName: "plus.circle")
-                            .font(.largeTitle)
-                    })
+            if (!collectionViewModel.loadingPlaces) {
+                if (collectionViewModel.places.count > 0) {
+                    List(collectionViewModel.places) { place in
+                        NavigationLink(
+                            destination: PlaceView(place: place),
+                            label: {
+                                Text(place.name)
+                                    .font(.title2)
+                            })
+                            .padding()
+                    }
+                } else {
+                    Text("No Places")
+                        .font(.system(.title, design: .rounded))
                 }
-
+            } else {
+                VStack {
+                    ProgressView()
+                    Text("Loading Places...")
+                }
+                
             }
         }
-        .navigationTitle(collectionName)
-//        .onAppear() {
-//            
-//        }
-    }
-}
+        .sheet(isPresented: $showAddNewPlace, content: {
+            AddPlaceView(location: "", isShow: $showAddNewPlace)
+        })
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    showAddNewPlace.toggle()
+                }, label: {
+                    Image(systemName: "plus.circle")
+                        .font(.largeTitle)
+                })
+            }
 
-struct CollectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        CollectionView(collectionName: "Test Name").environmentObject(UserViewModel())
+        }
+        .navigationTitle(collectionName)
+        .onAppear() {
+            print(collectionId)
+            collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
+        }
     }
 }
+//
+//struct CollectionView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CollectionView(collectionId: Binding<"String", collectionName: "Test Name").environmentObject(UserViewModel())
+//    }
+//}

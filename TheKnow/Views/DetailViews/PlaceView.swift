@@ -9,21 +9,13 @@ import SwiftUI
 
 struct PlaceView: View {
     
-//    @Binding var placeName: String
-//    @Binding var reccomendedBy: String
-//    @Binding var note: String
-
-    var placeName: String
-    var reccomendedBy: String
-    var note: String
-
+    var place: Place
     
     var body: some View {
         VStack {
-            placeNameBarView(reccomendedBy: reccomendedBy, name: placeName) // Title & Subtitle Row
-
-            quickActionsToolbarView() // Quick Actions Row
-            placeNotesView(note: note)
+            placeNameBarView(reccomendedBy: place.reccomendedBy?.name ?? "", name: place.name) // Title & Subtitle Row
+            quickActionsToolbarView(place: place) // Quick Actions Row
+            placeNotesView(note: place.note ?? "")
         }
 //        .navigationTitle(placeName)
         
@@ -47,13 +39,15 @@ struct placeNameBarView: View {
                         .lineLimit(1)
                     Spacer()
                 }
-                HStack {
-                    Text("Reccomended by \(reccomendedBy)")
-                        .font(.subheadline)
-                        .fontWeight(.regular)
-                        .padding(.leading)
-                        .lineLimit(1)
-                    Spacer()
+                if (reccomendedBy != "") {
+                    HStack {
+                        Text("Reccomended by \(reccomendedBy)")
+                            .font(.subheadline)
+                            .fontWeight(.regular)
+                            .padding(.leading)
+                            .lineLimit(1)
+                        Spacer()
+                    }
                 }
             }
             .padding(.bottom, 18.0)
@@ -66,14 +60,17 @@ struct placeNameBarView: View {
 
 struct roundButtonView: View {
     
+    @Environment(\.openURL) var openURL
+    
     var sfSymbol: String
     var buttonText: String
     var color: Color
     var size: CGFloat
+    var link: String
     
     var body: some View {
         Button(action: {
-            
+//            openURL(URL(string: link)!)
         }, label: {
             VStack {
                 Image(systemName: sfSymbol)
@@ -89,14 +86,23 @@ struct roundButtonView: View {
 
 
 struct quickActionsToolbarView: View {
+    
+    var place: Place
+    
     var body: some View {
         HStack { // Quick Actions
-            roundButtonView(sfSymbol: "phone.circle.fill", buttonText: "Call", color: .green, size: 32.0)
-                .padding(.horizontal, 24.0)
-            roundButtonView(sfSymbol: "arrow.triangle.turn.up.right.circle.fill", buttonText: "Directions", color: .blue, size: 32.0)
-                .padding(.horizontal, 24.0)
-            roundButtonView(sfSymbol: "link.circle.fill", buttonText: "Website", color: .blue, size: 32.0)
-                .padding(.horizontal, 20.0)
+            if (place.placeData?.phoneNumber != nil) {
+                roundButtonView(sfSymbol: "phone.circle.fill", buttonText: "Call", color: .green, size: 32.0, link: "")
+                    .padding(.horizontal, 24.0)
+            }
+            if (place.placeData?.mapsLink != nil) {
+                roundButtonView(sfSymbol: "arrow.triangle.turn.up.right.circle.fill", buttonText: "Directions", color: .blue, size: 32.0, link: (place.placeData?.mapsLink)!)
+                    .padding(.horizontal, 24.0)
+            }
+            if (place.placeData?.link != nil) {
+                roundButtonView(sfSymbol: "link.circle.fill", buttonText: "Website", color: .blue, size: 32.0, link: "")
+                    .padding(.horizontal, 20.0)
+            }
         }
     }
 }

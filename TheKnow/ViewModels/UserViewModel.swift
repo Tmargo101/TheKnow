@@ -27,10 +27,7 @@ class UserViewModel: ObservableObject {
                    parameters: parameters
         )
         .validate()
-        .responseJSON { response in
-            print(response)
-        }
-        .responseDecodable(of: Response.self) { (response) in
+        .responseDecodable(of: APIResponse.self) { (response) in
             guard let response = response.value else { return }
             
             /// Add userData to object
@@ -60,10 +57,7 @@ class UserViewModel: ObservableObject {
                    parameters: parameters
         )
         .validate()
-        .responseJSON { response in
-            print(response)
-        }
-        .responseDecodable(of: Response.self) { (response) in
+        .responseDecodable(of: APIResponse.self) { (response) in
             guard let response = response.value else { return }
             print(response)
             self.token = response.contents.user?.token
@@ -77,7 +71,7 @@ class UserViewModel: ObservableObject {
         let headers: HTTPHeaders = [Headers.AUTH: self.token ?? ""]
         AF.request(Routes.LOGOUT ,method: .post, headers: headers)
             .validate()
-            .responseDecodable(of: Response.self) { (response) in
+            .responseDecodable(of: APIResponse.self) { (response) in
                 guard response.value != nil else { return }
                 
                 /// Remove user details
