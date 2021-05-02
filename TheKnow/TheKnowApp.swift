@@ -11,13 +11,6 @@ import SwiftUI
 struct TheKnowApp: App {
     @StateObject var user = UserViewModel()
     
-    init() {
-//        UserDefaults.standard.register(defaults: [
-//            "loggedIn": false,
-//            "token": ""
-//        ])
-
-    }
     var body: some Scene {
         WindowGroup {
             ContentView().environmentObject(user)

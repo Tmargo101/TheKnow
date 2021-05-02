@@ -21,7 +21,7 @@ import Foundation
 //    var been: Bool
 //}
 
-struct Response: Decodable {
+struct APIResponse: Decodable {
     let status: String
     let message: String
     let contents: Contents
@@ -30,6 +30,8 @@ struct Response: Decodable {
 struct Contents: Decodable {
     let user: User?
     let collections: [Collection]?
+    let collection: Collection?
+    let places: [Place]?
 }
 
 struct User: Decodable {
@@ -43,7 +45,7 @@ struct Collection: Decodable, Identifiable {
     let members: [String]
     let name: String
     let owner: String
-    let places: [String]
+    let places: [String]?
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -52,5 +54,81 @@ struct Collection: Decodable, Identifiable {
         case name = "name"
         case owner = "owner"
         case places = "places"
+    }
+    
+    init() {
+        self.id = ""
+        self.createdDate = ""
+        self.members = [""]
+        self.places = [""]
+        self.owner = ""
+        self.name = ""
+    }
+}
+
+struct Place: Decodable, Identifiable {
+    let id: String
+    let name: String
+    let addedBy: String
+    let collectionId: String?
+    let createdDate: String
+    let reccomendedBy: PlaceReccomendedBy?
+    let placeData: PlaceData?
+    let note: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case name = "name"
+        case addedBy = "addedBy"
+        case collectionId = "collectionId"
+        case createdDate = "createdDate"
+        case reccomendedBy = "reccomendedBy"
+        case placeData = "placeData"
+        case note = "note"
+    }
+
+    init() {
+        self.id = ""
+        self.name = ""
+        self.addedBy = ""
+        self.collectionId = ""
+        self.createdDate = ""
+        self.note = ""
+        self.placeData = PlaceData()
+        self.reccomendedBy = PlaceReccomendedBy()
+    }
+}
+
+struct PlaceData: Decodable {
+    let address: String?
+    let link: String?
+    let phoneNumber: String?
+    let mapsLink: String?
+    let yelpLink: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case address = "address"
+        case link = "link"
+        case phoneNumber = "phoneNumber"
+        case mapsLink = "mapsLink"
+        case yelpLink = "yelpLink"
+    }
+
+    init() {
+        self.mapsLink = ""
+        self.yelpLink = ""
+        self.phoneNumber = ""
+        self.address = ""
+        self.link = ""
+    }
+}
+
+struct PlaceReccomendedBy: Decodable {
+    let name: String?
+    let id: String?
+    
+    init() {
+        self.name = ""
+        self.id = ""
     }
 }

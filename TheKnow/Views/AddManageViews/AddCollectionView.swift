@@ -29,7 +29,7 @@ struct AddCollectionView: View {
                         
                     }) {
                         Image(systemName: "xmark")
-                            .foregroundColor(.black)
+                            .foregroundColor(Color.primary)
                             .font(.headline)
                     }
                 }
@@ -40,7 +40,7 @@ struct AddCollectionView: View {
                     
                 })
                 .padding()
-                .background(Color(.systemGray6))
+                .background(Color(.systemGray5))
                 .cornerRadius(8)
                 .padding(.bottom)
                 
@@ -67,7 +67,7 @@ struct AddCollectionView: View {
                 
             }
             .padding()
-            .background(Color.white)
+            .background(Color(UIColor.systemBackground))
             .cornerRadius(10, antialiased: true)
             .offset(y: isEditing ? -320 : 0)
         }

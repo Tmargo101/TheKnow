@@ -12,8 +12,8 @@ struct Routes {
     static let LOGIN = "\(BASE)/login"
     static let SIGNUP = "\(BASE)/signup"
     static let LOGOUT = "\(BASE)/logout"
-    static let GET_ALL_COLLECTIONS = "\(BASE)/collections"
-    static let GET_LIST = "\(BASE)/collec"
+    static let GET_COLLECTIONS = "\(BASE)/collections"
+    static let GET_PLACES = "\(BASE)/places"
 }
 
 struct Headers {
@@ -22,6 +22,7 @@ struct Headers {
 
 struct BodyParams {
     static let USER = "user"
+    static let COLLECTION = "collection"
 }
 
 class API {

@@ -13,82 +13,101 @@ struct AddPlaceView: View {
     @Binding var isShow: Bool
     @State var isEditing = false
     @ObservedObject var searchMe = SearchMe()
+    @State var reccomendedBy: String = ""
+    @State var note: String = ""
 
     //@State var searchResults: [PlaceSearchResultModel] = []
     
     
     var body: some View {
-        VStack {
-//            Spacer()
-            
-            VStack(alignment: .leading) {
-                HStack {
-                    Text("Add a New Place")
-                        .font(.system(.title, design: .rounded))
-                        .bold()
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        self.isShow = false
-                        
-                    }) {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                    }
-                }
+        ZStack (alignment: .top){
+            VStack {
+    //            Spacer()
                 
-                SearchBar(text: $location, isEditing: $isEditing, searchMe: searchMe)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(8)
-                    .padding(.bottom)
-                    
-                if !searchMe.placeSearchResults.isEmpty {
-                    List {
-                        ForEach (searchMe.placeSearchResults) { sr in
-                            VStack(alignment: .leading) {
-                                Text("\(sr.name)")
-                                    .font(.headline)
-                                    .padding(.bottom, 3)
-                                Text("\(sr.address)")
-                                    .font(.subheadline)
-                            }
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("Add a New Place")
+                            .font(.system(.title, design: .rounded))
+                            .bold()
+                        
+                        Spacer()
+                        Button(action: {
+                            self.isShow = false
                             
+                        }) {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.primary)
+                                .font(.headline)
                         }
                     }
-                }
-
+                    .padding(.top, 20)
+                    .padding(.bottom, 10)
                     
-                Spacer()
-                // Save button for adding the  item
-                Button(action: {
-                    if self.location.trimmingCharacters(in: .whitespaces) == "" {
-                        return
-                    }
-                    self.isShow = false
-                    
-                    //add code to add collection here
-                    
-                }) {
-                    Text("Save")
-                        .font(.system(.headline, design: .rounded))
-                        .frame(minWidth: 0, maxWidth: .infinity)
+                    SearchBar(text: $location, isEditing: $isEditing, searchMe: searchMe)
                         .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(10)
+                        .background(Color(.systemGray5))
+                        .cornerRadius(8)
+                        .padding(.bottom)
+                        
+                    if !searchMe.placeSearchResults.isEmpty {
+                        List {
+                            ForEach (searchMe.placeSearchResults) { sr in
+                                VStack(alignment: .leading) {
+                                    Text("\(sr.name)")
+                                        .font(.headline)
+                                        .padding(.bottom, 3)
+                                    Text("\(sr.address)")
+                                        .font(.subheadline)
+                                }
+                                
+                            }
+                        }
+                    }
+                    TextField("Reccomended By", text: $reccomendedBy)
+                        .padding()
+                        .background(Color(.systemGray5))
+                        .cornerRadius(8)
+                        .padding(.bottom)
+                    TextEditor(text: $note)
+                        .padding()
+                        .background(Color(.systemGray5))
+                        .cornerRadius(8)
+                        .padding(.bottom)
+
+                        
+                    Spacer()
+                    // Save button for adding the  item
+                    Button(action: {
+                        if self.location.trimmingCharacters(in: .whitespaces) == "" {
+                            return
+                        }
+                        self.isShow = false
+                        
+                        //add code to add collection here
+                        
+                    }) {
+                        Text("Save")
+                            .font(.system(.headline, design: .rounded))
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                    }
+                    .padding(.bottom)
+                    
                 }
-                .padding(.bottom)
-                
+                .padding()
+                .background(Color(UIColor.systemBackground))
+                .cornerRadius(10, antialiased: true)
+    //            .offset(y: isEditing ? -320 : 0)
             }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10, antialiased: true)
-//            .offset(y: isEditing ? -320 : 0)
+            .edgesIgnoringSafeArea(.bottom)
+            Image(systemName: "chevron.compact.down")
+                .foregroundColor(Color(.systemGray5))
+                .font(.system(.largeTitle))
+                .padding(.top, 15)
         }
-        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
@@ -109,10 +128,11 @@ struct SearchBar: View {
     var body: some View {
         HStack {
             
-            TextField("Search...", text: $text, onEditingChanged: {
+            TextField("Name", text: $text, onEditingChanged: {
                 (ec) in
                 self.isEditing = ec
             })
+            .background(Color(.systemGray5))
             .onChange(of: text, perform: { _ in
                 searchMe.search(search: text)
                 print("fired")

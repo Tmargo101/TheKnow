@@ -17,6 +17,12 @@ struct AccountView: View {
                 Section (header: Text(Strings.ACCOUNT_NAME)) {
                     Text("\(user.username ?? Strings.USERNAME_NOT_FOUND)")
                 }
+                Section (header: Text("User ID (DEV)")) {
+                    Text("\(user.id ?? Strings.USERNAME_NOT_FOUND)")
+                }
+                Section (header: Text("Current Token (DEV)")) {
+                    Text("\(user.token ?? Strings.USERNAME_NOT_FOUND)")
+                }
 
                 Section (header: Text(Strings.ACCOUNT_ACTIONS)) {
                     Button(action: {
