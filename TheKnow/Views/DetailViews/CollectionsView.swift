@@ -17,6 +17,8 @@ struct CollectionsView: View {
     
     @State var presentNewCollectionSheet: Bool = false
     
+    @State var showAccountSheet: Bool = false
+    
 //    @State var collections = [Collection]()
     
     var body: some View {
@@ -52,12 +54,21 @@ struct CollectionsView: View {
             .sheet(isPresented: $presentNewCollectionSheet) {
                 AddCollectionView(name: "", isShow: $showAddNewCollection)
             }
+            .sheet(isPresented: $showAccountSheet) {
+                AccountView(showing: $showAccountSheet).environmentObject(user)
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: AccountView(), label: {
+                    Button(action: {
+                        showAccountSheet = true
+                    }, label: {
                         Image(systemName: "person.circle")
                             .font(.largeTitle)
                     })
+//                    NavigationLink(destination: AccountView(), label: {
+//                        Image(systemName: "person.circle")
+//                            .font(.largeTitle)
+//                    })
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {

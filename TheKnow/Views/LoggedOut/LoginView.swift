@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @EnvironmentObject var user: UserViewModel
     @ObservedObject private var loginViewModel = LoginViewModel()
+    @Binding var showing: Bool
 
     var body: some View {
         ZStack (alignment: .top) {
@@ -18,8 +19,16 @@ struct LoginView: View {
                     TextField(Strings.USERNAME, text: $loginViewModel.username)
                         .autocapitalization(.none)
                     SecureField(Strings.PASSWORD, text: $loginViewModel.password) {
-                        withAnimation {
-                            user.login(_username: loginViewModel.username, password: loginViewModel.password)
+                        user.login(_username: loginViewModel.username, password: loginViewModel.password) { (success) in
+                            if (success) {
+                                withAnimation {
+                                    user.loggedIn = true
+                                }
+                                DispatchQueue.main.async {
+                                    showing = false
+                                }
+                                
+                            }
                         }
                     }
                     .autocapitalization(.none)
@@ -28,8 +37,13 @@ struct LoginView: View {
                 }
                 Section {
                     Button(action: {
-                        withAnimation {
-                            user.login(_username: loginViewModel.username, password: loginViewModel.password)
+                        user.login(_username: loginViewModel.username, password: loginViewModel.password) { (success) in
+                            if (success) {
+                                withAnimation {
+                                    user.loggedIn = true
+                                }
+                                showing = false
+                            }
                         }
                     }, label: {
                         Text(Strings.LOG_IN)
@@ -43,8 +57,8 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
-}
+//struct LoginView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LoginView()
+//    }
+//}

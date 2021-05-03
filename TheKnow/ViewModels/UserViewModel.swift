@@ -13,11 +13,14 @@ class UserViewModel: ObservableObject {
     let defaults = UserDefaults.standard
 
     @Published var loggedIn: Bool = false
+//    @Published var loginSucess: Bool = false
+//    @Published var logoutSuccess: Bool = false
+    
     @Published var username: String? = ""
     @Published var id: String? = ""
     @Published var token: String? = ""
     
-    func login(_username: String, password: String) {
+    func login(_username: String, password: String, completion: @escaping (Bool) -> Void) {
         let parameters = [
             "username": _username,
             "password": password
@@ -28,19 +31,23 @@ class UserViewModel: ObservableObject {
         )
         .validate()
         .responseDecodable(of: APIResponse.self) { (response) in
-            guard let response = response.value else { return }
+            guard let response = response.value else {
+                completion(false)
+                return
+            }
             
             /// Add userData to object
             self.token = response.contents.user?.token
             self.id = response.contents.user?.id
             self.username = _username
-            self.loggedIn = true
             
             /// Add userData to UserDefaults
             self.defaults.set(self.token, forKey: "token")
             self.defaults.set(self.loggedIn, forKey: "loggedIn")
             self.defaults.set(self.username, forKey: "username")
             self.defaults.set(self.id, forKey: "id")
+            
+            completion(true)
         }
     }
     
@@ -63,28 +70,32 @@ class UserViewModel: ObservableObject {
             self.token = response.contents.user?.token
             self.id = response.contents.user?.id
             self.username = _username
-            self.loggedIn = true
+//            self.loginSucess = true
         }
     }
     
-    func logout() {
+    func logout(completion: @escaping (Bool) -> Void) {
         let headers: HTTPHeaders = [Headers.AUTH: self.token ?? ""]
         AF.request(Routes.LOGOUT ,method: .post, headers: headers)
             .validate()
             .responseDecodable(of: APIResponse.self) { (response) in
-                guard response.value != nil else { return }
+                guard response.value != nil else {
+                    completion(false)
+                    return
+                }
                 
                 /// Remove user details
                 self.username = ""
                 self.id = ""
                 self.token = ""
-                self.loggedIn = false
                 
                 /// Remove from UserDefaults
                 self.defaults.set(self.token, forKey: "token")
-                self.defaults.set(self.loggedIn, forKey: "loggedIn")
+//                self.defaults.set(self.loggedIn, forKey: "loggedIn")
                 self.defaults.set(self.username, forKey: "username")
                 self.defaults.set(self.id, forKey: "id")
+                
+                completion(true)
             }
     }
 }
