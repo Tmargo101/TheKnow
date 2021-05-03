@@ -16,7 +16,7 @@ struct Strings {
     static let LOG_IN = "Log In"
     static let LOG_OUT = "Log Out"
     static let SIGN_UP = "Sign Up"
-    static let USERNAME = "Username"
+    static let EMAIL = "Email"
     static let PASSWORD = "Password"
     static let ENTER_PASSWORD = "Enter password"
     static let VERIFY_PASSWORD = "Confirm password"

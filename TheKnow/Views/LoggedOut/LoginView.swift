@@ -14,46 +14,54 @@ struct LoginView: View {
 
     var body: some View {
         ZStack (alignment: .top) {
-            Form {
-                Section {
-                    TextField(Strings.USERNAME, text: $loginViewModel.username)
+            NavigationView {
+                Form {
+                    Section {
+                        TextField(Strings.EMAIL, text: $loginViewModel.email)
+                            .autocapitalization(.none)
+                            .disableAutocorrection(true)
+                            .keyboardType(.emailAddress)
+                        SecureField(Strings.PASSWORD, text: $loginViewModel.password) {
+                            performLogin()
+                        }
                         .autocapitalization(.none)
-                    SecureField(Strings.PASSWORD, text: $loginViewModel.password) {
-                        user.login(_username: loginViewModel.username, password: loginViewModel.password) { (success) in
-                            if (success) {
-                                withAnimation {
-                                    user.loggedIn = true
-                                }
-                                DispatchQueue.main.async {
-                                    showing = false
-                                }
-                                
-                            }
+                        .keyboardType(.default)
+                            
+
+                    }
+                    Section {
+                        Button(action: {
+                            performLogin()
+                        }, label: {
+                            Text(Strings.LOG_IN)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        })
+                        .disabled(!loginViewModel.isValid)
+                    } // Section
+                } // Form
+                .navigationTitle(Text(Strings.LOG_IN))
+            }
+            Image(systemName: "chevron.compact.down")
+                .foregroundColor(Color(.systemGray3))
+                .font(.system(.largeTitle))
+                .padding(.top, 15)
+
+        } // ZStack
+    } // Body
+    
+    func performLogin() {
+//        if(loginViewModel.isValid) {
+            user.login(_email: loginViewModel.email, password: loginViewModel.password) { (success) in
+                if (success) {
+                    showing = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        withAnimation {
+                            user.loggedIn = true
                         }
                     }
-                    .autocapitalization(.none)
-                        
-
                 }
-                Section {
-                    Button(action: {
-                        user.login(_username: loginViewModel.username, password: loginViewModel.password) { (success) in
-                            if (success) {
-                                withAnimation {
-                                    user.loggedIn = true
-                                }
-                                showing = false
-                            }
-                        }
-                    }, label: {
-                        Text(Strings.LOG_IN)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    })
-                    .disabled(!loginViewModel.isValid)
-                } // Section
-            } // Form
-            .navigationTitle(Text(Strings.LOG_IN))
-        } // ZStack
+            }
+//        }
     }
 }
 

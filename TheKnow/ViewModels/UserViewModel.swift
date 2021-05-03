@@ -13,16 +13,16 @@ class UserViewModel: ObservableObject {
     let defaults = UserDefaults.standard
 
     @Published var loggedIn: Bool = false
-//    @Published var loginSucess: Bool = false
-//    @Published var logoutSuccess: Bool = false
     
-    @Published var username: String? = ""
+    @Published var showAccountSheet: Bool = false
+    
+    @Published var email: String? = ""
     @Published var id: String? = ""
     @Published var token: String? = ""
     
-    func login(_username: String, password: String, completion: @escaping (Bool) -> Void) {
+    func login(_email: String, password: String, completion: @escaping (Bool) -> Void) {
         let parameters = [
-            "username": _username,
+            "email": _email,
             "password": password
         ]
         AF.request(Routes.LOGIN,
@@ -39,38 +39,43 @@ class UserViewModel: ObservableObject {
             /// Add userData to object
             self.token = response.contents.user?.token
             self.id = response.contents.user?.id
-            self.username = _username
+            self.email = _email
             
             /// Add userData to UserDefaults
             self.defaults.set(self.token, forKey: "token")
             self.defaults.set(self.loggedIn, forKey: "loggedIn")
-            self.defaults.set(self.username, forKey: "username")
+            self.defaults.set(self.email, forKey: "email")
             self.defaults.set(self.id, forKey: "id")
             
             completion(true)
         }
     }
     
-    func signup(_username: String, password: String, password2: String) {
-        print("Username: \(_username), Password: \(password)")
+    func signup(_email: String, firstname: String, lastname: String, password: String, password2: String, completion: @escaping (Bool) -> Void) {
+        print("Email: \(_email), Password: \(password)")
         let parameters = [
-            "username": _username,
-            "pass": password,
-            "pass2": password2,
+            BodyParams.EMAIL: _email,
+            BodyParams.FIRSTNAME: firstname,
+            BodyParams.LASTNAME: lastname,
+            BodyParams.PASSWORD: password,
+            BodyParams.PASSWORD_CONFIRM: password2,
         ]
-
         AF.request(Routes.SIGNUP,
                    method: .post,
                    parameters: parameters
         )
         .validate()
         .responseDecodable(of: APIResponse.self) { (response) in
-            guard let response = response.value else { return }
+            guard let response = response.value else {
+                completion(false)
+                return
+            }
             print(response)
             self.token = response.contents.user?.token
             self.id = response.contents.user?.id
-            self.username = _username
-//            self.loginSucess = true
+            self.email = _email
+            completion(true)
+            
         }
     }
     
@@ -85,14 +90,14 @@ class UserViewModel: ObservableObject {
                 }
                 
                 /// Remove user details
-                self.username = ""
+                self.email = ""
                 self.id = ""
                 self.token = ""
                 
                 /// Remove from UserDefaults
                 self.defaults.set(self.token, forKey: "token")
 //                self.defaults.set(self.loggedIn, forKey: "loggedIn")
-                self.defaults.set(self.username, forKey: "username")
+                self.defaults.set(self.email, forKey: "email")
                 self.defaults.set(self.id, forKey: "id")
                 
                 completion(true)

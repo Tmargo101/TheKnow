@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class LoginViewModel: ObservableObject {
-    @Published var username: String = ""
+    @Published var email: String = ""
     @Published var password: String = ""
     
     @Published var isValid: Bool = false
@@ -17,7 +17,7 @@ class LoginViewModel: ObservableObject {
     var cancellableSet: Set<AnyCancellable> = []
     
     var isUsernameValidPublisher: AnyPublisher<Bool,Never> {
-        $username
+        $email
             .debounce(for: 0.8, scheduler: RunLoop.main)
             .removeDuplicates()
             .map {input in
