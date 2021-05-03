@@ -9,18 +9,21 @@ import Foundation
 import Combine
 
 class SignupViewModel: ObservableObject {
-    @Published var username: String = ""
+    @Published var email: String = ""
+    @Published var firstname: String = ""
+    @Published var lastname: String = ""
     @Published var password: String = ""
     @Published var passwordConfirm: String = ""
     
-    @Published var usernameMessage: String = ""
+    @Published var emailMessage: String = ""
+    @Published var nameMessage: String = ""
     @Published var passwordMessage: String = ""
     @Published var isValid: Bool = false
 
     var cancellableSet: Set<AnyCancellable> = []
 
-    var isUsernameValidPublisher: AnyPublisher<Bool,Never> {
-        $username
+    var isEmailValidPublisher: AnyPublisher<Bool,Never> {
+        $email
             .debounce(for: 0.8, scheduler: RunLoop.main)
             .removeDuplicates()
             .map {input in
@@ -28,6 +31,18 @@ class SignupViewModel: ObservableObject {
             }
             .eraseToAnyPublisher()
     }
+    
+    var isNameValidPublisher: AnyPublisher<Bool,Never> {
+        Publishers.CombineLatest($firstname, $lastname)
+            .debounce(for: 0.8, scheduler: RunLoop.main)
+            .map {firstname, lastname in
+                let first = firstname.count >= 1
+                let last = lastname.count >= 1
+                return first && last
+            }
+            .eraseToAnyPublisher()
+    }
+
     var isPasswordEmptyPublisher: AnyPublisher<Bool, Never> {
         $password
             .debounce(for: 0.8, scheduler: RunLoop.main)
@@ -70,30 +85,37 @@ class SignupViewModel: ObservableObject {
     }
     
     var isFormValidPublisher: AnyPublisher<Bool, Never> {
-        Publishers.CombineLatest(isUsernameValidPublisher, isPasswordValidPublisher)
-            .map { usernameIsValid, passwordIsValid in
-                return usernameIsValid && (passwordIsValid == .valid)
+        Publishers.CombineLatest3(isEmailValidPublisher, isNameValidPublisher, isPasswordValidPublisher)
+            .map { usernameIsValid, nameIsValid, passwordIsValid in
+                return usernameIsValid && nameIsValid && (passwordIsValid == .valid)
             }
             .eraseToAnyPublisher()
     }
 
-    init() {
-        /// Check if the form is valid to eanble / disable the button
-        isFormValidPublisher
-            .receive(on: RunLoop.main)
-            .assign(to: \.isValid, on: self)
-            .store(in: &cancellableSet)
-        
-        /// Check if username is valid
-        isUsernameValidPublisher
+    func validateEmail() {
+        isEmailValidPublisher
             .receive(on: RunLoop.main)
             .map {
                 valid in
-                valid ? "" : "username must contain at least 3 characters"
+                valid ? "" : "Entry must be an email"
             }
-            .assign(to: \.usernameMessage, on: self)
+            .assign(to: \.emailMessage, on: self)
             .store(in: &cancellableSet)
-        
+    }
+    
+    func validateName() {
+        isNameValidPublisher
+            .receive(on: RunLoop.main)
+            .map {
+                valid in
+                valid ? "" : "Enter a first and last name"
+            }
+            .assign(to: \.nameMessage, on: self)
+            .store(in: &cancellableSet)
+
+    }
+    
+    func validatePassword() {
         isPasswordValidPublisher
             .receive(on: RunLoop.main)
             .map { passwordCheck in
@@ -108,6 +130,48 @@ class SignupViewModel: ObservableObject {
             }
             .assign(to: \.passwordMessage, on: self)
             .store(in: &cancellableSet)
+    }
+    
+    func validateSignup() {
+        /// Check if the form is valid to eanble / disable the button
+        isFormValidPublisher
+            .receive(on: RunLoop.main)
+            .assign(to: \.isValid, on: self)
+            .store(in: &cancellableSet)
+        
+//        /// Check if username is valid
+//        isEmailValidPublisher
+//            .receive(on: RunLoop.main)
+//            .map {
+//                valid in
+//                valid ? "" : "Entry must be an email"
+//            }
+//            .assign(to: \.emailMessage, on: self)
+//            .store(in: &cancellableSet)
+        
+//        isNameValidPublisher
+//            .receive(on: RunLoop.main)
+//            .map {
+//                valid in
+//                valid ? "" : "Enter a first and last name"
+//            }
+//            .assign(to: \.nameMessage, on: self)
+//            .store(in: &cancellableSet)
+
+//        isPasswordValidPublisher
+//            .receive(on: RunLoop.main)
+//            .map { passwordCheck in
+//                switch passwordCheck {
+//                    case .empty:
+//                        return "Password must not be empty"
+//                    case .notMatching:
+//                        return "Passwords don't match"
+//                    default:
+//                        return ""
+//                }
+//            }
+//            .assign(to: \.passwordMessage, on: self)
+//            .store(in: &cancellableSet)
     } // Init
 
 }

@@ -60,7 +60,7 @@ struct CollectionsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        showAccountSheet = true
+                        self.showAccountSheet = true
                     }, label: {
                         Image(systemName: "person.circle")
                             .font(.largeTitle)

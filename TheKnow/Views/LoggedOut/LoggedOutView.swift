@@ -12,7 +12,6 @@ struct LoggedOutView: View {
     @EnvironmentObject var user: UserViewModel
         
     var body: some View {
-//        NavigationView {
             VStack {
                 Text(Strings.LOGGED_OUT_WELCOME)
                     .font(.system(.largeTitle, design: .rounded))
@@ -21,8 +20,6 @@ struct LoggedOutView: View {
                 Spacer()
                 LoggedOutViewButtons()
             }
-//        }
-//        .navigationViewStyle(StackNavigationViewStyle())
 
         
     }

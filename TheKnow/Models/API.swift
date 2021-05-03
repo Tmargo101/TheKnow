@@ -23,6 +23,11 @@ struct Headers {
 struct BodyParams {
     static let USER = "user"
     static let COLLECTION = "collection"
+    static let EMAIL = "email"
+    static let FIRSTNAME = "firstname"
+    static let LASTNAME = "lastname"
+    static let PASSWORD = "pass"
+    static let PASSWORD_CONFIRM = "pass2"
 }
 
 class API {
