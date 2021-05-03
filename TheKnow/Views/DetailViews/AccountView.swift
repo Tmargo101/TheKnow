@@ -10,7 +10,9 @@ import SwiftUI
 struct AccountView: View {
     
     @EnvironmentObject var user: UserViewModel
-            
+    
+    @Binding var showing: Bool
+    
     var body: some View {
         ZStack (alignment: .top) {
             Form {
@@ -33,8 +35,20 @@ struct AccountView: View {
 
                     Button(action: {
                         withAnimation {
-                            user.logout()
-                        }
+                            user.logout() { (success) in
+                                if (success) {
+                                    DispatchQueue.main.async {
+                                        showing = false
+                                    }
+                                    withAnimation {
+                                        user.loggedIn = false
+                                    }
+                                    
+                                }
+                            }
+                                
+                            }
+    
                     }, label: {
                         Text(Strings.LOG_OUT)
                     })

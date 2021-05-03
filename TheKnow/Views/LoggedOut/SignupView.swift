@@ -10,6 +10,7 @@ import SwiftUI
 struct SignupView: View {
     @EnvironmentObject var user: UserViewModel
     @ObservedObject private var signupViewModel = SignupViewModel()
+    @Binding var showing: Bool
 
     var body: some View {
         ZStack (alignment: .top){
@@ -70,8 +71,8 @@ struct SignupView: View {
     }
 }
 
-struct SignupView_Previews: PreviewProvider {
-    static var previews: some View {
-        SignupView()
-    }
-}
+//struct SignupView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SignupView()
+//    }
+//}

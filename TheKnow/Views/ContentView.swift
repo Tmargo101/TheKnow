@@ -23,14 +23,10 @@ struct ContentView: View {
         ZStack {
             if (user.loggedIn) {
                 LoggedInView()
+                    .transition(.opacity)
             } else {
                 LoggedOutView()
-                    .transition(
-                        .asymmetric(
-                            insertion: .offset(y: -1000),
-                            removal: .offset(y: 1000)
-                        )
-                    )
+                    .transition(.opacity)
             }
         }.onAppear {
             user.loggedIn = UserDefaultsLoggedIn
