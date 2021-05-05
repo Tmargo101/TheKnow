@@ -11,6 +11,7 @@ struct LoginView: View {
     @EnvironmentObject var user: UserViewModel
     @ObservedObject private var loginViewModel = LoginViewModel()
     @Binding var showing: Bool
+    @State var showError: Bool = false
 
     var body: some View {
         ZStack (alignment: .top) {
@@ -41,6 +42,9 @@ struct LoginView: View {
                 } // Form
                 .navigationTitle(Text(Strings.LOG_IN))
             }
+            .alert(isPresented: $showError, content: {
+                Alert(title: Text("Error"), message: Text(user.responseMessage), dismissButton: .default(Text("Got it")))
+            })
             Image(systemName: "chevron.compact.down")
                 .foregroundColor(Color(.systemGray3))
                 .font(.system(.largeTitle))
@@ -59,6 +63,8 @@ struct LoginView: View {
                             user.loggedIn = true
                         }
                     }
+                } else {
+                    showError = true
                 }
             }
 //        }

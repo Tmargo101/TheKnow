@@ -24,7 +24,7 @@ import Foundation
 struct APIResponse: Decodable {
     let status: String
     let message: String
-    let contents: Contents
+    let contents: Contents?
 }
 
 struct Contents: Decodable {
