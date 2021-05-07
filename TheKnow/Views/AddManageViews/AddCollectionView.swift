@@ -12,6 +12,10 @@ struct AddCollectionView: View {
     @Binding var isShow: Bool
     @State var isEditing = false
     
+    @ObservedObject var addCollectionViewModel = AddCollectionViewModel()
+    
+    @EnvironmentObject var user: UserViewModel
+    
     var body: some View {
         VStack {
             Spacer()
@@ -34,7 +38,7 @@ struct AddCollectionView: View {
                     }
                 }
                 
-                TextField("Enter the collection name", text: $name, onEditingChanged: { (editingChanged) in
+                TextField("Enter the collection name", text: $addCollectionViewModel.newCollectionName, onEditingChanged: { (editingChanged) in
                     
                     self.isEditing = editingChanged
                     
@@ -47,8 +51,11 @@ struct AddCollectionView: View {
                 // Save button for adding the  item
                 Button(action: {
                     
-                    if self.name.trimmingCharacters(in: .whitespaces) == "" {
-                        return
+//                    if self.name.trimmingCharacters(in: .whitespaces) == "" {
+//                        return
+//                    }
+                    addCollectionViewModel.addNewCollection(_name: addCollectionViewModel.newCollectionName, usedId: user.id ?? "", token: user.token ?? "") { success in
+                        print(success)
                     }
                     
                     self.isShow = false

@@ -57,6 +57,9 @@ struct CollectionsView: View {
             .onAppear {
                 collectionsViewModel.getAllCollections(token: user.token, id: user.id)
             }
+            .onChange(of: showAddNewCollection, perform: { value in
+                collectionsViewModel.getAllCollections(token: user.token, id: user.id)
+            })
             .sheet(isPresented: $presentNewCollectionSheet) {
                 AddCollectionView(name: "", isShow: $showAddNewCollection)
             }
