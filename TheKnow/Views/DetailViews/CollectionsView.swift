@@ -31,8 +31,14 @@ struct CollectionsView: View {
                             NavigationLink(
                                 destination: CollectionView(collectionId: collection.id, collectionName: "\(collection.name)"),
                                 label: {
-                                    Text("\(collection.name)")
-                                        .font(.title2)
+                                    HStack {
+                                        Text("\(collection.name)")
+                                            .font(.title2)
+                                            .padding(.bottom, 1)
+                                        Spacer()
+                                        Text("\(collection.places!.count) Places")
+                                            .font(.headline)
+                                    }
                                 })
                                 .padding()
                         }
