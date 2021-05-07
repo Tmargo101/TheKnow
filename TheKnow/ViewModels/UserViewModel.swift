@@ -47,7 +47,7 @@ class UserViewModel: ObservableObject {
             
             /// Add userData to object
             self.token = response.contents?.user?.token
-            self.id = response.contents?.user?.id
+            self.id = response.contents?.user?._id
             self.email = _email
             
             /// Add userData to UserDefaults
@@ -79,7 +79,7 @@ class UserViewModel: ObservableObject {
                 return
             }
             self.token = response.contents?.user?.token
-            self.id = response.contents?.user?.id
+            self.id = response.contents?.user?._id
             self.email = _email
             completion(true)
             

@@ -35,8 +35,31 @@ struct Contents: Decodable {
 }
 
 struct User: Decodable {
-    let id: String
+    let email: String
+    let _id: String
     let token: String
+    let tokenCount: String
+    let name: UserName
+    let createdDate: String
+    
+    init() {
+        self.email = ""
+        self._id = ""
+        self.token = ""
+        self.tokenCount = ""
+        self.name = UserName()
+        self.createdDate = ""
+    }
+}
+
+struct UserName: Decodable {
+    let first: String
+    let last: String
+    
+    init() {
+        self.first = ""
+        self.last = ""
+    }
 }
 
 struct Collection: Decodable, Identifiable {

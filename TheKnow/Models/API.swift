@@ -14,6 +14,7 @@ struct Routes {
     static let LOGOUT = "\(BASE)/logout"
     static let GET_COLLECTIONS = "\(BASE)/collections"
     static let GET_PLACES = "\(BASE)/places"
+    static let GET_USER = "\(BASE)/user"
 }
 
 struct Headers {
