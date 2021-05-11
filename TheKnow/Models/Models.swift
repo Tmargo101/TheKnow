@@ -32,6 +32,7 @@ struct Contents: Decodable {
     let collections: [Collection]?
     let collection: Collection?
     let places: [Place]?
+    let members: [Member]?
 }
 
 struct User: Decodable {
@@ -170,3 +171,22 @@ struct PlaceComment: Decodable {
         self.userId = ""
     }
 }
+
+struct Member: Decodable {
+    let id: String
+    let email: String
+    let name: UserName
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case email = "email"
+        case name = "name"
+    }
+    
+    init() {
+        self.id = ""
+        self.name = UserName()
+        self.email = ""
+    }
+}
+
