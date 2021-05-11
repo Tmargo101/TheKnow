@@ -95,7 +95,7 @@ struct Place: Decodable, Identifiable {
     let addedBy: String
     let collectionId: String?
     let createdDate: String
-    let reccomendedBy: PlaceReccomendedBy?
+    let recommendedBy: PlaceRecommendedBy?
     let placeData: PlaceData?
     let note: String?
     let comments: [PlaceComment]?
@@ -106,7 +106,7 @@ struct Place: Decodable, Identifiable {
         case addedBy = "addedBy"
         case collectionId = "collectionId"
         case createdDate = "createdDate"
-        case reccomendedBy = "reccomendedBy"
+        case recommendedBy = "recommendedBy"
         case placeData = "placeData"
         case note = "note"
         case comments = "comments"
@@ -120,7 +120,7 @@ struct Place: Decodable, Identifiable {
         self.createdDate = ""
         self.note = ""
         self.placeData = PlaceData()
-        self.reccomendedBy = PlaceReccomendedBy()
+        self.recommendedBy = PlaceRecommendedBy()
         self.comments = [PlaceComment()]
     }
 }
@@ -149,7 +149,7 @@ struct PlaceData: Decodable {
     }
 }
 
-struct PlaceReccomendedBy: Decodable {
+struct PlaceRecommendedBy: Decodable {
     let name: String?
     let id: String?
     

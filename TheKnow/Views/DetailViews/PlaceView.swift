@@ -13,9 +13,10 @@ struct PlaceView: View {
     
     var body: some View {
         VStack {
-            placeNameBarView(reccomendedBy: place.reccomendedBy?.name ?? "", name: place.name) // Title & Subtitle Row
+            placeNameBarView(recommendedBy: place.recommendedBy?.name ?? "", name: place.name) // Title & Subtitle Row
             quickActionsToolbarView(place: place) // Quick Actions Row
             placeNotesView(note: place.note ?? "")
+            Spacer()
         }
 //        .navigationTitle(placeName)
         
@@ -25,7 +26,7 @@ struct PlaceView: View {
 struct placeNameBarView: View {
     
 //    @Binding var reccomendedBy: String
-    @State var reccomendedBy: String
+    @State var recommendedBy: String
     @State var name: String
 
     var body: some View {
@@ -39,9 +40,9 @@ struct placeNameBarView: View {
                         .lineLimit(1)
                     Spacer()
                 }
-                if (reccomendedBy != "") {
+                if (recommendedBy != "") {
                     HStack {
-                        Text("Reccomended by \(reccomendedBy)")
+                        Text("Recommended by \(recommendedBy)")
                             .font(.subheadline)
                             .fontWeight(.regular)
                             .padding(.leading)
@@ -95,8 +96,8 @@ struct quickActionsToolbarView: View {
                 roundButtonView(sfSymbol: "phone.circle.fill", buttonText: "Call", color: .green, size: 32.0, link: "")
                     .padding(.horizontal, 24.0)
             }
-            if (place.placeData?.mapsLink != nil) {
-                roundButtonView(sfSymbol: "arrow.triangle.turn.up.right.circle.fill", buttonText: "Directions", color: .blue, size: 32.0, link: (place.placeData?.mapsLink)!)
+            if (place.placeData?.address != nil) {
+                roundButtonView(sfSymbol: "arrow.triangle.turn.up.right.circle.fill", buttonText: "Directions", color: .blue, size: 32.0, link: (place.placeData?.address)!)
                     .padding(.horizontal, 24.0)
             }
             if (place.placeData?.link != nil) {
