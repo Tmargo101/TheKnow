@@ -20,6 +20,8 @@ class UserViewModel: ObservableObject {
     @Published var id: String? = ""
     @Published var token: String? = ""
     
+    @Published var responseMessage: String = ""
+    
     func login(_email: String, password: String, completion: @escaping (Bool) -> Void) {
         let parameters = [
             "email": _email,
@@ -29,16 +31,23 @@ class UserViewModel: ObservableObject {
                    method: .post,
                    parameters: parameters
         )
-        .validate()
+//        .validate()
         .responseDecodable(of: APIResponse.self) { (response) in
             guard let response = response.value else {
+                print(response)
+                completion(false)
+                return
+            }
+            
+            if (response.status == "error") {
+                self.responseMessage = response.message
                 completion(false)
                 return
             }
             
             /// Add userData to object
-            self.token = response.contents.user?.token
-            self.id = response.contents.user?.id
+            self.token = response.contents?.user?.token
+            self.id = response.contents?.user?._id
             self.email = _email
             
             /// Add userData to UserDefaults
@@ -64,15 +73,13 @@ class UserViewModel: ObservableObject {
                    method: .post,
                    parameters: parameters
         )
-        .validate()
         .responseDecodable(of: APIResponse.self) { (response) in
             guard let response = response.value else {
                 completion(false)
                 return
             }
-            print(response)
-            self.token = response.contents.user?.token
-            self.id = response.contents.user?.id
+            self.token = response.contents?.user?.token
+            self.id = response.contents?.user?._id
             self.email = _email
             completion(true)
             

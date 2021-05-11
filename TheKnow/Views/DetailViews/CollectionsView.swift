@@ -31,8 +31,14 @@ struct CollectionsView: View {
                             NavigationLink(
                                 destination: CollectionView(collectionId: collection.id, collectionName: "\(collection.name)"),
                                 label: {
-                                    Text("\(collection.name)")
-                                        .font(.title2)
+                                    HStack {
+                                        Text("\(collection.name)")
+                                            .font(.title2)
+                                            .padding(.bottom, 1)
+                                        Spacer()
+                                        Text("\(collection.places!.count) Places")
+                                            .font(.headline)
+                                    }
                                 })
                                 .padding()
                         }
@@ -51,6 +57,9 @@ struct CollectionsView: View {
             .onAppear {
                 collectionsViewModel.getAllCollections(token: user.token, id: user.id)
             }
+            .onChange(of: showAddNewCollection, perform: { value in
+                collectionsViewModel.getAllCollections(token: user.token, id: user.id)
+            })
             .sheet(isPresented: $presentNewCollectionSheet) {
                 AddCollectionView(name: "", isShow: $showAddNewCollection)
             }

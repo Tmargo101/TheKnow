@@ -36,6 +36,7 @@
 		A27EDE2726362ABA0081104D /* PlaceSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EDE2626362ABA0081104D /* PlaceSearch.swift */; };
 		A27EDE2B26362B180081104D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27EDE2A26362B180081104D /* CoreLocation.framework */; };
 		A27EDE2D26362B1D0081104D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27EDE2C26362B1D0081104D /* MapKit.framework */; };
+		A2C1D9072645096900343F6F /* AddCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C1D9062645096900343F6F /* AddCollectionViewModel.swift */; };
 		A2D050192638DB4F00E031F7 /* LoggedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D050182638DB4F00E031F7 /* LoggedInView.swift */; };
 		A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88472601668C00D16EBC /* TheKnowApp.swift */; };
 		A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88492601668C00D16EBC /* ContentView.swift */; };
@@ -72,6 +73,8 @@
 		A27EDE2626362ABA0081104D /* PlaceSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearch.swift; sourceTree = "<group>"; };
 		A27EDE2A26362B180081104D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A27EDE2C26362B1D0081104D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A2893E202642733900C49BB4 /* TheKnow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheKnow.entitlements; sourceTree = "<group>"; };
+		A2C1D9062645096900343F6F /* AddCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewModel.swift; sourceTree = "<group>"; };
 		A2D050182638DB4F00E031F7 /* LoggedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInView.swift; sourceTree = "<group>"; };
 		A2FF88442601668C00D16EBC /* TheKnow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheKnow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FF88472601668C00D16EBC /* TheKnowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheKnowApp.swift; sourceTree = "<group>"; };
@@ -160,6 +163,7 @@
 				A27DD5D12635F69B00A083CF /* CollectionsViewModel.swift */,
 				A207D72B263F3D41006BAEC8 /* CollectionViewModel.swift */,
 				A207D72D26405584006BAEC8 /* AccountViewModel.swift */,
+				A2C1D9062645096900343F6F /* AddCollectionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -219,6 +223,7 @@
 				A2FF88472601668C00D16EBC /* TheKnowApp.swift */,
 				A2FF884B2601668D00D16EBC /* Assets.xcassets */,
 				A2FF88502601668D00D16EBC /* Info.plist */,
+				A2893E202642733900C49BB4 /* TheKnow.entitlements */,
 				A2FF884D2601668D00D16EBC /* Preview Content */,
 			);
 			path = TheKnow;
@@ -325,6 +330,7 @@
 				A27EDE1E26362A5C0081104D /* PlaceAnnotation.swift in Sources */,
 				A207D72C263F3D41006BAEC8 /* CollectionViewModel.swift in Sources */,
 				A2D050192638DB4F00E031F7 /* LoggedInView.swift in Sources */,
+				A2C1D9072645096900343F6F /* AddCollectionViewModel.swift in Sources */,
 				A27DD5CF2635F33400A083CF /* SignupViewModel.swift in Sources */,
 				A27DD5D52635F95B00A083CF /* AccountView.swift in Sources */,
 				A2641F6E26017CE100A0F427 /* Strings.swift in Sources */,
@@ -463,6 +469,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TheKnow/TheKnow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TheKnow/Preview Content\"";
 				DEVELOPMENT_TEAM = 7QNFFF785Z;
@@ -485,9 +492,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TheKnow/TheKnow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TheKnow/Preview Content\"";
-				DEVELOPMENT_TEAM = 7QNFFF785Z;
+				DEVELOPMENT_TEAM = YQYAB9U8EZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TheKnow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

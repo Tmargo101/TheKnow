@@ -28,7 +28,7 @@ class CollectionViewModel: ObservableObject {
         }
         .responseDecodable(of: APIResponse.self) { response in
             guard let response = response.value else { print("Cannot parse to Decodables"); return }
-            self.places = response.contents.places ?? [Place]()
+            self.places = response.contents?.places ?? [Place]()
             print(self.places)
             self.loadingPlaces = false
         }

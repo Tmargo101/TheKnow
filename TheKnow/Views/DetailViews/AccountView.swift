@@ -21,6 +21,12 @@ struct AccountView: View {
                     Section (header: Text(Strings.ACCOUNT_NAME)) {
                         Text("\(user.email ?? Strings.USERNAME_NOT_FOUND)")
                     }
+                    Section (header: Text("Devices signed in")) {
+                        Text("\(accountViewModel.Account.tokenCount )")
+                    }
+                    Section (header: Text("Name")) {
+                        Text("\(accountViewModel.Account.name.first) \(accountViewModel.Account.name.last)")
+                    }
                     Section (header: Text("User ID (DEV)")) {
                         Text("\(user.id ?? Strings.USERNAME_NOT_FOUND)")
                     }
@@ -43,6 +49,9 @@ struct AccountView: View {
                         })
                     }
                 }
+                .onAppear(perform: {
+                    accountViewModel.getUser(token: user.token)
+                })
                 .navigationTitle(Strings.ACCOUNT)
 
             }

@@ -24,7 +24,7 @@ import Foundation
 struct APIResponse: Decodable {
     let status: String
     let message: String
-    let contents: Contents
+    let contents: Contents?
 }
 
 struct Contents: Decodable {
@@ -32,11 +32,35 @@ struct Contents: Decodable {
     let collections: [Collection]?
     let collection: Collection?
     let places: [Place]?
+    let members: [Member]?
 }
 
 struct User: Decodable {
-    let id: String
+    let email: String
+    let _id: String
     let token: String
+    let tokenCount: String
+    let name: UserName
+    let createdDate: String
+    
+    init() {
+        self.email = ""
+        self._id = ""
+        self.token = ""
+        self.tokenCount = ""
+        self.name = UserName()
+        self.createdDate = ""
+    }
+}
+
+struct UserName: Decodable {
+    let first: String
+    let last: String
+    
+    init() {
+        self.first = ""
+        self.last = ""
+    }
 }
 
 struct Collection: Decodable, Identifiable {
@@ -72,9 +96,10 @@ struct Place: Decodable, Identifiable {
     let addedBy: String
     let collectionId: String?
     let createdDate: String
-    let reccomendedBy: PlaceReccomendedBy?
+    let recommendedBy: PlaceRecommendedBy?
     let placeData: PlaceData?
     let note: String?
+    let comments: [PlaceComment]?
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -82,9 +107,10 @@ struct Place: Decodable, Identifiable {
         case addedBy = "addedBy"
         case collectionId = "collectionId"
         case createdDate = "createdDate"
-        case reccomendedBy = "reccomendedBy"
+        case recommendedBy = "recommendedBy"
         case placeData = "placeData"
         case note = "note"
+        case comments = "comments"
     }
 
     init() {
@@ -95,7 +121,8 @@ struct Place: Decodable, Identifiable {
         self.createdDate = ""
         self.note = ""
         self.placeData = PlaceData()
-        self.reccomendedBy = PlaceReccomendedBy()
+        self.recommendedBy = PlaceRecommendedBy()
+        self.comments = [PlaceComment()]
     }
 }
 
@@ -123,7 +150,7 @@ struct PlaceData: Decodable {
     }
 }
 
-struct PlaceReccomendedBy: Decodable {
+struct PlaceRecommendedBy: Decodable {
     let name: String?
     let id: String?
     
@@ -132,3 +159,34 @@ struct PlaceReccomendedBy: Decodable {
         self.id = ""
     }
 }
+
+struct PlaceComment: Decodable {
+    let name: String?
+    let text: String?
+    let userId: String?
+    
+    init() {
+        self.name = ""
+        self.text = ""
+        self.userId = ""
+    }
+}
+
+struct Member: Decodable {
+    let id: String
+    let email: String
+    let name: UserName
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case email = "email"
+        case name = "name"
+    }
+    
+    init() {
+        self.id = ""
+        self.name = UserName()
+        self.email = ""
+    }
+}
+

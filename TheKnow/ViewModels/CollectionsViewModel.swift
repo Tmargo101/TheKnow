@@ -30,7 +30,7 @@ class CollectionsViewModel: ObservableObject {
         }
         .responseDecodable(of: APIResponse.self) { (response) in
             guard let response = response.value else { return }
-            self.collections = response.contents.collections ?? []
+            self.collections = response.contents?.collections ?? []
             self.loadingCollections = false
         }
     }
@@ -48,7 +48,7 @@ class CollectionsViewModel: ObservableObject {
         }
         .responseDecodable(of: APIResponse.self) { response in
             guard let response = response.value else { print("Cannot parse to Decodables"); return }
-            self.collection = response.contents.collection ?? Collection()
+            self.collection = response.contents?.collection ?? Collection()
             print(self.collection)
             self.loadingCollection = false
         }
