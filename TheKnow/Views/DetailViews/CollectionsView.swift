@@ -111,9 +111,7 @@ struct CollectionsView: View {
                     }
                 
                 AddCollectionView(name: "", isShow: $showAddNewCollection)
-                    .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .bottom)))
-//                    .trans
-//                    .transition(.move(edge: .bottom))
+                    .transition(.move(edge: .bottom))
                     .animation(.interpolatingSpring(stiffness: 200.0, damping: 25.0, initialVelocity: 10.0))
             }
         }

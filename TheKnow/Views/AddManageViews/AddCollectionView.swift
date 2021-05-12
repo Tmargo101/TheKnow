@@ -50,10 +50,10 @@ struct AddCollectionView: View {
                 
                 // Save button for adding the  item
                 Button(action: {
-                    
-                    if self.name.trimmingCharacters(in: .whitespaces) == "" {
-                        return
-                    }
+//                    
+//                    if self.name.trimmingCharacters(in: .whitespaces) == "" {
+//                        return
+//                    }
                     addCollectionViewModel.addNewCollection(_name: addCollectionViewModel.newCollectionName, usedId: user.id ?? "", token: user.token ?? "") { success in
                         print(success)
                     }

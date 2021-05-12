@@ -90,21 +90,6 @@ struct AddPlaceView: View {
                                         }
 
                                     })
-//                                    Text("\(sr.name)")
-//                                        .font(.headline)
-//                                        .padding(.bottom, 3)
-//                                    Text("\(sr.address)")
-//                                        .font(.subheadline)
-//                                }
-//                                .onTapGesture {
-//                                    addPlaceViewModel.newPlaceAddress = sr.address
-//                                    addPlaceViewModel.newPlacePhoneNumber = sr.phoneNumber ?? ""
-//                                    addPlaceViewModel.newPlaceLink = sr.url?.absoluteString ?? ""
-//                                    addPlaceViewModel.newPlaceName = sr.name
-//                                    searchMe.placeSearchResults = []
-//                                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//                                    showSuggestions = false
-//
                                 }
                                 
                             }
@@ -131,23 +116,49 @@ struct AddPlaceView: View {
 //                        .font(.system(size: 20, design: .rounded))
 
                     HStack {
-                        Text("Been?")
-                            .font(.system(size: 20, design: .rounded))
                         Toggle(isOn: $addPlaceViewModel.newPlaceBeen) {
-                            Text("Been?")
+                            Text("")
                         }
-                        .toggleStyle(CheckboxStyle())
+                            .toggleStyle(CheckboxStyle())
+                            .padding()
+                        Text("Have you been here yet?")
+                            .font(.system(size: 20, design: .rounded))
+                            .foregroundColor(Color(.systemGray))
+                        Spacer()
                     }
-                    Text("Address: \(addPlaceViewModel.newPlaceAddress)")
-                        .font(.system(size: 20, design: .rounded))
-                        .padding()
-                    Text("Phone Number: \(addPlaceViewModel.newPlacePhoneNumber)")
-                        .font(.system(size: 20, design: .rounded))
-                        .padding()
-//                    Text("Link: \(addPlaceViewModel.newPlaceLink)")
-//                        .font(.system(size: 20, design: .rounded))
-//                        .padding()
                     Spacer()
+                    VStack (alignment: .leading) {
+                        HStack {
+                            Spacer()
+                            Text("Place Data:")
+                                .padding()
+                            Spacer()
+                        }
+                        HStack {
+                            Text("Address: \(addPlaceViewModel.newPlaceAddress)")
+                                .padding(.bottom, 4)
+                                .font(.system(size: 16, design: .rounded))
+                                .foregroundColor(Color(.systemGray2))
+                            Spacer()
+                        }
+                        HStack {
+                            Text("Phone Number: \(addPlaceViewModel.newPlacePhoneNumber)")
+                                .padding(.bottom, 4)
+                                .font(.system(size: 16, design: .rounded))
+                                .foregroundColor(Color(.systemGray2))
+                            Spacer()
+                        }
+                        HStack {
+                            Text("Link: \(addPlaceViewModel.newPlaceLink)")
+                                .padding(.bottom, 4)
+                                .font(.system(size: 16, design: .rounded))
+                                .foregroundColor(Color(.systemGray2))
+                            Spacer()
+                        }
+                    }
+                    .background(Color(.systemGray5))
+                    .cornerRadius(10.0)
+                    
                     // Save button for adding the  item
                     Button(action: {
 //                        if self.addPlaceViewModel.newPlaceName.trimmingCharacters(in: .whitespaces) == "" {
