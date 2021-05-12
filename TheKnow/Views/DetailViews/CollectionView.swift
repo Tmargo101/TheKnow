@@ -18,7 +18,12 @@ struct CollectionView: View {
     
     var body: some View {
         VStack {
-            if (!collectionViewModel.loadingPlaces) {
+            if (collectionViewModel.loadingPlaces && collectionViewModel.places.count == 0) {
+                VStack {
+                    ProgressView()
+                    Text("Loading Places...")
+                }
+            } else {
                 if (collectionViewModel.places.count > 0) {
                     List {
                         ForEach(collectionViewModel.places) { place in
@@ -35,13 +40,8 @@ struct CollectionView: View {
                 } else {
                     Text("No Places")
                         .font(.system(.title, design: .rounded))
+                        .transition(.opacity)
                 }
-            } else {
-                VStack {
-                    ProgressView()
-                    Text("Loading Places...")
-                }
-                
             }
         }
         .sheet(isPresented: $showAddNewPlace, content: {

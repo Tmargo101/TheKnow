@@ -24,7 +24,12 @@ struct CollectionsView: View {
         
         ZStack {
             VStack {
-                if (!collectionsViewModel.loadingCollections) {
+                if (collectionsViewModel.loadingCollections && collectionsViewModel.collections.count == 0) {
+                    VStack {
+                        ProgressView()
+                        Text("Loading Collections...")
+                    }
+                } else {
                     if (collectionsViewModel.collections.count > 0) {
                         List {
                             ForEach(collectionsViewModel.collections) { collection in
@@ -41,11 +46,6 @@ struct CollectionsView: View {
                         .transition(.opacity)
                     } else {
                         Text("No Collections")
-                    }
-                } else {
-                    VStack {
-                        ProgressView()
-                        Text("Loading Collections...")
                     }
                 }
             }
@@ -94,11 +94,10 @@ struct CollectionsView: View {
                 } // ToolbarItem
             } //Toolbar
             .navigationTitle(Text("\((user.firstname != "") ? "\(user.firstname ?? "")'s" :  "My") Collections"))
-//            .navigationTitle(Text("\(Strings.MY_COLLECTIONS)"))
 
 
 //            .rotation3DEffect(Angle(degrees: showAddNewCollection ? 5 : 0), axis: (x: 1, y: 0, z: 0))
-//            .offset(y: showAddNewCollection ? -50 : 0)
+//            .offset(y: showAddNewCollection ? 50 : 0)
 //            .animation(.easeOut)
         
         
@@ -106,11 +105,15 @@ struct CollectionsView: View {
                 BlankView(bgColor: .secondary)
                     .opacity(0.5)
                     .onTapGesture {
-                        self.showAddNewCollection = false
+                        withAnimation {
+                            self.showAddNewCollection = false
+                        }
                     }
                 
                 AddCollectionView(name: "", isShow: $showAddNewCollection)
-                    .transition(.move(edge: .bottom))
+                    .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .bottom)))
+//                    .trans
+//                    .transition(.move(edge: .bottom))
                     .animation(.interpolatingSpring(stiffness: 200.0, damping: 25.0, initialVelocity: 10.0))
             }
         }
