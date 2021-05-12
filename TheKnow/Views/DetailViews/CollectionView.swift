@@ -20,14 +20,17 @@ struct CollectionView: View {
         VStack {
             if (!collectionViewModel.loadingPlaces) {
                 if (collectionViewModel.places.count > 0) {
-                    List(collectionViewModel.places) { place in
-                        NavigationLink(
-                            destination: PlaceView(_place: place),
-                            label: {
-                                Text(place.name)
-                                    .font(.title2)
-                            })
-                            .padding()
+                    List {
+                        ForEach(collectionViewModel.places) { place in
+                            NavigationLink(
+                                destination: PlaceView(_place: place),
+                                label: {
+                                    Text(place.name)
+                                        .font(.title2)
+                                })
+                                .padding()
+                        }
+                        .onDelete(perform: deletePlace)
                     }
                     .transition(.opacity)
                 } else {
@@ -52,6 +55,11 @@ struct CollectionView: View {
             )
         })
         .toolbar {
+            
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                EditButton()
+//            }
+
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
@@ -79,6 +87,12 @@ struct CollectionView: View {
         .onChange(of: showAddNewPlace, perform: { value in
             collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
         })
+    }
+    
+    func deletePlace(at offsets: IndexSet) {
+        collectionViewModel.deletePlace(token: user.token, index: offsets.first!) { _ in 
+            collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
+        }
     }
 }
 //

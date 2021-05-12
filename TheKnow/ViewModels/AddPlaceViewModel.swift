@@ -31,18 +31,22 @@ class AddPlaceViewModel: ObservableObject {
         if (newPlaceBeen) { beenString = "true" }
         
         let headers: HTTPHeaders = [Headers.AUTH: token]
-        let parameters = [
+        var parameters = [
             "name": newPlaceName,
             "addedBy": addedBy,
             "collectionId": collectionId,
             "been": beenString,
             "recommendedBy": newPlaceRecommendedBy,
-            "commentText": newPlaceNote,
-            "commentName": fullName,
             "address": newPlaceAddress,
             "link": newPlaceLink,
             "phoneNumber": newPlacePhoneNumber
         ]
+        
+        if newPlaceNote.count > 1 {
+            parameters["commentText"] = newPlaceNote
+            parameters["commentName"] = fullName
+        }
+                
         AF.request(Routes.GET_PLACES,
                    method: .post,
                    parameters: parameters,

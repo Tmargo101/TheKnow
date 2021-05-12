@@ -140,7 +140,9 @@ struct roundButtonView: View {
             }
             if phoneNumber != "" {
                 let tel = "tel://"
-                let formattedString = tel + phoneNumber
+                //MARK:-Convert Phone numbers to a good link
+                let formattedPhoneNumber = phoneNumber.filter("0123456789.".contains)
+                let formattedString = tel + formattedPhoneNumber
                 print(formattedString)
                 guard let url = URL(string: formattedString) else { return }
                 UIApplication.shared.open(url)
