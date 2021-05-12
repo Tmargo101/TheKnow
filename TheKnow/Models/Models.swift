@@ -32,6 +32,7 @@ struct Contents: Decodable {
     let collections: [Collection]?
     let collection: Collection?
     let places: [Place]?
+//    let place: Place?
     let members: [Member]?
 }
 

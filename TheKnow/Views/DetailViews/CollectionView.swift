@@ -22,7 +22,7 @@ struct CollectionView: View {
                 if (collectionViewModel.places.count > 0) {
                     List(collectionViewModel.places) { place in
                         NavigationLink(
-                            destination: PlaceView(place: place),
+                            destination: PlaceView(_place: place),
                             label: {
                                 Text(place.name)
                                     .font(.title2)
