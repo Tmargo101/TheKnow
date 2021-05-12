@@ -42,7 +42,6 @@ struct CollectionsView: View {
                             }
                             .onDelete(perform: deleteCollection)
                         }
-                        .listStyle(SidebarListStyle())
                         .transition(.opacity)
                     } else {
                         Text("No Collections")
@@ -75,9 +74,7 @@ struct CollectionsView: View {
                     Button(action: {
                         collectionsViewModel.getAllCollections(token: user.token, id: user.id)
                     }) {
-                        Image(systemName: "arrow.clockwise")
-                            .font(.largeTitle)
-                            .foregroundColor(.purple)
+                        RefreshButtonView(loading: $collectionsViewModel.loadingCollections, image: "arrow.clockwise")
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -124,21 +121,21 @@ struct CollectionsView: View {
 
 struct CollectionsView_Previews: PreviewProvider {
     static var previews: some View {
+        
         CollectionsView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
+            .previewDisplayName("iPhone SE 4.7 Inch")
             .environmentObject(UserViewModel())
-    }
-}
+        
+        CollectionsView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro 6.1 Inch"))
+            .previewDisplayName("iPhone 12 Pro")
+            .environmentObject(UserViewModel())
+        
+        CollectionsView()
+            .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
+            .previewDisplayName("iPad 11 Inch")
+            .environmentObject(UserViewModel())
 
-struct BlankView : View {
-    
-    var bgColor: Color
-    
-    var body: some View {
-        VStack {
-            Spacer()
-        }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .background(bgColor)
-        .edgesIgnoringSafeArea(.all)
     }
 }

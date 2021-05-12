@@ -58,16 +58,14 @@ struct CollectionView: View {
                 Button(action: {
                     collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
                 }) {
-                    Image(systemName: "arrow.clockwise")
-                        .font(.largeTitle)
-                        .foregroundColor(.purple)
+                    RefreshButtonView(loading: $collectionViewModel.loadingPlaces, image: "arrow.clockwise")
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     showAddNewPlace.toggle()
                 }, label: {
-                    Image(systemName: "plus.circle")
+                    Image(systemName: "plus.circle.fill")
                         .font(.largeTitle)
                 })
             }
