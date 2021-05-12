@@ -11,6 +11,8 @@ import Alamofire
 class UserViewModel: ObservableObject {
     
     let defaults = UserDefaults.standard
+    
+    @Published var dev = false
 
     @Published var loggedIn: Bool = false
     
@@ -19,6 +21,7 @@ class UserViewModel: ObservableObject {
     @Published var email: String? = ""
     @Published var id: String? = ""
     @Published var token: String? = ""
+    @Published var name: String?
     
     @Published var responseMessage: String = ""
     
@@ -49,6 +52,7 @@ class UserViewModel: ObservableObject {
             self.token = response.contents?.user?.token
             self.id = response.contents?.user?._id
             self.email = _email
+            self.name = "\(response.contents?.user?.name.first ?? "") \(response.contents?.user?.name.last ?? "")"
             
             /// Add userData to UserDefaults
             self.defaults.set(self.token, forKey: "token")
@@ -100,12 +104,14 @@ class UserViewModel: ObservableObject {
                 self.email = ""
                 self.id = ""
                 self.token = ""
+                self.name = ""
                 
                 /// Remove from UserDefaults
                 self.defaults.set(self.token, forKey: "token")
 //                self.defaults.set(self.loggedIn, forKey: "loggedIn")
                 self.defaults.set(self.email, forKey: "email")
                 self.defaults.set(self.id, forKey: "id")
+                self.defaults.set(self.name, forKey: "name")
                 
                 completion(true)
             }

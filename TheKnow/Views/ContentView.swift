@@ -29,10 +29,12 @@ struct ContentView: View {
                     .transition(.move(edge: .leading))
             }
         }.onAppear {
-            user.loggedIn = UserDefaultsLoggedIn
-            user.token = UserDefaultsToken
-            user.id = UserDefaultsId
-            user.email = UserDefaultsEmail
+            if (!user.dev) {
+                user.loggedIn = UserDefaultsLoggedIn
+                user.token = UserDefaultsToken
+                user.id = UserDefaultsId
+                user.email = UserDefaultsEmail
+            }
         }
     }
     

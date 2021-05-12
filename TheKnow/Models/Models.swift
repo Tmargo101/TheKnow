@@ -101,6 +101,7 @@ struct Place: Decodable, Identifiable {
     let placeData: PlaceData?
     let note: String?
     let comments: [PlaceComment]?
+    let been: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -112,6 +113,7 @@ struct Place: Decodable, Identifiable {
         case placeData = "placeData"
         case note = "note"
         case comments = "comments"
+        case been = "been"
     }
 
     init() {
@@ -124,6 +126,7 @@ struct Place: Decodable, Identifiable {
         self.placeData = PlaceData()
         self.recommendedBy = PlaceRecommendedBy()
         self.comments = [PlaceComment()]
+        self.been = false
     }
 }
 

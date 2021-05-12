@@ -42,7 +42,13 @@ struct CollectionView: View {
             }
         }
         .sheet(isPresented: $showAddNewPlace, content: {
-            AddPlaceView(location: "", isShow: $showAddNewPlace)
+            AddPlaceView(
+                token: user.token ?? "",
+                userId: user.id ?? "",
+                collectionId: collectionId,
+                fullName: "\(user.name ?? "")",
+                isShow: $showAddNewPlace
+            )
         })
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -69,6 +75,9 @@ struct CollectionView: View {
             print(collectionId)
             collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
         }
+        .onChange(of: showAddNewPlace, perform: { value in
+            collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
+        })
     }
 }
 //

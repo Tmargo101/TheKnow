@@ -9,16 +9,28 @@ import SwiftUI
 
 
 struct AddPlaceView: View {
-    @State var location: String
+    var token: String = ""
+    var userId: String = ""
+    var collectionId: String = ""
+    var fullName: String = ""
+    
+    @State var showError: Bool = false
+    
+//    @State var location: String
     @Binding var isShow: Bool
+    
     @State var isEditing = false
     @ObservedObject var searchMe = SearchMe()
     @State var reccomendedBy: String = ""
     @State var note: String = ""
+    
+    @ObservedObject var addPlaceViewModel = AddPlaceViewModel()
 
     //@State var searchResults: [PlaceSearchResultModel] = []
-    
-    
+//    init() {
+//        UITextView.appearance().backgroundColor = .clear
+//    }
+//
     var body: some View {
         ZStack (alignment: .top){
             VStack {
@@ -43,7 +55,7 @@ struct AddPlaceView: View {
                     .padding(.top, 20)
                     .padding(.bottom, 10)
                     
-                    SearchBar(text: $location, isEditing: $isEditing, searchMe: searchMe)
+                    SearchBar(text: $addPlaceViewModel.newPlaceName, isEditing: $isEditing, searchMe: searchMe)
                         .padding()
                         .background(Color(.systemGray5))
                         .cornerRadius(8)
@@ -63,28 +75,58 @@ struct AddPlaceView: View {
                             }
                         }
                     }
-                    TextField("Reccomended By", text: $reccomendedBy)
+                    TextField("Reccomended By", text: $addPlaceViewModel.newPlaceRecommendedBy)
                         .padding()
                         .background(Color(.systemGray5))
                         .cornerRadius(8)
                         .padding(.bottom)
-                    TextEditor(text: $note)
+                    TextField("Note", text: $addPlaceViewModel.newPlaceNote)
                         .padding()
                         .background(Color(.systemGray5))
                         .cornerRadius(8)
                         .padding(.bottom)
 
-                        
+//                    TextEditor(text: $addPlaceViewModel.newPlaceNote)
+//                        .frame(minHeight: 50, maxHeight: 200)
+//                        .padding()
+//                        .padding(.top, 20)
+//                        .background(Color(.systemGray5))
+//                        .cornerRadius(8)
+//                        .padding(.bottom)
+//                        .font(.system(size: 20, design: .rounded))
+
+                    HStack {
+                        Text("Been?")
+                            .font(.system(size: 20, design: .rounded))
+                        Toggle(isOn: $addPlaceViewModel.newPlaceBeen) {
+                            Text("Been?")
+                        }
+                        .toggleStyle(CheckboxStyle())
+                    }
+
                     Spacer()
                     // Save button for adding the  item
                     Button(action: {
-                        if self.location.trimmingCharacters(in: .whitespaces) == "" {
-                            return
+//                        if self.addPlaceViewModel.newPlaceName.trimmingCharacters(in: .whitespaces) == "" {
+//                            return
+//                        }
+                        addPlaceViewModel.addPlace(
+                            token: token,
+                            _name: addPlaceViewModel.newPlaceName,
+                            addedBy: userId,
+                            collectionId: collectionId,
+                            been: addPlaceViewModel.newPlaceBeen,
+                            recommendedBy: addPlaceViewModel.newPlaceRecommendedBy,
+                            note: addPlaceViewModel.newPlaceNote,
+                            name: fullName
+                        ) { success in
+                            print(success)
+                            if (success) {
+                                self.isShow = false
+                            } else {
+                                self.showError = true
+                            }
                         }
-                        self.isShow = false
-                        
-                        //add code to add collection here
-                        
                     }) {
                         Text("Save")
                             .font(.system(.headline, design: .rounded))
@@ -97,6 +139,13 @@ struct AddPlaceView: View {
                     .padding(.bottom)
                     
                 }
+                .alert(isPresented: $showError) {
+                    Alert(title: Text("Error adding place"), message: Text("\(addPlaceViewModel.responseMessage)"), dismissButton: .default(Text("Close")))
+                }
+                .onAppear() {
+                    // Make the note field clear so the background works
+                    UITextView.appearance().backgroundColor = .clear
+                }
                 .padding()
                 .background(Color(UIColor.systemBackground))
                 .cornerRadius(10, antialiased: true)
@@ -108,14 +157,6 @@ struct AddPlaceView: View {
                 .font(.system(.largeTitle))
                 .padding(.top, 15)
         }
-    }
-}
-
-
-
-struct AddPlaceView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddPlaceView(location: "", isShow: .constant(true))
     }
 }
 
@@ -175,4 +216,28 @@ struct SearchBar: View {
 //                })
         }
     } // Body
+}
+    //
+    //struct AddPlaceView_Previews: PreviewProvider {
+    //    static var previews: some View {
+    //        AddPlaceView(location: "", isShow: .constant(true))
+    //    }
+    //}
+
+struct CheckboxStyle: ToggleStyle {
+
+    func makeBody(configuration: Self.Configuration) -> some View {
+
+        return HStack {
+            Image(systemName: configuration.isOn ? "checkmark.square.fill" : "square")
+                .resizable()
+                .frame(width: 32, height: 32)
+                .foregroundColor(configuration.isOn ? .green : .gray)
+                .font(.system(size: 32, weight: .bold, design: .default))
+                .onTapGesture {
+                    configuration.isOn.toggle()
+                }
+        }
+
+    }
 }
