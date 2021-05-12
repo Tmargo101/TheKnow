@@ -16,10 +16,13 @@ class AddPlaceViewModel: ObservableObject {
     
     @Published var newPlaceName = ""
     @Published var newPlaceRecommendedBy = ""
-    @Published var been = false
+    @Published var newPlaceBeen = false
     @Published var newPlaceCollectionId = ""
+    @Published var newPlaceNote = ""
     
-    func addPlace(token: String, _name: String, addedBy: String, collectionId: String, been: Bool, recommendedBy: String, completion: @escaping (Bool) -> Void) {
+    func addPlace(token: String, _name: String, addedBy: String, collectionId: String, been: Bool, recommendedBy: String, note: String?, name: String?, completion: @escaping (Bool) -> Void) {
+        
+        // Convert "been" to string (necessary?)
         var beenString = "false"
         if (been) { beenString = "true" }
         
@@ -30,6 +33,8 @@ class AddPlaceViewModel: ObservableObject {
             "collectionId": collectionId,
             "been": beenString,
             "recommendedBy": recommendedBy,
+            "commentText": note,
+            "commentName": name
         ]
         AF.request(Routes.GET_PLACES,
                    method: .post,

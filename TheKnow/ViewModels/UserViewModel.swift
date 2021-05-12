@@ -12,15 +12,16 @@ class UserViewModel: ObservableObject {
     
     let defaults = UserDefaults.standard
     
-    @Published var dev = true
+    @Published var dev = false
 
-    @Published var loggedIn: Bool = true
+    @Published var loggedIn: Bool = false
     
     @Published var showAccountSheet: Bool = false
     
-    @Published var email: String? = "tmargo101@gmail.com"
-    @Published var id: String? = "6090677510b4180015de0fc5"
-    @Published var token: String? = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTA2Nzc1MTBiNDE4MDAxNWRlMGZjNSIsImlhdCI6MTYyMDc4MTQ5NCwiZXhwIjoxNjI4NTU3NDk0fQ.1EPXnJgVJ6k0eoJU7ayb4eYCmhcQAUTSJlTw6Wxophs"
+    @Published var email: String? = ""
+    @Published var id: String? = ""
+    @Published var token: String? = ""
+    @Published var name: String?
     
     @Published var responseMessage: String = ""
     
@@ -51,6 +52,7 @@ class UserViewModel: ObservableObject {
             self.token = response.contents?.user?.token
             self.id = response.contents?.user?._id
             self.email = _email
+            self.name = "\(response.contents?.user?.name.first ?? "") \(response.contents?.user?.name.last ?? "")"
             
             /// Add userData to UserDefaults
             self.defaults.set(self.token, forKey: "token")
@@ -102,12 +104,14 @@ class UserViewModel: ObservableObject {
                 self.email = ""
                 self.id = ""
                 self.token = ""
+                self.name = ""
                 
                 /// Remove from UserDefaults
                 self.defaults.set(self.token, forKey: "token")
 //                self.defaults.set(self.loggedIn, forKey: "loggedIn")
                 self.defaults.set(self.email, forKey: "email")
                 self.defaults.set(self.id, forKey: "id")
+                self.defaults.set(self.name, forKey: "name")
                 
                 completion(true)
             }

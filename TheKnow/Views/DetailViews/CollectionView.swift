@@ -46,6 +46,7 @@ struct CollectionView: View {
                 token: user.token ?? "",
                 userId: user.id ?? "",
                 collectionId: collectionId,
+                fullName: "\(user.name ?? "")",
                 isShow: $showAddNewPlace
             )
         })

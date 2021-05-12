@@ -12,6 +12,7 @@ struct AddPlaceView: View {
     var token: String = ""
     var userId: String = ""
     var collectionId: String = ""
+    var fullName: String = ""
     
     @State var showError: Bool = false
     
@@ -26,8 +27,10 @@ struct AddPlaceView: View {
     @ObservedObject var addPlaceViewModel = AddPlaceViewModel()
 
     //@State var searchResults: [PlaceSearchResultModel] = []
-    
-    
+//    init() {
+//        UITextView.appearance().backgroundColor = .clear
+//    }
+//
     var body: some View {
         ZStack (alignment: .top){
             VStack {
@@ -77,13 +80,30 @@ struct AddPlaceView: View {
                         .background(Color(.systemGray5))
                         .cornerRadius(8)
                         .padding(.bottom)
-                    TextEditor(text: $note)
+                    TextField("Note", text: $addPlaceViewModel.newPlaceNote)
                         .padding()
                         .background(Color(.systemGray5))
                         .cornerRadius(8)
                         .padding(.bottom)
 
-                        
+//                    TextEditor(text: $addPlaceViewModel.newPlaceNote)
+//                        .frame(minHeight: 50, maxHeight: 200)
+//                        .padding()
+//                        .padding(.top, 20)
+//                        .background(Color(.systemGray5))
+//                        .cornerRadius(8)
+//                        .padding(.bottom)
+//                        .font(.system(size: 20, design: .rounded))
+
+                    HStack {
+                        Text("Been?")
+                            .font(.system(size: 20, design: .rounded))
+                        Toggle(isOn: $addPlaceViewModel.newPlaceBeen) {
+                            Text("Been?")
+                        }
+                        .toggleStyle(CheckboxStyle())
+                    }
+
                     Spacer()
                     // Save button for adding the  item
                     Button(action: {
@@ -95,8 +115,10 @@ struct AddPlaceView: View {
                             _name: addPlaceViewModel.newPlaceName,
                             addedBy: userId,
                             collectionId: collectionId,
-                            been: addPlaceViewModel.been,
-                            recommendedBy: addPlaceViewModel.newPlaceRecommendedBy
+                            been: addPlaceViewModel.newPlaceBeen,
+                            recommendedBy: addPlaceViewModel.newPlaceRecommendedBy,
+                            note: addPlaceViewModel.newPlaceNote,
+                            name: fullName
                         ) { success in
                             print(success)
                             if (success) {
@@ -119,6 +141,10 @@ struct AddPlaceView: View {
                 }
                 .alert(isPresented: $showError) {
                     Alert(title: Text("Error adding place"), message: Text("\(addPlaceViewModel.responseMessage)"), dismissButton: .default(Text("Close")))
+                }
+                .onAppear() {
+                    // Make the note field clear so the background works
+                    UITextView.appearance().backgroundColor = .clear
                 }
                 .padding()
                 .background(Color(UIColor.systemBackground))
@@ -197,3 +223,21 @@ struct SearchBar: View {
     //        AddPlaceView(location: "", isShow: .constant(true))
     //    }
     //}
+
+struct CheckboxStyle: ToggleStyle {
+
+    func makeBody(configuration: Self.Configuration) -> some View {
+
+        return HStack {
+            Image(systemName: configuration.isOn ? "checkmark.square.fill" : "square")
+                .resizable()
+                .frame(width: 32, height: 32)
+                .foregroundColor(configuration.isOn ? .green : .gray)
+                .font(.system(size: 32, weight: .bold, design: .default))
+                .onTapGesture {
+                    configuration.isOn.toggle()
+                }
+        }
+
+    }
+}
