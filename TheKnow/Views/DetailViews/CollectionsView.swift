@@ -13,6 +13,8 @@ struct CollectionsView: View {
     @EnvironmentObject var user: UserViewModel
     @ObservedObject var collectionsViewModel = CollectionsViewModel()
     
+    @State private var editMode: Bool = false
+    
     @State private var showAddNewCollection: Bool = false
     
     @State var presentNewCollectionSheet: Bool = false
@@ -27,20 +29,24 @@ struct CollectionsView: View {
             VStack {
                 if (!collectionsViewModel.loadingCollections) {
                     if (collectionsViewModel.collections.count > 0) {
-                        List(collectionsViewModel.collections) { collection in
-                            NavigationLink(
-                                destination: CollectionView(collectionId: collection.id, collectionName: "\(collection.name)"),
-                                label: {
-                                    HStack {
-                                        Text("\(collection.name)")
-                                            .font(.title2)
-                                            .padding(.bottom, 1)
-                                        Spacer()
-                                        Text("\(collection.places!.count) Places")
-                                            .font(.headline)
-                                    }
-                                })
-                                .padding()
+                        List {
+                            ForEach(collectionsViewModel.collections) { collection in
+                                NavigationLink(
+                                    destination: CollectionView(collectionId: collection.id, collectionName: "\(collection.name)"),
+                                    label: {
+                                        CollectionRowView(collection: collection)
+//                                        HStack {
+//                                            Text("\(collection.name)")
+//                                                .font(.title2)
+//                                                .padding(.bottom, 1)
+//                                            Spacer()
+//                                            Text("\(collection.places!.count) Places")
+//                                                .font(.headline)
+//                                        }
+                                    })
+                                    .padding()
+                            }
+                            .onDelete(perform: deleteCollection)
                         }
                         .listStyle(SidebarListStyle())
                         .transition(.opacity)
@@ -76,16 +82,21 @@ struct CollectionsView: View {
                             .font(.largeTitle)
                     })
                 }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            collectionsViewModel.getAllCollections(token: user.token, id: user.id)
-
-                        }) {
-                            Image(systemName: "arrow.clockwise")
-                                .font(.largeTitle)
-                                .foregroundColor(.purple)
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
+                        .onTapGesture {
+                            editMode.toggle()
                         }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        collectionsViewModel.getAllCollections(token: user.token, id: user.id)
+                    }) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.largeTitle)
+                            .foregroundColor(.purple)
                     }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         self.showAddNewCollection = true
@@ -120,6 +131,10 @@ struct CollectionsView: View {
             }
         }
     } // Body
+    
+    func deleteCollection(at offsets: IndexSet) {
+        print(offsets.first!)
+    }
 }
 
 struct CollectionsView_Previews: PreviewProvider {

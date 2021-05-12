@@ -25,8 +25,7 @@ struct CollectionView: View {
                             NavigationLink(
                                 destination: PlaceView(_place: place),
                                 label: {
-                                    Text(place.name)
-                                        .font(.title2)
+                                    PlaceRowView(place: place)
                                 })
                                 .padding()
                         }
@@ -55,11 +54,6 @@ struct CollectionView: View {
             )
         })
         .toolbar {
-            
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                EditButton()
-//            }
-
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
