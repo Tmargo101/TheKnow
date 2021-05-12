@@ -12,6 +12,7 @@ struct PlaceView: View {
     
     @EnvironmentObject var user: UserViewModel
     @ObservedObject var placeViewModel = PlaceViewModel()
+    @State var addCommentText = ""
     
     var comments: [PlaceComment]?
     
@@ -56,9 +57,16 @@ struct PlaceView: View {
                     }
                 }
             }
+            Text("Add A Comment")
+                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            TextEditor(text: $addCommentText)
+                .foregroundColor(.black)
+                .opacity(0.5)
+                .padding()
+                .keyboardType(.webSearch)
             
-            // Comment View
-            //            placeNotesView(note: placeViewModel.place.note ?? "")
+            
             Spacer()
         }
         .onAppear() {
@@ -68,6 +76,8 @@ struct PlaceView: View {
         
     }
 }
+
+
 
 struct placeNameBarView: View {
     
