@@ -14,6 +14,7 @@ struct Routes {
     static let LOGOUT = "\(BASE)/logout"
     static let GET_COLLECTIONS = "\(BASE)/collections"
     static let GET_PLACES = "\(BASE)/places"
+    static let GET_PLACE = "\(BASE)/places"
     static let GET_USER = "\(BASE)/user"
 }
 
@@ -29,6 +30,7 @@ struct BodyParams {
     static let LASTNAME = "lastname"
     static let PASSWORD = "pass"
     static let PASSWORD_CONFIRM = "pass2"
+    static let PLACE = "place"
 }
 
 class API {

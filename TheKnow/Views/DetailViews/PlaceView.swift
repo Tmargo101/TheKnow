@@ -9,14 +9,31 @@ import SwiftUI
 
 struct PlaceView: View {
     
-    var place: Place
+    @EnvironmentObject var user: UserViewModel
+    @ObservedObject var placeViewModel = PlaceViewModel()
+    
+    init(_place: Place) {
+        placeViewModel.place = _place
+    }
     
     var body: some View {
         VStack {
-            placeNameBarView(recommendedBy: place.recommendedBy?.name ?? "", name: place.name) // Title & Subtitle Row
-            quickActionsToolbarView(place: place) // Quick Actions Row
-            placeNotesView(note: place.note ?? "")
+            
+            // Title & Subtitle Row
+            placeNameBarView(
+                recommendedBy: placeViewModel.place.recommendedBy?.name ?? "",
+                name: placeViewModel.place.name
+            )
+            
+            // Quick Actions Row
+            quickActionsToolbarView(place: placeViewModel.place)
+            
+            // Comment View
+            placeNotesView(note: placeViewModel.place.note ?? "")
             Spacer()
+        }
+        .onAppear() {
+//            placeViewModel.getPlace(token: user.token, placeId: placeViewModel.place.id)
         }
 //        .navigationTitle(placeName)
         

@@ -22,7 +22,7 @@ struct CollectionView: View {
                 if (collectionViewModel.places.count > 0) {
                     List(collectionViewModel.places) { place in
                         NavigationLink(
-                            destination: PlaceView(place: place),
+                            destination: PlaceView(_place: place),
                             label: {
                                 Text(place.name)
                                     .font(.title2)
@@ -45,6 +45,15 @@ struct CollectionView: View {
             AddPlaceView(location: "", isShow: $showAddNewPlace)
         })
         .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
+                }) {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.largeTitle)
+                        .foregroundColor(.purple)
+                }
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     showAddNewPlace.toggle()
