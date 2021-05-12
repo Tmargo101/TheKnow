@@ -15,10 +15,7 @@ struct ContentView: View {
     @AppStorage("loggedIn") var UserDefaultsLoggedIn = false
     @AppStorage("email") var UserDefaultsEmail = ""
     @AppStorage("id") var UserDefaultsId = ""
-    
-//    init() {
-//    }
-    
+        
     var body: some View {
         ZStack {
             if (user.loggedIn) {
@@ -29,12 +26,10 @@ struct ContentView: View {
                     .transition(.move(edge: .leading))
             }
         }.onAppear {
-            if (!user.dev) {
-                user.loggedIn = UserDefaultsLoggedIn
-                user.token = UserDefaultsToken
-                user.id = UserDefaultsId
-                user.email = UserDefaultsEmail
-            }
+            user.loggedIn = UserDefaultsLoggedIn
+            user.token = UserDefaultsToken
+            user.id = UserDefaultsId
+            user.email = UserDefaultsEmail
         }
     }
     

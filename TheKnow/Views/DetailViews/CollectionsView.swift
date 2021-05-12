@@ -43,6 +43,7 @@ struct CollectionsView: View {
                                 .padding()
                         }
                         .listStyle(SidebarListStyle())
+                        .transition(.opacity)
                     } else {
                         Text("No Collections")
                     }

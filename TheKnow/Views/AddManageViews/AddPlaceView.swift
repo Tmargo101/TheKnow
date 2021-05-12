@@ -24,6 +24,8 @@ struct AddPlaceView: View {
     @State var reccomendedBy: String = ""
     @State var note: String = ""
     
+    @State var showSuggestions: Bool = false
+    
     @ObservedObject var addPlaceViewModel = AddPlaceViewModel()
 
     //@State var searchResults: [PlaceSearchResultModel] = []
@@ -60,16 +62,49 @@ struct AddPlaceView: View {
                         .background(Color(.systemGray5))
                         .cornerRadius(8)
                         .padding(.bottom)
+                        .onTapGesture {
+                            showSuggestions = true
+                        }
                         
-                    if !searchMe.placeSearchResults.isEmpty {
+                    if !searchMe.placeSearchResults.isEmpty && showSuggestions {
                         List {
                             ForEach (searchMe.placeSearchResults) { sr in
                                 VStack(alignment: .leading) {
-                                    Text("\(sr.name)")
-                                        .font(.headline)
-                                        .padding(.bottom, 3)
-                                    Text("\(sr.address)")
-                                        .font(.subheadline)
+                                    Button(action: {
+                                        addPlaceViewModel.newPlaceAddress = sr.address
+                                        addPlaceViewModel.newPlacePhoneNumber = sr.phoneNumber ?? ""
+                                        addPlaceViewModel.newPlaceLink = sr.url?.absoluteString ?? ""
+                                        addPlaceViewModel.newPlaceName = sr.name
+                                        searchMe.placeSearchResults = []
+                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                        showSuggestions = false
+
+                                    }, label: {
+                                        VStack(alignment: .leading) {
+                                            Text("\(sr.name)")
+                                                .font(.headline)
+                                                .padding(.bottom, 3)
+                                            Text("\(sr.address)")
+                                                .font(.subheadline)
+                                                .padding(.bottom, 2)
+                                        }
+
+                                    })
+//                                    Text("\(sr.name)")
+//                                        .font(.headline)
+//                                        .padding(.bottom, 3)
+//                                    Text("\(sr.address)")
+//                                        .font(.subheadline)
+//                                }
+//                                .onTapGesture {
+//                                    addPlaceViewModel.newPlaceAddress = sr.address
+//                                    addPlaceViewModel.newPlacePhoneNumber = sr.phoneNumber ?? ""
+//                                    addPlaceViewModel.newPlaceLink = sr.url?.absoluteString ?? ""
+//                                    addPlaceViewModel.newPlaceName = sr.name
+//                                    searchMe.placeSearchResults = []
+//                                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+//                                    showSuggestions = false
+//
                                 }
                                 
                             }
@@ -103,7 +138,15 @@ struct AddPlaceView: View {
                         }
                         .toggleStyle(CheckboxStyle())
                     }
-
+                    Text("Address: \(addPlaceViewModel.newPlaceAddress)")
+                        .font(.system(size: 20, design: .rounded))
+                        .padding()
+                    Text("Phone Number: \(addPlaceViewModel.newPlacePhoneNumber)")
+                        .font(.system(size: 20, design: .rounded))
+                        .padding()
+//                    Text("Link: \(addPlaceViewModel.newPlaceLink)")
+//                        .font(.system(size: 20, design: .rounded))
+//                        .padding()
                     Spacer()
                     // Save button for adding the  item
                     Button(action: {
@@ -112,13 +155,9 @@ struct AddPlaceView: View {
 //                        }
                         addPlaceViewModel.addPlace(
                             token: token,
-                            _name: addPlaceViewModel.newPlaceName,
                             addedBy: userId,
                             collectionId: collectionId,
-                            been: addPlaceViewModel.newPlaceBeen,
-                            recommendedBy: addPlaceViewModel.newPlaceRecommendedBy,
-                            note: addPlaceViewModel.newPlaceNote,
-                            name: fullName
+                            fullName: fullName
                         ) { success in
                             print(success)
                             if (success) {

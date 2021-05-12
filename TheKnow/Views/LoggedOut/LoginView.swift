@@ -60,7 +60,8 @@ struct LoginView: View {
                     showing = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                         withAnimation {
-                            user.loggedIn = true
+                            user.setLoggedIn(status: true)
+//                            user.loggedIn = true
                         }
                     }
                 } else {

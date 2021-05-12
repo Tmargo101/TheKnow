@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftUI
 
 class CollectionsViewModel: ObservableObject {
     @Published var collections = [Collection]()
@@ -16,7 +17,10 @@ class CollectionsViewModel: ObservableObject {
     @Published var loadingCollection: Bool = false
     
     func getAllCollections(token: String?, id: String?) {
-        loadingCollections = true
+        withAnimation {
+            loadingCollections = true
+        }
+    
         let headers: HTTPHeaders = [Headers.AUTH: token ?? ""]
         let parameters = [BodyParams.USER: id]
         AF.request(
@@ -31,7 +35,9 @@ class CollectionsViewModel: ObservableObject {
         .responseDecodable(of: APIResponse.self) { (response) in
             guard let response = response.value else { return }
             self.collections = response.contents?.collections ?? []
-            self.loadingCollections = false
+            withAnimation {
+                self.loadingCollections = false
+            }
         }
     }
     

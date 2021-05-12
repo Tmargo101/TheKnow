@@ -69,7 +69,7 @@ struct AccountView: View {
                 showing = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                     withAnimation {
-                        user.loggedIn = false
+                        user.setLoggedIn(status: false)
                     }
                 }
             }

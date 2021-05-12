@@ -12,8 +12,6 @@ class UserViewModel: ObservableObject {
     
     let defaults = UserDefaults.standard
     
-    @Published var dev = false
-
     @Published var loggedIn: Bool = false
     
     @Published var showAccountSheet: Bool = false
@@ -21,7 +19,7 @@ class UserViewModel: ObservableObject {
     @Published var email: String? = ""
     @Published var id: String? = ""
     @Published var token: String? = ""
-    @Published var name: String?
+    @Published var name: String? = ""
     
     @Published var responseMessage: String = ""
     
@@ -49,6 +47,7 @@ class UserViewModel: ObservableObject {
             }
             
             /// Add userData to object
+//            self.loggedIn = true
             self.token = response.contents?.user?.token
             self.id = response.contents?.user?._id
             self.email = _email
@@ -62,6 +61,11 @@ class UserViewModel: ObservableObject {
             
             completion(true)
         }
+    }
+    
+    func setLoggedIn(status: Bool) {
+        self.loggedIn = status
+        self.defaults.set(self.loggedIn, forKey: "loggedIn")
     }
     
     func signup(_email: String, firstname: String, lastname: String, password: String, password2: String, completion: @escaping (Bool) -> Void) {

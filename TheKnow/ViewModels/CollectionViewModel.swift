@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftUI
 
 class CollectionViewModel: ObservableObject {
     @Published var places = [Place]()
@@ -14,7 +15,9 @@ class CollectionViewModel: ObservableObject {
 
 
     func getPlacesInCollection(token: String?, collectionId: String?) {
-        loadingPlaces = true
+        withAnimation {
+            loadingPlaces = true
+        }
         let headers: HTTPHeaders = [Headers.AUTH: token ?? ""]
         let parameters = [BodyParams.COLLECTION: collectionId]
         AF.request(
@@ -30,7 +33,9 @@ class CollectionViewModel: ObservableObject {
             guard let response = response.value else { print("Cannot parse to Decodables"); return }
             self.places = response.contents?.places ?? [Place]()
             print(self.places)
-            self.loadingPlaces = false
+            withAnimation {
+                self.loadingPlaces = false
+            }
         }
     }
 }
