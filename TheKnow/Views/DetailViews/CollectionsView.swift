@@ -57,7 +57,7 @@ struct CollectionsView: View {
             .onAppear {
                 collectionsViewModel.getAllCollections(token: user.token, id: user.id)
             }
-            .onChange(of: showAddNewCollection, perform: { value in
+            .onChange(of: showAddNewCollection, perform: { _ in
                 collectionsViewModel.getAllCollections(token: user.token, id: user.id)
             })
             .sheet(isPresented: $presentNewCollectionSheet) {
@@ -74,12 +74,17 @@ struct CollectionsView: View {
                         Image(systemName: "person.circle")
                             .font(.largeTitle)
                     })
-//                    NavigationLink(destination: AccountView(), label: {
-//                        Image(systemName: "person.circle")
-//                            .font(.largeTitle)
-//                    })
                 }
-                
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            collectionsViewModel.getAllCollections(token: user.token, id: user.id)
+
+                        }) {
+                            Image(systemName: "arrow.clockwise")
+                                .font(.largeTitle)
+                                .foregroundColor(.purple)
+                        }
+                    }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         self.showAddNewCollection = true

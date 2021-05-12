@@ -39,6 +39,7 @@
 		A2C1D9072645096900343F6F /* AddCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C1D9062645096900343F6F /* AddCollectionViewModel.swift */; };
 		A2D050192638DB4F00E031F7 /* LoggedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D050182638DB4F00E031F7 /* LoggedInView.swift */; };
 		A2DED264264B631C00431545 /* AddPlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED263264B631C00431545 /* AddPlaceViewModel.swift */; };
+		A2DED261264B4F0700431545 /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED260264B4F0700431545 /* PlaceViewModel.swift */; };
 		A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88472601668C00D16EBC /* TheKnowApp.swift */; };
 		A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88492601668C00D16EBC /* ContentView.swift */; };
 		A2FF884C2601668D00D16EBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2FF884B2601668D00D16EBC /* Assets.xcassets */; };
@@ -78,6 +79,7 @@
 		A2C1D9062645096900343F6F /* AddCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewModel.swift; sourceTree = "<group>"; };
 		A2D050182638DB4F00E031F7 /* LoggedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInView.swift; sourceTree = "<group>"; };
 		A2DED263264B631C00431545 /* AddPlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceViewModel.swift; sourceTree = "<group>"; };
+		A2DED260264B4F0700431545 /* PlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewModel.swift; sourceTree = "<group>"; };
 		A2FF88442601668C00D16EBC /* TheKnow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheKnow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FF88472601668C00D16EBC /* TheKnowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheKnowApp.swift; sourceTree = "<group>"; };
 		A2FF88492601668C00D16EBC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				A207D72D26405584006BAEC8 /* AccountViewModel.swift */,
 				A2C1D9062645096900343F6F /* AddCollectionViewModel.swift */,
 				A2DED263264B631C00431545 /* AddPlaceViewModel.swift */,
+				A2DED260264B4F0700431545 /* PlaceViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				A27DD5BF2635DC9C00A083CF /* CollectionsView.swift in Sources */,
 				A27EDE1726362A280081104D /* LocationManager.swift in Sources */,
 				A27DD5D22635F69B00A083CF /* CollectionsViewModel.swift in Sources */,
+				A2DED261264B4F0700431545 /* PlaceViewModel.swift in Sources */,
 				A2641F692601786600A0F427 /* Models.swift in Sources */,
 				A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */,
 				A22ACC7926371CD000C04639 /* AddCollectionView.swift in Sources */,

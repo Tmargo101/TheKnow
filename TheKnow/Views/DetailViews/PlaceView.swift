@@ -6,29 +6,75 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct PlaceView: View {
     
-    var place: Place
+    @EnvironmentObject var user: UserViewModel
+    @ObservedObject var placeViewModel = PlaceViewModel()
+    
+    var comments: [PlaceComment]?
+    
+    init(_place: Place) {
+        placeViewModel.place = _place
+        
+        if let comments = placeViewModel.place.comments {
+            self.comments = comments
+        }
+    }
     
     var body: some View {
         VStack {
-            placeNameBarView(recommendedBy: place.recommendedBy?.name ?? "", name: place.name) // Title & Subtitle Row
-            quickActionsToolbarView(place: place) // Quick Actions Row
-            placeNotesView(note: place.note ?? "")
+            
+            // Title & Subtitle Row
+            placeNameBarView(
+                recommendedBy: placeViewModel.place.recommendedBy?.name ?? "",
+                name: placeViewModel.place.name
+            )
+            
+            // Quick Actions Row
+            quickActionsToolbarView(place: placeViewModel.place)
+                .padding(.bottom, 20)
+            //            if (placeViewModel.place.comments > 0) {
+            //                List(placeViewModel.place.comments) { comment in
+            //
+            //                }
+            //            }
+            if let _ = comments {
+                List {
+                    ForEach (comments!, id: \.self) { c in
+                        //MARK: Center Align These Fuckers
+                        VStack(alignment: .leading) {
+                            Text("\(c.name!.trimmingCharacters(in: .whitespacesAndNewlines))")
+                                .font(.title)
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            
+                            Text("\(c.text!.trimmingCharacters(in: .whitespacesAndNewlines))")
+                                .font(.body)
+                        }
+                        .padding(15)
+                    }
+                }
+            }
+            
+            // Comment View
+            //            placeNotesView(note: placeViewModel.place.note ?? "")
             Spacer()
         }
-//        .navigationTitle(placeName)
+        .onAppear() {
+            //            placeViewModel.getPlace(token: user.token, placeId: placeViewModel.place.id)
+        }
+        //        .navigationTitle(placeName)
         
     }
 }
 
 struct placeNameBarView: View {
     
-//    @Binding var reccomendedBy: String
+    //    @Binding var reccomendedBy: String
     @State var recommendedBy: String
     @State var name: String
-
+    
     var body: some View {
         HStack { // Title & Reccomended By
             VStack {
@@ -62,16 +108,38 @@ struct placeNameBarView: View {
 struct roundButtonView: View {
     
     @Environment(\.openURL) var openURL
+    @ObservedObject var locationManager = LocationManager()
+    
     
     var sfSymbol: String
     var buttonText: String
     var color: Color
     var size: CGFloat
     var link: String
+    var name: String
+    var phoneNumber: String
+    var website: String
     
     var body: some View {
         Button(action: {
-//            openURL(URL(string: link)!)
+            //            openURL(URL(string: link)!)
+            if link != "" {
+                locationManager.locationString = link
+                locationManager.locationName = name
+                locationManager.openMapWithAddress()
+            }
+            if phoneNumber != "" {
+                let tel = "tel://"
+                let formattedString = tel + phoneNumber
+                print(formattedString)
+                guard let url = URL(string: formattedString) else { return }
+                UIApplication.shared.open(url)
+            }
+            if website != "" {
+                guard let site = URL(string: website) else { return }
+                UIApplication.shared.open(site)
+            }
+            
         }, label: {
             VStack {
                 Image(systemName: sfSymbol)
@@ -81,8 +149,10 @@ struct roundButtonView: View {
                     .foregroundColor(color)
             }
         })
-
+        
     }
+    
+    
 }
 
 
@@ -93,15 +163,15 @@ struct quickActionsToolbarView: View {
     var body: some View {
         HStack { // Quick Actions
             if (place.placeData?.phoneNumber != nil) {
-                roundButtonView(sfSymbol: "phone.circle.fill", buttonText: "Call", color: .green, size: 32.0, link: "")
+                roundButtonView(sfSymbol: "phone.circle.fill", buttonText: "Call", color: .green, size: 32.0, link: "", name: "", phoneNumber: place.placeData!.phoneNumber!, website: "")
                     .padding(.horizontal, 24.0)
             }
             if (place.placeData?.address != nil) {
-                roundButtonView(sfSymbol: "arrow.triangle.turn.up.right.circle.fill", buttonText: "Directions", color: .blue, size: 32.0, link: (place.placeData?.address)!)
+                roundButtonView(sfSymbol: "arrow.triangle.turn.up.right.circle.fill", buttonText: "Directions", color: .blue, size: 32.0, link: (place.placeData?.address)!, name: place.name, phoneNumber: "", website: "")
                     .padding(.horizontal, 24.0)
             }
             if (place.placeData?.link != nil) {
-                roundButtonView(sfSymbol: "link.circle.fill", buttonText: "Website", color: .blue, size: 32.0, link: "")
+                roundButtonView(sfSymbol: "link.circle.fill", buttonText: "Website", color: .blue, size: 32.0, link: "", name: "", phoneNumber: "", website: place.placeData!.link!)
                     .padding(.horizontal, 20.0)
             }
         }
@@ -111,7 +181,7 @@ struct quickActionsToolbarView: View {
 
 struct placeNotesView: View {
     
-//    @Binding var note: String
+    //    @Binding var note: String
     @State var note: String
     
     var body: some View {

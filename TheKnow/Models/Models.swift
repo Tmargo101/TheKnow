@@ -32,6 +32,7 @@ struct Contents: Decodable {
     let collections: [Collection]?
     let collection: Collection?
     let places: [Place]?
+//    let place: Place?
     let members: [Member]?
 }
 
@@ -163,12 +164,21 @@ struct PlaceRecommendedBy: Decodable {
     }
 }
 
-struct PlaceComment: Decodable {
+struct PlaceComment: Decodable, Hashable {
+    let id: String?
     let name: String?
     let text: String?
     let userId: String?
     
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case name = "name"
+        case text = "text"
+        case userId = "userId"
+    }
+    
     init() {
+        self.id = ""
         self.name = ""
         self.text = ""
         self.userId = ""
