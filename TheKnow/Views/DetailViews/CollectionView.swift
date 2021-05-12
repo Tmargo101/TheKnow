@@ -47,6 +47,15 @@ struct CollectionView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
+                    collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
+                }) {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.largeTitle)
+                        .foregroundColor(.purple)
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
                     showAddNewPlace.toggle()
                 }, label: {
                     Image(systemName: "plus.circle")
