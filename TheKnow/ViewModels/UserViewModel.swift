@@ -11,14 +11,16 @@ import Alamofire
 class UserViewModel: ObservableObject {
     
     let defaults = UserDefaults.standard
+    
+    @Published var dev = true
 
-    @Published var loggedIn: Bool = false
+    @Published var loggedIn: Bool = true
     
     @Published var showAccountSheet: Bool = false
     
-    @Published var email: String? = ""
-    @Published var id: String? = ""
-    @Published var token: String? = ""
+    @Published var email: String? = "tmargo101@gmail.com"
+    @Published var id: String? = "6090677510b4180015de0fc5"
+    @Published var token: String? = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTA2Nzc1MTBiNDE4MDAxNWRlMGZjNSIsImlhdCI6MTYyMDc4MTQ5NCwiZXhwIjoxNjI4NTU3NDk0fQ.1EPXnJgVJ6k0eoJU7ayb4eYCmhcQAUTSJlTw6Wxophs"
     
     @Published var responseMessage: String = ""
     

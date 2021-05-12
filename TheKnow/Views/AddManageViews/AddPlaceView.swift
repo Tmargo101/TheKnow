@@ -9,12 +9,18 @@ import SwiftUI
 
 
 struct AddPlaceView: View {
-    @State var location: String
+    var token: String = ""
+    var userId: String = ""
+    var collectionId: String = ""
+    
+//    @State var location: String
     @Binding var isShow: Bool
     @State var isEditing = false
     @ObservedObject var searchMe = SearchMe()
     @State var reccomendedBy: String = ""
     @State var note: String = ""
+    
+    @ObservedObject var addPlaceViewModel = AddPlaceViewModel()
 
     //@State var searchResults: [PlaceSearchResultModel] = []
     
@@ -43,7 +49,7 @@ struct AddPlaceView: View {
                     .padding(.top, 20)
                     .padding(.bottom, 10)
                     
-                    SearchBar(text: $location, isEditing: $isEditing, searchMe: searchMe)
+                    SearchBar(text: $addPlaceViewModel.newPlaceName, isEditing: $isEditing, searchMe: searchMe)
                         .padding()
                         .background(Color(.systemGray5))
                         .cornerRadius(8)
@@ -63,7 +69,7 @@ struct AddPlaceView: View {
                             }
                         }
                     }
-                    TextField("Reccomended By", text: $reccomendedBy)
+                    TextField("Reccomended By", text: $addPlaceViewModel.newPlaceRecommendedBy)
                         .padding()
                         .background(Color(.systemGray5))
                         .cornerRadius(8)
@@ -78,10 +84,21 @@ struct AddPlaceView: View {
                     Spacer()
                     // Save button for adding the  item
                     Button(action: {
-                        if self.location.trimmingCharacters(in: .whitespaces) == "" {
-                            return
+//                        if self.addPlaceViewModel.newPlaceName.trimmingCharacters(in: .whitespaces) == "" {
+//                            return
+//                        }
+                        addPlaceViewModel.addPlace(
+                            token: token,
+                            _name: addPlaceViewModel.newPlaceName,
+                            addedBy: userId,
+                            collectionId: collectionId,
+                            been: addPlaceViewModel.been,
+                            recommendedBy: addPlaceViewModel.newPlaceRecommendedBy
+                        ) { success in
+                            if (success) {
+//                                self.isShow = false
+                            }
                         }
-                        self.isShow = false
                         
                         //add code to add collection here
                         
@@ -108,14 +125,6 @@ struct AddPlaceView: View {
                 .font(.system(.largeTitle))
                 .padding(.top, 15)
         }
-    }
-}
-
-
-
-struct AddPlaceView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddPlaceView(location: "", isShow: .constant(true))
     }
 }
 
@@ -176,3 +185,9 @@ struct SearchBar: View {
         }
     } // Body
 }
+    //
+    //struct AddPlaceView_Previews: PreviewProvider {
+    //    static var previews: some View {
+    //        AddPlaceView(location: "", isShow: .constant(true))
+    //    }
+    //}
