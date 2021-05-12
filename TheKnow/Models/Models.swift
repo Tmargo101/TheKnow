@@ -161,7 +161,7 @@ struct PlaceRecommendedBy: Decodable {
     }
 }
 
-struct PlaceComment: Decodable {
+struct PlaceComment: Decodable, Hashable {
     let id: String?
     let name: String?
     let text: String?
