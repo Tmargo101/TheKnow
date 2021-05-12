@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Alamofire
 
 struct CollectionsView: View {
         
@@ -20,9 +19,7 @@ struct CollectionsView: View {
     @State var presentNewCollectionSheet: Bool = false
     
     @State var showAccountSheet: Bool = false
-    
-//    @State var collections = [Collection]()
-    
+        
     var body: some View {
         
         ZStack {
@@ -35,14 +32,6 @@ struct CollectionsView: View {
                                     destination: CollectionView(collectionId: collection.id, collectionName: "\(collection.name)"),
                                     label: {
                                         CollectionRowView(collection: collection)
-//                                        HStack {
-//                                            Text("\(collection.name)")
-//                                                .font(.title2)
-//                                                .padding(.bottom, 1)
-//                                            Spacer()
-//                                            Text("\(collection.places!.count) Places")
-//                                                .font(.headline)
-//                                        }
                                     })
                                     .padding()
                             }
@@ -83,12 +72,6 @@ struct CollectionsView: View {
                     })
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                        .onTapGesture {
-                            editMode.toggle()
-                        }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         collectionsViewModel.getAllCollections(token: user.token, id: user.id)
                     }) {
@@ -110,7 +93,8 @@ struct CollectionsView: View {
                     
                 } // ToolbarItem
             } //Toolbar
-            .navigationTitle(Text(Strings.MY_COLLECTIONS))
+            .navigationTitle(Text("\((user.firstname != "") ? "\(user.firstname ?? "")'s" :  "My") Collections"))
+//            .navigationTitle(Text("\(Strings.MY_COLLECTIONS)"))
 
 
 //            .rotation3DEffect(Angle(degrees: showAddNewCollection ? 5 : 0), axis: (x: 1, y: 0, z: 0))

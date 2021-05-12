@@ -20,6 +20,8 @@ class UserViewModel: ObservableObject {
     @Published var id: String? = ""
     @Published var token: String? = ""
     @Published var name: String? = ""
+    @Published var firstname: String? = ""
+    @Published var lastname: String? = ""
     
     @Published var responseMessage: String = ""
     
@@ -51,13 +53,17 @@ class UserViewModel: ObservableObject {
             self.token = response.contents?.user?.token
             self.id = response.contents?.user?._id
             self.email = _email
-            self.name = "\(response.contents?.user?.name.first ?? "") \(response.contents?.user?.name.last ?? "")"
+//            self.name = "\(response.contents?.user?.name.first ?? "") \(response.contents?.user?.name.last ?? "")"
+            self.firstname = "\(response.contents?.user?.name.first ?? "")"
+            self.lastname = "\(response.contents?.user?.name.first ?? "")"
             
             /// Add userData to UserDefaults
             self.defaults.set(self.token, forKey: "token")
             self.defaults.set(self.loggedIn, forKey: "loggedIn")
             self.defaults.set(self.email, forKey: "email")
             self.defaults.set(self.id, forKey: "id")
+            self.defaults.set(self.firstname, forKey: "firstName")
+            self.defaults.set(self.lastname, forKey: "lastName")
             
             completion(true)
         }
@@ -108,7 +114,9 @@ class UserViewModel: ObservableObject {
                 self.email = ""
                 self.id = ""
                 self.token = ""
-                self.name = ""
+//                self.name = ""
+                self.firstname = ""
+                self.lastname = ""
                 
                 /// Remove from UserDefaults
                 self.defaults.set(self.token, forKey: "token")
@@ -116,6 +124,9 @@ class UserViewModel: ObservableObject {
                 self.defaults.set(self.email, forKey: "email")
                 self.defaults.set(self.id, forKey: "id")
                 self.defaults.set(self.name, forKey: "name")
+                self.defaults.set(self.firstname, forKey: "firstName")
+                self.defaults.set(self.lastname, forKey: "lastName")
+
                 
                 completion(true)
             }

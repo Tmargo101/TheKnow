@@ -18,22 +18,21 @@ struct AccountView: View {
         ZStack (alignment: .top) {
             NavigationView {
                 Form {
-                    Section (header: Text(Strings.ACCOUNT_NAME)) {
+                    Section (header: Text("Name")) {
+                        Text("\(accountViewModel.Account.name.first) \(accountViewModel.Account.name.last)")
+                    }
+                    Section (header: Text("Email")) {
                         Text("\(user.email ?? Strings.USERNAME_NOT_FOUND)")
                     }
                     Section (header: Text("Devices signed in")) {
                         Text("\(accountViewModel.Account.tokenCount )")
                     }
-                    Section (header: Text("Name")) {
-                        Text("\(accountViewModel.Account.name.first) \(accountViewModel.Account.name.last)")
-                    }
-                    Section (header: Text("User ID (DEV)")) {
-                        Text("\(user.id ?? Strings.USERNAME_NOT_FOUND)")
-                    }
-                    Section (header: Text("Current Token (DEV)")) {
-                        Text("\(user.token ?? Strings.USERNAME_NOT_FOUND)")
-                    }
-
+//                    Section (header: Text("User ID (DEV)")) {
+//                        Text("\(user.id ?? Strings.USERNAME_NOT_FOUND)")
+//                    }
+//                    Section (header: Text("Current Token (DEV)")) {
+//                        Text("\(user.token ?? Strings.USERNAME_NOT_FOUND)")
+//                    }
                     Section (header: Text(Strings.ACCOUNT_ACTIONS)) {
                         Button(action: {
                             

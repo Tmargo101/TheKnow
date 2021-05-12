@@ -15,6 +15,8 @@ struct ContentView: View {
     @AppStorage("loggedIn") var UserDefaultsLoggedIn = false
     @AppStorage("email") var UserDefaultsEmail = ""
     @AppStorage("id") var UserDefaultsId = ""
+    @AppStorage("firstName") var UserDefaultsFirstName = ""
+    @AppStorage("lastName") var UserDefaultsLastName = ""
         
     var body: some View {
         ZStack {
@@ -30,6 +32,8 @@ struct ContentView: View {
             user.token = UserDefaultsToken
             user.id = UserDefaultsId
             user.email = UserDefaultsEmail
+            user.firstname = UserDefaultsFirstName
+            user.lastname = UserDefaultsLastName
         }
     }
     

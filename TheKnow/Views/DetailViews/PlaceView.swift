@@ -25,6 +25,8 @@ struct PlaceView: View {
     }
     
     var body: some View {
+        ZStack {
+        }
         VStack {
             
             // Title & Subtitle Row
@@ -36,19 +38,15 @@ struct PlaceView: View {
             // Quick Actions Row
             quickActionsToolbarView(place: placeViewModel.place)
                 .padding(.bottom, 20)
-            //            if (placeViewModel.place.comments > 0) {
-            //                List(placeViewModel.place.comments) { comment in
-            //
-            //                }
-            //            }
             if let _ = comments {
                 List {
                     ForEach (comments!, id: \.self) { c in
-                        //MARK: Center Align These Fuckers
+                        //MARK: Center Align
                         VStack(alignment: .leading) {
                             Text("\(c.name!.trimmingCharacters(in: .whitespacesAndNewlines))")
-                                .font(.title)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(.system(size: 24, design: .rounded))
+                                .bold()
+                                .padding(.bottom, 5)
                             
                             Text("\(c.text!.trimmingCharacters(in: .whitespacesAndNewlines))")
                                 .font(.body)
@@ -57,22 +55,28 @@ struct PlaceView: View {
                     }
                 }
             }
-            Text("Add A Comment")
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-            TextEditor(text: $addCommentText)
-                .foregroundColor(.black)
-                .opacity(0.5)
-                .padding()
-                .keyboardType(.webSearch)
             
-            
-            Spacer()
         }
         .onAppear() {
             //            placeViewModel.getPlace(token: user.token, placeId: placeViewModel.place.id)
         }
-        //        .navigationTitle(placeName)
+        
+        GroupBox {
+            Text("Add A Comment")
+                .font(.title2)
+                .fontWeight(.semibold)
+            TextEditor(text: $addCommentText)
+                .frame(minHeight: 50, idealHeight: 100)
+                .foregroundColor(.black)
+                .opacity(0.5)
+                .keyboardType(.webSearch)
+                .edgesIgnoringSafeArea(.bottom)
+
+        }
+        .frame(minHeight: 150, maxHeight: 200)
+        .background(Color(.systemGray5))
+        .cornerRadius(10.0)
+        .navigationTitle(placeViewModel.place.name)
         
     }
 }
@@ -81,27 +85,26 @@ struct PlaceView: View {
 
 struct placeNameBarView: View {
     
-    //    @Binding var reccomendedBy: String
-    @State var recommendedBy: String
-    @State var name: String
+    var recommendedBy: String
+    var name: String
     
     var body: some View {
         HStack { // Title & Reccomended By
             VStack {
-                HStack {
-                    Text(name)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .padding(.leading)
-                        .lineLimit(1)
-                    Spacer()
-                }
+//                HStack {
+//                    Text(name)
+//                        .font(.largeTitle)
+//                        .fontWeight(.bold)
+//                        .padding(.leading)
+//                        .lineLimit(1)
+//                    Spacer()
+//                }
                 if (recommendedBy != "") {
                     HStack {
                         Text("Recommended by \(recommendedBy)")
                             .font(.subheadline)
                             .fontWeight(.regular)
-                            .padding(.leading)
+                            .padding(.leading, 25)
                             .lineLimit(1)
                         Spacer()
                     }
@@ -120,7 +123,6 @@ struct roundButtonView: View {
     @Environment(\.openURL) var openURL
     @ObservedObject var locationManager = LocationManager()
     
-    
     var sfSymbol: String
     var buttonText: String
     var color: Color
@@ -132,7 +134,6 @@ struct roundButtonView: View {
     
     var body: some View {
         Button(action: {
-            //            openURL(URL(string: link)!)
             if link != "" {
                 locationManager.locationString = link
                 locationManager.locationName = name
@@ -140,7 +141,6 @@ struct roundButtonView: View {
             }
             if phoneNumber != "" {
                 let tel = "tel://"
-                //MARK:-Convert Phone numbers to a good link
                 let formattedPhoneNumber = phoneNumber.filter("0123456789.".contains)
                 let formattedString = tel + formattedPhoneNumber
                 print(formattedString)
@@ -189,31 +189,6 @@ struct quickActionsToolbarView: View {
         }
     }
 }
-
-
-struct placeNotesView: View {
-    
-    //    @Binding var note: String
-    @State var note: String
-    
-    var body: some View {
-        GroupBox(label:
-                    Text("Notes")
-                    .font(.title3)
-                    .fontWeight(.semibold)) {
-            TextEditor(text: $note)
-                .foregroundColor(.primary)
-                .lineSpacing(10.0)
-                .padding(7.5)
-                .font(.system(size: 18))
-                .background(Color(UIColor.systemBackground))
-                .frame(minWidth: 0, idealWidth: 100, maxWidth: .infinity, minHeight: 100, idealHeight: 200, maxHeight: 300, alignment: .center)
-            
-        }
-        .padding()
-    }
-}
-
 
 //struct PlaceView_Previews: PreviewProvider {
 //    static var previews: some View {
