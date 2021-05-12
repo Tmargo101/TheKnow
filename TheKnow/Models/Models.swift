@@ -162,11 +162,20 @@ struct PlaceRecommendedBy: Decodable {
 }
 
 struct PlaceComment: Decodable {
+    let id: String?
     let name: String?
     let text: String?
     let userId: String?
     
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case name = "name"
+        case text = "text"
+        case userId = "userId"
+    }
+    
     init() {
+        self.id = ""
         self.name = ""
         self.text = ""
         self.userId = ""

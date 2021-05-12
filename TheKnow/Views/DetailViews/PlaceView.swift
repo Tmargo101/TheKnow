@@ -27,9 +27,15 @@ struct PlaceView: View {
             
             // Quick Actions Row
             quickActionsToolbarView(place: placeViewModel.place)
+//            if (placeViewModel.place.comments > 0) {
+//                List(placeViewModel.place.comments) { comment in
+//                    
+//                }
+//            }
+            
             
             // Comment View
-            placeNotesView(note: placeViewModel.place.note ?? "")
+//            placeNotesView(note: placeViewModel.place.note ?? "")
             Spacer()
         }
         .onAppear() {
