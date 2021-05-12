@@ -19,22 +19,29 @@ class AddPlaceViewModel: ObservableObject {
     @Published var newPlaceBeen = false
     @Published var newPlaceCollectionId = ""
     @Published var newPlaceNote = ""
+    @Published var newPlaceAddress = ""
+    @Published var newPlacePhoneNumber = ""
+    @Published var newPlaceLink = ""
     
-    func addPlace(token: String, _name: String, addedBy: String, collectionId: String, been: Bool, recommendedBy: String, note: String?, name: String?, completion: @escaping (Bool) -> Void) {
+    
+    func addPlace(token: String, addedBy: String, collectionId: String, fullName: String?, completion: @escaping (Bool) -> Void) {
         
         // Convert "been" to string (necessary?)
         var beenString = "false"
-        if (been) { beenString = "true" }
+        if (newPlaceBeen) { beenString = "true" }
         
         let headers: HTTPHeaders = [Headers.AUTH: token]
         let parameters = [
-            "name": _name,
+            "name": newPlaceName,
             "addedBy": addedBy,
             "collectionId": collectionId,
             "been": beenString,
-            "recommendedBy": recommendedBy,
-            "commentText": note,
-            "commentName": name
+            "recommendedBy": newPlaceRecommendedBy,
+            "commentText": newPlaceNote,
+            "commentName": fullName,
+            "address": newPlaceAddress,
+            "link": newPlaceLink,
+            "phoneNumber": newPlacePhoneNumber
         ]
         AF.request(Routes.GET_PLACES,
                    method: .post,

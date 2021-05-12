@@ -29,6 +29,7 @@ struct CollectionView: View {
                             })
                             .padding()
                     }
+                    .transition(.opacity)
                 } else {
                     Text("No Places")
                         .font(.system(.title, design: .rounded))
