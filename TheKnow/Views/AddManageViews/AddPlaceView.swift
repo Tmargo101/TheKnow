@@ -13,8 +13,11 @@ struct AddPlaceView: View {
     var userId: String = ""
     var collectionId: String = ""
     
+    @State var showError: Bool = false
+    
 //    @State var location: String
     @Binding var isShow: Bool
+    
     @State var isEditing = false
     @ObservedObject var searchMe = SearchMe()
     @State var reccomendedBy: String = ""
@@ -95,13 +98,13 @@ struct AddPlaceView: View {
                             been: addPlaceViewModel.been,
                             recommendedBy: addPlaceViewModel.newPlaceRecommendedBy
                         ) { success in
+                            print(success)
                             if (success) {
-//                                self.isShow = false
+                                self.isShow = false
+                            } else {
+                                self.showError = true
                             }
                         }
-                        
-                        //add code to add collection here
-                        
                     }) {
                         Text("Save")
                             .font(.system(.headline, design: .rounded))
@@ -113,6 +116,9 @@ struct AddPlaceView: View {
                     }
                     .padding(.bottom)
                     
+                }
+                .alert(isPresented: $showError) {
+                    Alert(title: Text("Error adding place"), message: Text("\(addPlaceViewModel.responseMessage)"), dismissButton: .default(Text("Close")))
                 }
                 .padding()
                 .background(Color(UIColor.systemBackground))

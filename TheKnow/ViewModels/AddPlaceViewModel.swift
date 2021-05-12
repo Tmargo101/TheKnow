@@ -46,12 +46,12 @@ class AddPlaceViewModel: ObservableObject {
                 completion(false)
                 return
             }
-            completion(true)
             if (response.status == "error") {
                 self.responseMessage = response.message
                 completion(false)
                 return
             }
+            completion(true)
         }
 
     }
