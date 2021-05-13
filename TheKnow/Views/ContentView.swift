@@ -28,12 +28,19 @@ struct ContentView: View {
                     .transition(.move(edge: .leading))
             }
         }.onAppear {
-            user.loggedIn = UserDefaultsLoggedIn
+            
+            if (UserDefaultsToken == "" || UserDefaultsToken.count == 0) {
+                user.setLoggedIn(status: false)
+            } else {
+                user.loggedIn = UserDefaultsLoggedIn
+            }
+
             user.token = UserDefaultsToken
             user.id = UserDefaultsId
             user.email = UserDefaultsEmail
             user.firstname = UserDefaultsFirstName
             user.lastname = UserDefaultsLastName
+           
         }
     }
     

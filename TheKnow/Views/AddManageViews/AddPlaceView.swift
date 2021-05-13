@@ -106,14 +106,6 @@ struct AddPlaceView: View {
                         .cornerRadius(8)
                         .padding(.bottom)
 
-//                    TextEditor(text: $addPlaceViewModel.newPlaceNote)
-//                        .frame(minHeight: 50, maxHeight: 200)
-//                        .padding()
-//                        .padding(.top, 20)
-//                        .background(Color(.systemGray5))
-//                        .cornerRadius(8)
-//                        .padding(.bottom)
-//                        .font(.system(size: 20, design: .rounded))
 
                     HStack {
                         Toggle(isOn: $addPlaceViewModel.newPlaceBeen) {
@@ -127,37 +119,37 @@ struct AddPlaceView: View {
                         Spacer()
                     }
                     Spacer()
-                    VStack (alignment: .leading) {
-                        HStack {
-                            Spacer()
-                            Text("Place Data:")
-                                .padding()
-                            Spacer()
-                        }
-                        HStack {
-                            Text("Address: \(addPlaceViewModel.newPlaceAddress)")
-                                .padding(.bottom, 4)
-                                .font(.system(size: 16, design: .rounded))
-                                .foregroundColor(Color(.systemGray2))
-                            Spacer()
-                        }
-                        HStack {
-                            Text("Phone Number: \(addPlaceViewModel.newPlacePhoneNumber)")
-                                .padding(.bottom, 4)
-                                .font(.system(size: 16, design: .rounded))
-                                .foregroundColor(Color(.systemGray2))
-                            Spacer()
-                        }
-                        HStack {
-                            Text("Link: \(addPlaceViewModel.newPlaceLink)")
-                                .padding(.bottom, 4)
-                                .font(.system(size: 16, design: .rounded))
-                                .foregroundColor(Color(.systemGray2))
-                            Spacer()
-                        }
-                    }
-                    .background(Color(.systemGray5))
-                    .cornerRadius(10.0)
+//                    VStack (alignment: .leading) {
+//                        HStack {
+//                            Spacer()
+//                            Text("Place Data:")
+//                                .padding()
+//                            Spacer()
+//                        }
+//                        HStack {
+//                            Text("Address: \(addPlaceViewModel.newPlaceAddress)")
+//                                .padding(.bottom, 4)
+//                                .font(.system(size: 16, design: .rounded))
+//                                .foregroundColor(Color(.systemGray2))
+//                            Spacer()
+//                        }
+//                        HStack {
+//                            Text("Phone Number: \(addPlaceViewModel.newPlacePhoneNumber)")
+//                                .padding(.bottom, 4)
+//                                .font(.system(size: 16, design: .rounded))
+//                                .foregroundColor(Color(.systemGray2))
+//                            Spacer()
+//                        }
+//                        HStack {
+//                            Text("Link: \(addPlaceViewModel.newPlaceLink)")
+//                                .padding(.bottom, 4)
+//                                .font(.system(size: 16, design: .rounded))
+//                                .foregroundColor(Color(.systemGray2))
+//                            Spacer()
+//                        }
+//                    }
+//                    .background(Color(.systemGray5))
+//                    .cornerRadius(10.0)
                     
                     // Save button for adding the  item
                     Button(action: {
