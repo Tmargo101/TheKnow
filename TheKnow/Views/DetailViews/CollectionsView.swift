@@ -26,32 +26,32 @@ struct CollectionsView: View {
         ZStack {
             VStack {
                 if (collectionsViewModel.collections.count == 0) {
-                    VStack {
-                        ProgressView()
-                        Text("Loading Collections...")
-                    }
-                } else {
-                    if (collectionsViewModel.collections.count > 0) {
-                        List {
-                            ForEach(collectionsViewModel.collections) { collection in
-                                NavigationLink(
-                                    destination: CollectionView(collectionId: collection.id, collectionName: "\(collection.name)"),
-                                    label: {
-                                        CollectionRowView(collection: collection)
-                                    })
-                                    .padding()
-                            }
-                            .onDelete(perform: deleteCollection)
-                            .pullToRefresh(isShowing: $collectionsViewModel.loadingCollections) {
-                                collectionsViewModel.loadingCollections = true
-                                collectionsViewModel.getAllCollections(token: user.token, id: user.id) { _ in
-                                    collectionsViewModel.loadingCollections = false
-                                }
-                            }
+                    if (collectionsViewModel.loadingCollections) {
+                        VStack {
+                            ProgressView()
+                            Text("Loading Collections...")
                         }
                         .transition(.opacity)
                     } else {
                         Text("No Collections")
+                    }
+                } else {
+                    List {
+                        ForEach(collectionsViewModel.collections) { collection in
+                            NavigationLink(
+                                destination: CollectionView(collectionId: collection.id, collectionName: "\(collection.name)"),
+                                label: {
+                                    CollectionRowView(collection: collection)
+                                })
+                                .padding()
+                        }
+                        .onDelete(perform: deleteCollection)
+                        .pullToRefresh(isShowing: $collectionsViewModel.loadingCollections) {
+                            collectionsViewModel.loadingCollections = true
+                            collectionsViewModel.getAllCollections(token: user.token, id: user.id) { _ in
+                                collectionsViewModel.loadingCollections = false
+                            }
+                        }
                     }
                 }
             }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIRefresh
 
 struct CollectionView: View {
     @EnvironmentObject var user: UserViewModel
@@ -18,23 +19,32 @@ struct CollectionView: View {
     
     var body: some View {
         VStack {
-            if (collectionViewModel.loadingPlaces && collectionViewModel.places.count == 0) {
-                VStack {
-                    ProgressView()
-                    Text("Loading Places...")
+            if (collectionViewModel.places.count > 0) {
+                List {
+                    ForEach(collectionViewModel.places) { place in
+                        NavigationLink(
+                            destination: PlaceView(_place: place),
+                            label: {
+                                PlaceRowView(place: place)
+                            })
+                            .padding()
+                    }
+                    .onDelete(perform: deletePlace)
                 }
-            } else {
-                if (collectionViewModel.places.count > 0) {
-                    List {
-                        ForEach(collectionViewModel.places) { place in
-                            NavigationLink(
-                                destination: PlaceView(_place: place),
-                                label: {
-                                    PlaceRowView(place: place)
-                                })
-                                .padding()
+                .pullToRefresh(isShowing: $collectionViewModel.loadingCollection) {
+                    collectionViewModel.getCollection(token: user.token, collectionId: collectionId) { success in
+                        collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId) { success in
+                            withAnimation { collectionViewModel.loadingCollection = false }
                         }
-                        .onDelete(perform: deletePlace)
+                    }
+                }
+                .transition(.opacity)
+
+            } else {
+                if (collectionViewModel.loadingCollection) {
+                    VStack {
+                        ProgressView()
+                        Text("Loading Places...")
                     }
                     .transition(.opacity)
                 } else {
@@ -42,6 +52,7 @@ struct CollectionView: View {
                         .font(.system(.title, design: .rounded))
                         .transition(.opacity)
                 }
+
             }
         }
         .sheet(isPresented: $showAddNewPlace, content: {
@@ -56,13 +67,6 @@ struct CollectionView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
-                }) {
-                    RefreshButtonView(loading: $collectionViewModel.loadingPlaces, image: "arrow.clockwise")
-                }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
                     showAddNewPlace.toggle()
                 }, label: {
                     Image(systemName: "plus.circle.fill")
@@ -74,16 +78,29 @@ struct CollectionView: View {
         .navigationTitle(collectionName)
         .onAppear() {
             print(collectionId)
-            collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
+            withAnimation { collectionViewModel.loadingCollection = true }
+
+            collectionViewModel.getCollection(token: user.token, collectionId: collectionId) { success in
+                collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId) { success in
+                    withAnimation { collectionViewModel.loadingCollection = false }
+                }
+            }
+            
         }
-        .onChange(of: showAddNewPlace, perform: { value in
-            collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
+        .onChange(of: showAddNewPlace, perform: { _ in
+            withAnimation { collectionViewModel.loadingCollection = true }
+            collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId) { success in
+                withAnimation { collectionViewModel.loadingCollection = false }
+            }
         })
     }
     
     func deletePlace(at offsets: IndexSet) {
-        collectionViewModel.deletePlace(token: user.token, index: offsets.first!) { _ in 
-            collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
+        collectionViewModel.deletePlace(token: user.token, index: offsets.first!) { _ in
+            // Reload places in the collection
+            collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId) { success in
+                
+            }
         }
     }
 }

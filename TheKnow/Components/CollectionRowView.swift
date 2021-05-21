@@ -17,7 +17,7 @@ struct CollectionRowView: View {
                 .font(.system(size: 28, design: .rounded))
                 .bold()
                 .padding(.bottom, 3)
-            Text("\(collection.places!.count) \(collection.places!.count == 1 ? "Place" : "Places")")
+            Text("\(collection.places.count) \(collection.places.count == 1 ? "Place" : "Places")")
                 .font(.headline)
         }
 

@@ -15,9 +15,7 @@ class CollectionsViewModel: ObservableObject {
     @Published var collections = [Collection]()
     @Published var collection = Collection()
     
-    @Published var loadingCollections: Bool = false
-    @Published var loadingCollection: Bool = false
-    @Published var reloadingCollections: Bool = false
+    @Published var loadingCollections: Bool = true
     
     func getAllCollections(token: String?, id: String?, completion: @escaping (Bool) -> Void) {
     
@@ -39,25 +37,6 @@ class CollectionsViewModel: ObservableObject {
             }
             self.collections = response.contents?.collections ?? []
             completion(true)
-        }
-    }
-    
-    func getCollection(token: String?, collectionId: String?) {
-        loadingCollection = true
-        let headers: HTTPHeaders = [Headers.AUTH: token ?? ""]
-        AF.request(
-            "\(Routes.GET_COLLECTIONS)/\(collectionId ?? "")",
-            headers: headers
-        )
-        .validate()
-//        .responseJSON { response in
-//            print(response)
-//        }
-        .responseDecodable(of: APIResponse.self) { response in
-            guard let response = response.value else { print("Cannot parse to Decodables"); return }
-            self.collection = response.contents?.collection ?? Collection()
-//            print(self.collection)
-            self.loadingCollection = false
         }
     }
 }
