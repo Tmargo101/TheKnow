@@ -29,9 +29,9 @@ class CollectionsViewModel: ObservableObject {
             headers: headers
         )
         .validate()
-        .responseJSON { response in
-            print(response)
-        }
+//        .responseJSON { response in
+//            print(response)
+//        }
         .responseDecodable(of: APIResponse.self) { (response) in
             guard let response = response.value else { return }
             self.collections = response.contents?.collections ?? []
@@ -49,13 +49,13 @@ class CollectionsViewModel: ObservableObject {
             headers: headers
         )
         .validate()
-        .responseJSON { response in
-            print(response)
-        }
+//        .responseJSON { response in
+//            print(response)
+//        }
         .responseDecodable(of: APIResponse.self) { response in
             guard let response = response.value else { print("Cannot parse to Decodables"); return }
             self.collection = response.contents?.collection ?? Collection()
-            print(self.collection)
+//            print(self.collection)
             self.loadingCollection = false
         }
     }

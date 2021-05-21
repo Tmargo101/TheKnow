@@ -12,14 +12,33 @@ struct LoggedOutView: View {
     @EnvironmentObject var user: UserViewModel
         
     var body: some View {
+        ZStack {
+            Image("Background")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
             VStack {
-                Text(Strings.LOGGED_OUT_WELCOME)
-                    .font(.system(.largeTitle, design: .rounded))
+                Text("Welcome to")
+                    .font(.system(size: 32, design: .rounded))
                     .fontWeight(.bold)
-                    .padding(.top, 50)
+                    .padding(.top, 10)
+                    .foregroundColor(.white)
+                Text("TheKnow")
+                    .font(.system(size: 52, design: .rounded))
+                    .fontWeight(.bold)
+                    .padding(.top, 2)
+                    .padding(.bottom, 20)
+                    .foregroundColor(.white)
+                Text("Keep track of your favorite places to eat, and share them with your friends!")
+                    .font(.system(.headline, design: .rounded))
+                    .padding()
+                    .padding(.horizontal, 30)
+                    .foregroundColor(.white)
+
                 Spacer()
                 LoggedOutViewButtons()
             }
+
+        }
 
         
     }
@@ -70,35 +89,6 @@ struct LoggedOutViewButtons: View {
         .sheet(isPresented: $showSignupSheet, content: {
             SignupView(showing: $showLoginSheet).environmentObject(user)
         })
-//            NavigationLink(
-//                destination: LoginView(),
-//                label: {
-//                    RoundedRectangle(cornerRadius: 10)
-//                        .frame(minWidth: 200, maxWidth: 400, minHeight: 60, maxHeight: 60)
-//                        .padding(.horizontal)
-//                        .overlay(
-//                            Text(Strings.LOG_IN)
-//                                .foregroundColor(.white)
-//                                .font(.system(.title3, design: .rounded))
-//                                .bold()
-//                        ) // Overlay
-//            }) // NavigationLink
-//                .padding(.bottom)
-//            NavigationLink(
-//                destination: SignupView(),
-//                label: {
-//                    RoundedRectangle(cornerRadius: 10)
-//                        .frame(minWidth: 200, maxWidth: 400, minHeight: 60, maxHeight: 60)
-//                        .padding(.horizontal)
-//                        .overlay(
-//                            Text(Strings.SIGN_UP)
-//                                .foregroundColor(.white)
-//                                .font(.system(.title3, design: .rounded))
-//                                .bold()
-//                        ) // Overlay
-//            }) // NavigationLink
-//                .padding(.bottom)
-//        }
     } // Body
 }
 

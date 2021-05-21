@@ -15,7 +15,6 @@ struct TheKnowApp: App {
         WindowGroup {
             ContentView().environmentObject(user)
                 .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-
         }
     }
 }

@@ -38,8 +38,15 @@
 		A27EDE2D26362B1D0081104D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27EDE2C26362B1D0081104D /* MapKit.framework */; };
 		A2C1D9072645096900343F6F /* AddCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C1D9062645096900343F6F /* AddCollectionViewModel.swift */; };
 		A2D050192638DB4F00E031F7 /* LoggedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D050182638DB4F00E031F7 /* LoggedInView.swift */; };
-		A2DED264264B631C00431545 /* AddPlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED263264B631C00431545 /* AddPlaceViewModel.swift */; };
 		A2DED261264B4F0700431545 /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED260264B4F0700431545 /* PlaceViewModel.swift */; };
+		A2DED264264B631C00431545 /* AddPlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED263264B631C00431545 /* AddPlaceViewModel.swift */; };
+		A2DED269264C326200431545 /* PlaceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED268264C326200431545 /* PlaceRowView.swift */; };
+		A2DED26B264C351A00431545 /* CollectionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED26A264C351A00431545 /* CollectionRowView.swift */; };
+		A2DED26D264C886B00431545 /* RefreshButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED26C264C886B00431545 /* RefreshButtonView.swift */; };
+		A2DED26F264C896D00431545 /* BlankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED26E264C896D00431545 /* BlankView.swift */; };
+		A2DED274264C8C0100431545 /* PlaceActionsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED273264C8C0100431545 /* PlaceActionsRowView.swift */; };
+		A2DED276264C8D5A00431545 /* PlaceCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED275264C8D5A00431545 /* PlaceCommentView.swift */; };
+		A2DED279264C8FAC00431545 /* RoundButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED278264C8FAC00431545 /* RoundButtonView.swift */; };
 		A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88472601668C00D16EBC /* TheKnowApp.swift */; };
 		A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF88492601668C00D16EBC /* ContentView.swift */; };
 		A2FF884C2601668D00D16EBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2FF884B2601668D00D16EBC /* Assets.xcassets */; };
@@ -78,8 +85,15 @@
 		A2893E202642733900C49BB4 /* TheKnow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheKnow.entitlements; sourceTree = "<group>"; };
 		A2C1D9062645096900343F6F /* AddCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewModel.swift; sourceTree = "<group>"; };
 		A2D050182638DB4F00E031F7 /* LoggedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInView.swift; sourceTree = "<group>"; };
-		A2DED263264B631C00431545 /* AddPlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceViewModel.swift; sourceTree = "<group>"; };
 		A2DED260264B4F0700431545 /* PlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewModel.swift; sourceTree = "<group>"; };
+		A2DED263264B631C00431545 /* AddPlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceViewModel.swift; sourceTree = "<group>"; };
+		A2DED268264C326200431545 /* PlaceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRowView.swift; sourceTree = "<group>"; };
+		A2DED26A264C351A00431545 /* CollectionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRowView.swift; sourceTree = "<group>"; };
+		A2DED26C264C886B00431545 /* RefreshButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshButtonView.swift; sourceTree = "<group>"; };
+		A2DED26E264C896D00431545 /* BlankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankView.swift; sourceTree = "<group>"; };
+		A2DED273264C8C0100431545 /* PlaceActionsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceActionsRowView.swift; sourceTree = "<group>"; };
+		A2DED275264C8D5A00431545 /* PlaceCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCommentView.swift; sourceTree = "<group>"; };
+		A2DED278264C8FAC00431545 /* RoundButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButtonView.swift; sourceTree = "<group>"; };
 		A2FF88442601668C00D16EBC /* TheKnow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheKnow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FF88472601668C00D16EBC /* TheKnowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheKnowApp.swift; sourceTree = "<group>"; };
 		A2FF88492601668C00D16EBC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -201,6 +215,20 @@
 			path = LoggedOut;
 			sourceTree = "<group>";
 		};
+		A2DED265264C322100431545 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A2DED268264C326200431545 /* PlaceRowView.swift */,
+				A2DED26A264C351A00431545 /* CollectionRowView.swift */,
+				A2DED26C264C886B00431545 /* RefreshButtonView.swift */,
+				A2DED26E264C896D00431545 /* BlankView.swift */,
+				A2DED273264C8C0100431545 /* PlaceActionsRowView.swift */,
+				A2DED275264C8D5A00431545 /* PlaceCommentView.swift */,
+				A2DED278264C8FAC00431545 /* RoundButtonView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		A2FF883B2601668C00D16EBC = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +249,7 @@
 		A2FF88462601668C00D16EBC /* TheKnow */ = {
 			isa = PBXGroup;
 			children = (
+				A2DED265264C322100431545 /* Components */,
 				A27EDE1526362A160081104D /* Managers */,
 				A27DD5B52635D95A00A083CF /* ViewModels */,
 				291FDEC92635C91700181FE8 /* Models */,
@@ -319,21 +348,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				291FDECC2635C94F00181FE8 /* YelpAPI.swift in Sources */,
+				A2DED26D264C886B00431545 /* RefreshButtonView.swift in Sources */,
 				A22ACC8426371CF700C04639 /* CollectionManageView.swift in Sources */,
 				A27DD5CB2635E6E000A083CF /* UserViewModel.swift in Sources */,
 				A22ACC7626371CA200C04639 /* PlaceView.swift in Sources */,
 				A27EDE2426362AA90081104D /* PlaceListView.swift in Sources */,
 				A22ACC7D26371CD900C04639 /* AddPlaceView.swift in Sources */,
+				A2DED274264C8C0100431545 /* PlaceActionsRowView.swift in Sources */,
 				A27DD5B32635D8EF00A083CF /* LoginView.swift in Sources */,
 				A27DD5BF2635DC9C00A083CF /* CollectionsView.swift in Sources */,
 				A27EDE1726362A280081104D /* LocationManager.swift in Sources */,
 				A27DD5D22635F69B00A083CF /* CollectionsViewModel.swift in Sources */,
+				A2DED269264C326200431545 /* PlaceRowView.swift in Sources */,
 				A2DED261264B4F0700431545 /* PlaceViewModel.swift in Sources */,
+				A2DED26F264C896D00431545 /* BlankView.swift in Sources */,
 				A2641F692601786600A0F427 /* Models.swift in Sources */,
 				A2FF884A2601668C00D16EBC /* ContentView.swift in Sources */,
 				A22ACC7926371CD000C04639 /* AddCollectionView.swift in Sources */,
 				A27DD5B72635D96900A083CF /* LoginViewModel.swift in Sources */,
 				A27EDE1B26362A470081104D /* Place.swift in Sources */,
+				A2DED276264C8D5A00431545 /* PlaceCommentView.swift in Sources */,
 				A27EDE1E26362A5C0081104D /* PlaceAnnotation.swift in Sources */,
 				A207D72C263F3D41006BAEC8 /* CollectionViewModel.swift in Sources */,
 				A2D050192638DB4F00E031F7 /* LoggedInView.swift in Sources */,
@@ -344,8 +378,10 @@
 				A2641F6E26017CE100A0F427 /* Strings.swift in Sources */,
 				A27DD5C22635DCC400A083CF /* LoggedOutView.swift in Sources */,
 				A207D72E26405584006BAEC8 /* AccountViewModel.swift in Sources */,
+				A2DED279264C8FAC00431545 /* RoundButtonView.swift in Sources */,
 				A27EDE2126362A8E0081104D /* MapView.swift in Sources */,
 				A2FF88482601668C00D16EBC /* TheKnowApp.swift in Sources */,
+				A2DED26B264C351A00431545 /* CollectionRowView.swift in Sources */,
 				A27DD5C72635E04400A083CF /* SignupView.swift in Sources */,
 				A27EDE2726362ABA0081104D /* PlaceSearch.swift in Sources */,
 				A22ACC7326371C9500C04639 /* CollectionView.swift in Sources */,
@@ -503,7 +539,7 @@
 				CODE_SIGN_ENTITLEMENTS = TheKnow/TheKnow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TheKnow/Preview Content\"";
-				DEVELOPMENT_TEAM = YQYAB9U8EZ;
+				DEVELOPMENT_TEAM = 7QNFFF785Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TheKnow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

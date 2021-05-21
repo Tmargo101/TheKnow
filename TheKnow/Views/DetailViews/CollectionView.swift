@@ -18,28 +18,30 @@ struct CollectionView: View {
     
     var body: some View {
         VStack {
-            if (!collectionViewModel.loadingPlaces) {
+            if (collectionViewModel.loadingPlaces && collectionViewModel.places.count == 0) {
+                VStack {
+                    ProgressView()
+                    Text("Loading Places...")
+                }
+            } else {
                 if (collectionViewModel.places.count > 0) {
-                    List(collectionViewModel.places) { place in
-                        NavigationLink(
-                            destination: PlaceView(_place: place),
-                            label: {
-                                Text(place.name)
-                                    .font(.title2)
-                            })
-                            .padding()
+                    List {
+                        ForEach(collectionViewModel.places) { place in
+                            NavigationLink(
+                                destination: PlaceView(_place: place),
+                                label: {
+                                    PlaceRowView(place: place)
+                                })
+                                .padding()
+                        }
+                        .onDelete(perform: deletePlace)
                     }
                     .transition(.opacity)
                 } else {
                     Text("No Places")
                         .font(.system(.title, design: .rounded))
+                        .transition(.opacity)
                 }
-            } else {
-                VStack {
-                    ProgressView()
-                    Text("Loading Places...")
-                }
-                
             }
         }
         .sheet(isPresented: $showAddNewPlace, content: {
@@ -47,7 +49,7 @@ struct CollectionView: View {
                 token: user.token ?? "",
                 userId: user.id ?? "",
                 collectionId: collectionId,
-                fullName: "\(user.name ?? "")",
+                fullName: "\(user.firstname ?? "") \(user.lastname ?? "")",
                 isShow: $showAddNewPlace
             )
         })
@@ -56,16 +58,14 @@ struct CollectionView: View {
                 Button(action: {
                     collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
                 }) {
-                    Image(systemName: "arrow.clockwise")
-                        .font(.largeTitle)
-                        .foregroundColor(.purple)
+                    RefreshButtonView(loading: $collectionViewModel.loadingPlaces, image: "arrow.clockwise")
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     showAddNewPlace.toggle()
                 }, label: {
-                    Image(systemName: "plus.circle")
+                    Image(systemName: "plus.circle.fill")
                         .font(.largeTitle)
                 })
             }
@@ -79,6 +79,12 @@ struct CollectionView: View {
         .onChange(of: showAddNewPlace, perform: { value in
             collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
         })
+    }
+    
+    func deletePlace(at offsets: IndexSet) {
+        collectionViewModel.deletePlace(token: user.token, index: offsets.first!) { _ in 
+            collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId)
+        }
     }
 }
 //

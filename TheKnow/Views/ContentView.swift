@@ -15,6 +15,8 @@ struct ContentView: View {
     @AppStorage("loggedIn") var UserDefaultsLoggedIn = false
     @AppStorage("email") var UserDefaultsEmail = ""
     @AppStorage("id") var UserDefaultsId = ""
+    @AppStorage("firstName") var UserDefaultsFirstName = ""
+    @AppStorage("lastName") var UserDefaultsLastName = ""
         
     var body: some View {
         ZStack {
@@ -26,10 +28,19 @@ struct ContentView: View {
                     .transition(.move(edge: .leading))
             }
         }.onAppear {
-            user.loggedIn = UserDefaultsLoggedIn
+            
+            if (UserDefaultsToken == "" || UserDefaultsToken.count == 0) {
+                user.setLoggedIn(status: false)
+            } else {
+                user.loggedIn = UserDefaultsLoggedIn
+            }
+
             user.token = UserDefaultsToken
             user.id = UserDefaultsId
             user.email = UserDefaultsEmail
+            user.firstname = UserDefaultsFirstName
+            user.lastname = UserDefaultsLastName
+           
         }
     }
     
@@ -53,6 +64,35 @@ extension UIApplication: UIGestureRecognizerDelegate {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(UserViewModel())
+        
+        ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 12 mini)"))
+            .previewDisplayName("iPhone 12 Mini")
+            .environmentObject(UserViewModel())
+
+        ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
+            .previewDisplayName("iPhone SE 4.7 Inch")
+            .environmentObject(UserViewModel())
+        
+        ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro"))
+            .previewDisplayName("iPhone 12 Pro 6.1 Inch")
+            .environmentObject(UserViewModel())
+        
+        ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPad (8th generation)"))
+            .previewDisplayName("iPad Base")
+            .environmentObject(UserViewModel())
+
+        ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
+            .previewDisplayName("iPad 11 Inch")
+            .environmentObject(UserViewModel())
+        
+        ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch) (5th generation)"))
+            .previewDisplayName("iPad 12.9 Inch")
+            .environmentObject(UserViewModel())
     }
 }

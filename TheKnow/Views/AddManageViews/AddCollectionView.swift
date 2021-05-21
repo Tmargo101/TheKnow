@@ -13,7 +13,6 @@ struct AddCollectionView: View {
     @State var isEditing = false
     
     @ObservedObject var addCollectionViewModel = AddCollectionViewModel()
-    
     @EnvironmentObject var user: UserViewModel
     
     var body: some View {
@@ -29,8 +28,9 @@ struct AddCollectionView: View {
                     Spacer()
                     
                     Button(action: {
-                        self.isShow = false
-                        
+                        withAnimation {
+                            self.isShow = false
+                        }
                     }) {
                         Image(systemName: "xmark")
                             .foregroundColor(Color.primary)
@@ -50,7 +50,7 @@ struct AddCollectionView: View {
                 
                 // Save button for adding the  item
                 Button(action: {
-                    
+//                    
 //                    if self.name.trimmingCharacters(in: .whitespaces) == "" {
 //                        return
 //                    }
