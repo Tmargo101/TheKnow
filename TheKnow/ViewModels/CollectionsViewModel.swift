@@ -11,6 +11,7 @@ import SwiftUI
 
 
 class CollectionsViewModel: ObservableObject {
+    
     @Published var collections = [Collection]()
     @Published var collection = Collection()
     
@@ -18,11 +19,7 @@ class CollectionsViewModel: ObservableObject {
     @Published var loadingCollection: Bool = false
     @Published var reloadingCollections: Bool = false
     
-    func getAllCollections(token: String?, id: String?) {
-        withAnimation {
-            loadingCollections = true
-        }
-        reloadingCollections = true
+    func getAllCollections(token: String?, id: String?, completion: @escaping (Bool) -> Void) {
     
         let headers: HTTPHeaders = [Headers.AUTH: token ?? ""]
         let parameters = [BodyParams.USER: id]
@@ -36,12 +33,12 @@ class CollectionsViewModel: ObservableObject {
 //            print(response)
 //        }
         .responseDecodable(of: APIResponse.self) { (response) in
-            guard let response = response.value else { return }
-            self.collections = response.contents?.collections ?? []
-            withAnimation {
-                self.loadingCollections = false
+            guard let response = response.value else {
+                completion(false)
+                return
             }
-            self.reloadingCollections = false
+            self.collections = response.contents?.collections ?? []
+            completion(true)
         }
     }
     
