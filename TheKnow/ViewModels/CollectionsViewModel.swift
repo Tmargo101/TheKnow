@@ -9,17 +9,20 @@ import Foundation
 import Alamofire
 import SwiftUI
 
+
 class CollectionsViewModel: ObservableObject {
     @Published var collections = [Collection]()
     @Published var collection = Collection()
     
     @Published var loadingCollections: Bool = false
     @Published var loadingCollection: Bool = false
+    @Published var reloadingCollections: Bool = false
     
     func getAllCollections(token: String?, id: String?) {
         withAnimation {
             loadingCollections = true
         }
+        reloadingCollections = true
     
         let headers: HTTPHeaders = [Headers.AUTH: token ?? ""]
         let parameters = [BodyParams.USER: id]
@@ -38,6 +41,7 @@ class CollectionsViewModel: ObservableObject {
             withAnimation {
                 self.loadingCollections = false
             }
+            self.reloadingCollections = false
         }
     }
     
