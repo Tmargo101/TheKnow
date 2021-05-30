@@ -11,7 +11,7 @@ import SwiftUIRefresh
 struct CollectionsView: View {
         
     @EnvironmentObject var user: UserViewModel
-    @ObservedObject var collectionsViewModel = CollectionsViewModel()
+    @StateObject var collectionsViewModel = CollectionsViewModel()
     
     @State private var editMode: Bool = false
     

@@ -10,7 +10,7 @@ import SwiftUIRefresh
 
 struct CollectionView: View {
     @EnvironmentObject var user: UserViewModel
-    @ObservedObject var collectionViewModel = CollectionViewModel()
+    @StateObject var collectionViewModel = CollectionViewModel()
     var collectionId: String
     var collectionName: String
     @State private var showAddNewPlace: Bool = false
