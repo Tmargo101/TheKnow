@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Alamofire
 
 struct Routes {
-    static let BASE = "https://txm5483-theknow-api.herokuapp.com"
+    static let BASE = "https://theknow-api.herokuapp.com"
     static let LOGIN = "\(BASE)/login"
     static let SIGNUP = "\(BASE)/signup"
     static let LOGOUT = "\(BASE)/logout"
@@ -33,6 +34,28 @@ struct BodyParams {
     static let PLACE = "place"
 }
 
-class API {
-
-}
+//
+//func getAllCollectionsAPI(token: String, id: String, completion: @escaping (([Collection])) -> Void) {
+//    
+//    var collections: [Collection] = []
+//
+//    let headers: HTTPHeaders = [Headers.AUTH: token]
+//    let parameters = [BodyParams.USER: id]
+//    AF.request(
+//        Routes.GET_COLLECTIONS,
+//        parameters: parameters,
+//        headers: headers
+//    )
+//    .validate()
+//    .responseDecodable(of: APIResponse.self) { (response) in
+//        guard let response = response.value else {
+//            print(response)
+//            completion(collections)
+//            return
+//        }
+//        
+//        collections = response.contents?.collections ?? []
+//        completion(collections)
+//    }
+//}
+//

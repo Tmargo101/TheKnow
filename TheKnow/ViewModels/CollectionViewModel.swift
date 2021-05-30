@@ -11,14 +11,29 @@ import SwiftUI
 
 class CollectionViewModel: ObservableObject {
     @Published var places = [Place]()
-    @Published var loadingPlaces: Bool = false
     @Published var responseMessage = ""
-
-
-    func getPlacesInCollection(token: String?, collectionId: String?) {
-        withAnimation {
-            loadingPlaces = true
+    
+    @Published var collection = Collection()
+    @Published var loadingCollection: Bool = true
+    
+    func getCollection(token: String?, collectionId: String?, completion: @escaping (Bool) -> Void) {
+        let headers: HTTPHeaders = [Headers.AUTH: token ?? ""]
+        AF.request(
+            "\(Routes.GET_COLLECTIONS)/\(collectionId ?? "")",
+            headers: headers
+        )
+        .validate()
+        .responseDecodable(of: APIResponse.self) { [self] response in
+            guard let response = response.value else {
+                completion(false)
+                return
+            }
+            self.collection = response.contents?.collection ?? Collection()
+            completion(true)
         }
+    }
+
+    func getPlacesInCollection(token: String?, collectionId: String?, completion: @escaping (Bool) -> Void) {
         let headers: HTTPHeaders = [Headers.AUTH: token ?? ""]
         let parameters = [BodyParams.COLLECTION: collectionId]
         AF.request(
@@ -27,15 +42,14 @@ class CollectionViewModel: ObservableObject {
             headers: headers
         )
         .validate()
-//        .responseJSON { response in
-//            print(response)
-//        }
         .responseDecodable(of: APIResponse.self) { response in
-            guard let response = response.value else { print("Cannot parse to Decodables"); return }
-            self.places = response.contents?.places ?? [Place]()
-            withAnimation {
-                self.loadingPlaces = false
+            guard let response = response.value else {
+                print("Cannot parse to Decodables")
+                completion(false)
+                return
             }
+            self.places = response.contents?.places ?? [Place]()
+            completion(true)
         }
     }
     

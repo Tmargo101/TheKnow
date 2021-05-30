@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import SwiftUIRefresh
 
 struct CollectionsView: View {
         
     @EnvironmentObject var user: UserViewModel
-    @ObservedObject var collectionsViewModel = CollectionsViewModel()
+    @StateObject var collectionsViewModel = CollectionsViewModel()
     
     @State private var editMode: Bool = false
     
@@ -24,36 +25,48 @@ struct CollectionsView: View {
         
         ZStack {
             VStack {
-                if (collectionsViewModel.loadingCollections && collectionsViewModel.collections.count == 0) {
-                    VStack {
-                        ProgressView()
-                        Text("Loading Collections...")
-                    }
-                } else {
-                    if (collectionsViewModel.collections.count > 0) {
-                        List {
-                            ForEach(collectionsViewModel.collections) { collection in
-                                NavigationLink(
-                                    destination: CollectionView(collectionId: collection.id, collectionName: "\(collection.name)"),
-                                    label: {
-                                        CollectionRowView(collection: collection)
-                                    })
-                                    .padding()
-                            }
-                            .onDelete(perform: deleteCollection)
+                if (collectionsViewModel.collections.count == 0) {
+                    if (collectionsViewModel.loadingCollections) {
+                        VStack {
+                            ProgressView()
+                            Text("Loading Collections...")
                         }
                         .transition(.opacity)
                     } else {
                         Text("No Collections")
                     }
+                } else {
+                    List {
+                        ForEach(collectionsViewModel.collections) { collection in
+                            NavigationLink(
+                                destination: CollectionView(collectionId: collection.id, collectionName: "\(collection.name)"),
+                                label: {
+                                    CollectionRowView(collection: collection)
+                                })
+                                .padding()
+                        }
+                        .onDelete(perform: deleteCollection)
+                        .pullToRefresh(isShowing: $collectionsViewModel.loadingCollections) {
+                            collectionsViewModel.loadingCollections = true
+                            collectionsViewModel.getAllCollections(token: user.token, id: user.id) { _ in
+                                collectionsViewModel.loadingCollections = false
+                            }
+                        }
+                    }
                 }
             }
             .transition(.opacity)
             .onAppear {
-                collectionsViewModel.getAllCollections(token: user.token, id: user.id)
+                withAnimation { collectionsViewModel.loadingCollections = true }
+                collectionsViewModel.getAllCollections(token: user.token, id: user.id) { _ in
+                    withAnimation { collectionsViewModel.loadingCollections = false }
+                }
             }
             .onChange(of: showAddNewCollection, perform: { _ in
-                collectionsViewModel.getAllCollections(token: user.token, id: user.id)
+                collectionsViewModel.loadingCollections = true
+                collectionsViewModel.getAllCollections(token: user.token, id: user.id) { success in
+                    collectionsViewModel.loadingCollections = false
+                }
             })
             .sheet(isPresented: $presentNewCollectionSheet) {
                 AddCollectionView(name: "", isShow: $showAddNewCollection)
@@ -72,13 +85,6 @@ struct CollectionsView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        collectionsViewModel.getAllCollections(token: user.token, id: user.id)
-                    }) {
-                        RefreshButtonView(loading: $collectionsViewModel.loadingCollections, image: "arrow.clockwise")
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
                         self.showAddNewCollection = true
                         
                     }) {
@@ -86,8 +92,6 @@ struct CollectionsView: View {
                             .font(.largeTitle)
                             .foregroundColor(.purple)
                     }
-                    
-                    
                 } // ToolbarItem
             } //Toolbar
             .navigationTitle(Text("\((user.firstname != "") ? "\(user.firstname ?? "")'s" :  "My") Collections"))

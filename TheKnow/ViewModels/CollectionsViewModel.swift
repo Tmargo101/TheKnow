@@ -10,17 +10,22 @@ import Alamofire
 import SwiftUI
 
 class CollectionsViewModel: ObservableObject {
+    
     @Published var collections = [Collection]()
     @Published var collection = Collection()
     
-    @Published var loadingCollections: Bool = false
-    @Published var loadingCollection: Bool = false
+    @Published var loadingCollections: Bool = true
     
-    func getAllCollections(token: String?, id: String?) {
-        withAnimation {
-            loadingCollections = true
-        }
+//    func getAllCollections(token: String?, id: String?, completion: @escaping(Bool) -> Void) {
+//        let _token = token ?? ""
+//        let _id = id ?? ""
+//        getAllCollectionsAPI(token: _token, id: _id) { Collections in
+//           print(Collections)
+//        }
+//    }
     
+    func getAllCollections(token: String?, id: String?, completion: @escaping (Bool) -> Void) {
+
         let headers: HTTPHeaders = [Headers.AUTH: token ?? ""]
         let parameters = [BodyParams.USER: id]
         AF.request(
@@ -33,30 +38,12 @@ class CollectionsViewModel: ObservableObject {
 //            print(response)
 //        }
         .responseDecodable(of: APIResponse.self) { (response) in
-            guard let response = response.value else { return }
-            self.collections = response.contents?.collections ?? []
-            withAnimation {
-                self.loadingCollections = false
+            guard let response = response.value else {
+                completion(false)
+                return
             }
-        }
-    }
-    
-    func getCollection(token: String?, collectionId: String?) {
-        loadingCollection = true
-        let headers: HTTPHeaders = [Headers.AUTH: token ?? ""]
-        AF.request(
-            "\(Routes.GET_COLLECTIONS)/\(collectionId ?? "")",
-            headers: headers
-        )
-        .validate()
-//        .responseJSON { response in
-//            print(response)
-//        }
-        .responseDecodable(of: APIResponse.self) { response in
-            guard let response = response.value else { print("Cannot parse to Decodables"); return }
-            self.collection = response.contents?.collection ?? Collection()
-//            print(self.collection)
-            self.loadingCollection = false
+            self.collections = response.contents?.collections ?? []
+            completion(true)
         }
     }
 }

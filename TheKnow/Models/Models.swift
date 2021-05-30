@@ -7,20 +7,6 @@
 
 import Foundation
 
-//struct PlaceList: Codable {
-//    let name: String
-//    let id: Int
-//}
-//
-//struct Place: Codable {
-//    var name: String
-//    var address: String
-//    var notes: String
-//    var reccomendedBy: String
-//    var id: String
-//    var been: Bool
-//}
-
 struct APIResponse: Decodable {
     let status: String
     let message: String
@@ -70,7 +56,7 @@ struct Collection: Decodable, Identifiable {
     let members: [String]
     let name: String
     let owner: String
-    let places: [String]?
+    let places: [String]
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
