@@ -36,7 +36,6 @@
 		A27EDE2726362ABA0081104D /* PlaceSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EDE2626362ABA0081104D /* PlaceSearch.swift */; };
 		A27EDE2B26362B180081104D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27EDE2A26362B180081104D /* CoreLocation.framework */; };
 		A27EDE2D26362B1D0081104D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27EDE2C26362B1D0081104D /* MapKit.framework */; };
-		A2B134EB26583C200060B285 /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = A2B134EA26583C200060B285 /* SwiftUIRefresh */; };
 		A2C1D9072645096900343F6F /* AddCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C1D9062645096900343F6F /* AddCollectionViewModel.swift */; };
 		A2D050192638DB4F00E031F7 /* LoggedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D050182638DB4F00E031F7 /* LoggedInView.swift */; };
 		A2DED261264B4F0700431545 /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DED260264B4F0700431545 /* PlaceViewModel.swift */; };
@@ -108,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2B134EB26583C200060B285 /* SwiftUIRefresh in Frameworks */,
 				A27EDE2B26362B180081104D /* CoreLocation.framework in Frameworks */,
 				A27EDE2D26362B1D0081104D /* MapKit.framework in Frameworks */,
 				A2641F432601695700A0F427 /* Alamofire in Frameworks */,
@@ -292,7 +290,6 @@
 			name = TheKnow;
 			packageProductDependencies = (
 				A2641F422601695700A0F427 /* Alamofire */,
-				A2B134EA26583C200060B285 /* SwiftUIRefresh */,
 			);
 			productName = TheKnow;
 			productReference = A2FF88442601668C00D16EBC /* TheKnow.app */;
@@ -323,7 +320,6 @@
 			mainGroup = A2FF883B2601668C00D16EBC;
 			packageReferences = (
 				A2641F412601695700A0F427 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				A2B134E926583C200060B285 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
 			);
 			productRefGroup = A2FF88452601668C00D16EBC /* Products */;
 			projectDirPath = "";
@@ -590,14 +586,6 @@
 				minimumVersion = 5.4.1;
 			};
 		};
-		A2B134E926583C200060B285 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/timbersoftware/SwiftUIRefresh.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.3;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -605,11 +593,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A2641F412601695700A0F427 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		A2B134EA26583C200060B285 /* SwiftUIRefresh */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A2B134E926583C200060B285 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
-			productName = SwiftUIRefresh;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
