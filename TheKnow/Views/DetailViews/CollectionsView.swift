@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUIRefresh
 
 struct CollectionsView: View {
         
@@ -46,12 +45,19 @@ struct CollectionsView: View {
                                 .padding()
                         }
                         .onDelete(perform: deleteCollection)
-                        .pullToRefresh(isShowing: $collectionsViewModel.loadingCollections) {
-                            collectionsViewModel.loadingCollections = true
-                            collectionsViewModel.getAllCollections(token: user.token, id: user.id) { _ in
-                                collectionsViewModel.loadingCollections = false
-                            }
+//                        .pullToRefresh(isShowing: $collectionsViewModel.loadingCollections) {
+//                            collectionsViewModel.loadingCollections = true
+//                            collectionsViewModel.getAllCollections(token: user.token, id: user.id) { _ in
+//                                collectionsViewModel.loadingCollections = false
+//                            }
+//                        }
+                    }
+                    .refreshable {
+                        collectionsViewModel.loadingCollections = true
+                        collectionsViewModel.getAllCollections(token: user.token, id: user.id) { _ in
+                            collectionsViewModel.loadingCollections = false
                         }
+
                     }
                 }
             }

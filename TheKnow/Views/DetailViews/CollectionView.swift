@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUIRefresh
 
 struct CollectionView: View {
     @EnvironmentObject var user: UserViewModel
@@ -31,7 +30,7 @@ struct CollectionView: View {
                     }
                     .onDelete(perform: deletePlace)
                 }
-                .pullToRefresh(isShowing: $collectionViewModel.loadingCollection) {
+                .refreshable {
                     collectionViewModel.getCollection(token: user.token, collectionId: collectionId) { success in
                         collectionViewModel.getPlacesInCollection(token: user.token, collectionId: collectionId) { success in
                             withAnimation { collectionViewModel.loadingCollection = false }
